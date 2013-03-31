@@ -3,12 +3,16 @@ package com.erlaa.glosor;
 import java.util.Arrays;
 import java.util.List;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuInflater;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -19,7 +23,8 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-public class StartPoint extends Activity {
+
+public class StartPoint extends SherlockActivity {
 	
 	ListView fileListView;
 	public static final String PREFS_NAME = "FileList";
@@ -63,7 +68,8 @@ public class StartPoint extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.start_point, menu);
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.start_point, menu);
 		return true;
 		
 	}

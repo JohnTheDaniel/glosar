@@ -1,8 +1,12 @@
 package com.erlaa.glosor;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuInflater;
+
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,10 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 @SuppressLint("NewApi")
-public class addFile extends Activity {
+public class addFile extends SherlockActivity {
 	int counter;
 	int text;
 	@Override
@@ -27,7 +30,7 @@ public class addFile extends Activity {
 		setContentView(R.layout.activity_add_new);
 		
 		//Create custom actionbar
-		final ActionBar ab = getActionBar();
+		final ActionBar ab = getSupportActionBar();
 	    ab.setDisplayShowHomeEnabled(false);
 	    ab.setDisplayShowTitleEnabled(false);     
 	    final LayoutInflater inflater = (LayoutInflater)getSystemService("layout_inflater");
