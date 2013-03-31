@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <LinearLayout
+        android:layout_alignParentTop="true"
+        android:layout_height="70dp"
+        android:layout_width="fill_parent"
+        android:background="#D3D3D3" 
+        android:gravity="center"
+        android:weightSum="1.0"
+        android:id="@+id/topBarNameEditor">
+        <EditText
+            android:hint="Namge glosträning"
+            android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+            android:gravity="center" 
+            android:textSize="25sp"
+            android:id="@+id/addNewEditText"
+            />
+            <!--android:layout_weight="0.7"-->
+    </LinearLayout>
+    <RelativeLayout 
+        android:layout_below="@id/topBarNameEditor"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingBottom="49dp">
+    <ScrollView 
+        android:layout_width="fill_parent"
+        android:padding="8dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/container">
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:id="@+id/RelativeLayout"
+            ></RelativeLayout>
+    
+    </ScrollView>
+    </RelativeLayout>
+    
+    <LinearLayout
+		android:layout_alignParentBottom="true"
+	    android:layout_width="fill_parent"
+		android:layout_height="49dp"
+		android:background="@drawable/border_forlist"
+		android:id="@+id/bottomButton"
+		android:gravity="center"
+		android:clickable="true" >
+		
+		       <ImageView
+		            android:layout_width="25dp"
+		            android:layout_height="25dp"
+		            android:src="@drawable/plus" />
+		            
+		
+			    <TextView
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:gravity="center"
+			        android:paddingLeft="8dp"
+			        android:text="NY GLOSA"
+			        android:textSize="15sp"
+			        android:fontFamily="sans-serif-condensed"
+			        android:textStyle="bold" />
+
+   </LinearLayout>
+	
+</RelativeLayout>
