@@ -6,7 +6,6 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
-
 import android.os.Bundle;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -74,5 +73,38 @@ public class StartPoint extends SherlockActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		
+		//Måste ladda om listan när man kommer tillbaka till appen
+		//efter att man har skrivit in sina glosor. 
+		super.onResume();
+		//get the list of files
+		String files;
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		files = settings.getAll().toString();
+		
+		//hantera file, dela och ta bort skit
+		files.replace("{", "").replace("}", "");
+		files.replace("=", ", ");
+		String[] fileListValues = files.replace("{", "").replace("}", "").split(", ");
+		
+		//Vid första startup kommer användaren inte
+		//ha några gloslistor. Välkomsmeddelande.
+		if (fileListValues.length == 0){
+			TextView tv = (TextView) findViewById(R.id.prompt);
+			tv.setText("\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning.");
+			LinearLayout layout = (LinearLayout) findViewById(R.id.container);
+			layout.setBackgroundResource(R.drawable.gray_line_bg);
+		}
+		else {
+			fileListView = (ListView) findViewById(R.id.fileListView);
+			ArrayAdapter<String> fileAdapter = new ArrayAdapter<String>(this,
+			android.R.layout.simple_list_item_1, android.R.id.text1, fileListValues);
+			fileListView.setAdapter(fileAdapter);
+		}
+	}
 }
+
