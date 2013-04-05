@@ -1,51 +1,42 @@
 package com.erlaa.glosor;
 
-import java.util.Arrays;
-import java.util.List;
+
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 
 public class StartPoint extends SherlockActivity {
 	
 	ListView fileListView;
-	public static final String PREFS_NAME = "FileList";
+	public static final String PREFS_NAME = "StoreSettings";
+	public static final String PREFS_FILE_NUMBER = "numberOfFIles";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start_point);
 		EditText toAdd, word2;
 		//get the list of files
-		String file;
+		String files;
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		file = settings.getAll().toString();
+		files = settings.getAll().toString();
 		
 		//hantera file, dela och ta bort skit
-		file.replace("{", "").replace("}", "");
-		file.replace("=", ", ");
+		files.replace("{", "").replace("}", "");
+		files.replace("=", ", ");
 		
-		//String[] fileListValues = file.split(", ");
-		String[] fileListValues = new String[] {
-				/*"Fil1", "Fil2"*/
-		};
+		String[] fileListValues = files.replace("{", "").replace("}", "").split(", ");
 		
 		//Vid första startup kommer användaren inte ha några gloslistor. Välkomsmeddelande
 		if (fileListValues.length == 0){

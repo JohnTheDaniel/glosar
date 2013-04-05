@@ -8,8 +8,8 @@ import com.actionbarsherlock.view.MenuInflater;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -18,37 +18,47 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 @SuppressLint("NewApi")
 public class addFile extends SherlockActivity {
 	int counter;
 	int text;
+	EditText nameField;
+	public static final String PREFS_FILE_NUMBER = "StoreSettings";
+	SharedPreferences thisFilePrefs;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new);
 		
-		//Create custom actionbar
-		final ActionBar ab = getSupportActionBar();
-	    ab.setDisplayShowHomeEnabled(false);
-	    ab.setDisplayShowTitleEnabled(false);     
-	    final LayoutInflater inflater = (LayoutInflater)getSystemService("layout_inflater");
-	    View view = inflater.inflate(R.layout.action_bar_edit_mode_add_file,null); 
+		//check if first startup
+		final SharedPreferences filesPrefs = getSharedPreferences("StoreSettings", 0);
+		SharedPreferences.Editor filesEditor = filesPrefs.edit();
+		boolean firstTime = filesPrefs.getBoolean("firstTime", true);
+		if (firstTime == true) { 
+		    filesEditor.putBoolean("firstTime", false);
+		    filesEditor.putInt("numberOfFiles", 0);
+		    filesEditor.commit();
+		}
+		
+		//Getting number of trainings
+		//Jag glömde varför jag gjorde det här....
+		int filesNumber = filesPrefs.getInt("numberOfFiles", 0); //Varför blir den här alltid 0?
+		Context context = getApplicationContext();
+		CharSequence toastText = filesNumber + " filer";
+		int duration = Toast.LENGTH_SHORT;
+
+		Toast toast = Toast.makeText(context, toastText, duration);
+		toast.show();
 	    
 	    //Pairing id's
 	    final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.RelativeLayout);
 	    final ScrollView containerScrollView = (ScrollView) findViewById(R.id.container);
 	    final LinearLayout addWordButton = (LinearLayout) findViewById(R.id.bottomButton);
-	    final EditText nameField = (EditText) findViewById(R.id.addNewEditText);
+	    nameField = (EditText) findViewById(R.id.addNewEditText);
 	    
-	    ab.setCustomView(view);
-	    ab.setDisplayShowCustomEnabled(true);
-	    View custom; 
-	    LayoutInflater inflated = (LayoutInflater)   getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
-	    custom = inflater.inflate(R.layout.action_bar_edit_mode_add_file, null);
-	    final LinearLayout saveButton = (LinearLayout) custom.findViewById(R.id.addNewSaveButton);
-	    final LinearLayout cancelButton = (LinearLayout) custom.findViewById(R.id.addNewCancelButton);
 	    
 	    
 	    //add first glosa
@@ -85,6 +95,62 @@ public class addFile extends SherlockActivity {
 					});
 					//Test
 			}	
-		});	
+		});			
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.add_file, menu);
+		return true;	
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		/*int id = item.getItemId();
+		if (id == R.id.addFileSaveButton){
+			Context context = getApplicationContext();
+			CharSequence text = "Sparar...";
+			int duration = Toast.LENGTH_LONG;
+			
+			Toast toast = Toast.makeText(context, text, duration);
+			toast.show();
+		}*/
+		switch (item.getItemId()) {
+		case R.id.addFileSaveButton:
+			saveOperation();
+			return true;
+		case R.id.addFileCancelButton:
+			finish();
+			return true;
+		default: return super.onOptionsItemSelected(item);
+		}
+	}
+	public void saveOperation() {
+		//first check. Is there any any name?
+		if (nameField.getText().toString().equals("")){
+			//nameField is empty.
+			Toast saveErr = Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG);
+			saveErr.show();
+		}
+		else {
+			
+			SharedPreferences filePrefs = getSharedPreferences("StoreSettings", 0);
+			SharedPreferences.Editor filesEditor = filePrefs.edit();
+			int filesNumber = filePrefs.getInt("numberOfFiles", 0);
+			filesNumber++;
+			//Writing to StoreSettings
+			filesEditor .putInt("numberOfFiles", filesNumber);
+			String thisFileReferense = "" + filesNumber;
+			filesEditor.putString(thisFileReferense, nameField.getText().toString());
+			filesEditor.commit();
+			
+			//Save the stuff witten into this app
+			String thisPrefName = nameField.getText().toString();
+			thisFilePrefs = getSharedPreferences(thisPrefName, 0);
+			
+			Toast confirmSaveToast = Toast.makeText(getApplicationContext(), "Sparar...", Toast.LENGTH_LONG);
+			confirmSaveToast.show();
+			finish();
+		}
 	}
 }

@@ -52,7 +52,6 @@
 		        android:clickable="true"
 		        android:id="@+id/addNewSaveButton"
 		        android:background="@drawable/actionbar_bundle">
-		        
 		        	    
 		        	    <ImageView 
 		        	        android:src="@drawable/save"
