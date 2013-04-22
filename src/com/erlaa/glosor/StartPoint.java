@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,7 +24,18 @@ public class StartPoint extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start_point);
-		EditText toAdd, word2;
+		
+		//Kollar om det är fösta starten
+		/*final SharedPreferences filesPrefs = getSharedPreferences("StoreSettings", 0);
+		SharedPreferences.Editor filesEditor = filesPrefs.edit();
+		boolean firstTime = filesPrefs.getBoolean("firstTime", true);
+		if (firstTime == true) { 
+		    filesEditor.putBoolean("firstTime", false);
+		    filesEditor.putInt("numberOfFiles", 0);
+		    filesEditor.commit();
+		}*/
+		
+		
 		//get the list of files
 		String files;
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
@@ -38,7 +48,8 @@ public class StartPoint extends SherlockActivity {
 		String[] fileListValues = files.replace("{", "").replace("}", "").split(", ");
 		
 		//Vid första startup kommer användaren inte ha några gloslistor. Välkomsmeddelande
-		if (fileListValues.length == 0){
+		boolean needTutorialCheck = needTutorialCheck();
+		if (needTutorialCheck == true){
 			TextView tv = (TextView) findViewById(R.id.prompt);
 			tv.setText("\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning.");
 			LinearLayout layout = (LinearLayout) findViewById(R.id.container);
@@ -82,9 +93,9 @@ public class StartPoint extends SherlockActivity {
 		//efter att man har skrivit in sina glosor. 
 		super.onResume();
 		//get the list of files
-		String files;
+		
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		files = settings.getAll().toString();
+		String files = settings.getAll().toString();
 		
 		//hantera file, dela och ta bort skit
 		files.replace("{", "").replace("}", "");
@@ -105,6 +116,16 @@ public class StartPoint extends SherlockActivity {
 			android.R.layout.simple_list_item_1, android.R.id.text1, fileListValues);
 			fileListView.setAdapter(fileAdapter);
 		}
+	}
+	public boolean needTutorialCheck(){
+		//check if first startup
+		final SharedPreferences filesPrefs = getSharedPreferences("StoreSettings", 0);
+		int trueCheck = filesPrefs.getInt("numberOfFiles", 0);
+		if (trueCheck == 0){
+			return true; 
+		} else {
+			return false;
+		}		
 	}
 }
 

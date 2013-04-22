@@ -21,24 +21,21 @@
             />
             <!--android:layout_weight="0.7"-->
     </LinearLayout>
-    <RelativeLayout 
-        android:layout_below="@id/topBarNameEditor"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:paddingBottom="49dp">
     <ScrollView 
         android:layout_width="fill_parent"
         android:padding="8dp"
-        android:layout_height="wrap_content"
+        android:layout_below="@id/topBarNameEditor"
+        android:layout_marginBottom="49dp"
+        android:layout_height="fill_parent"
+        android:fillViewport="true"
         android:id="@+id/container">
         <RelativeLayout
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:id="@+id/RelativeLayout"
             ></RelativeLayout>
     
     </ScrollView>
-    </RelativeLayout>
     
     <LinearLayout
 		android:layout_alignParentBottom="true"

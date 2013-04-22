@@ -1,7 +1,6 @@
 package com.erlaa.glosor;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
@@ -13,6 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -33,19 +34,10 @@ public class addFile extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new);
 		
-		//check if first startup
-		final SharedPreferences filesPrefs = getSharedPreferences("StoreSettings", 0);
-		SharedPreferences.Editor filesEditor = filesPrefs.edit();
-		boolean firstTime = filesPrefs.getBoolean("firstTime", true);
-		if (firstTime == true) { 
-		    filesEditor.putBoolean("firstTime", false);
-		    filesEditor.putInt("numberOfFiles", 0);
-		    filesEditor.commit();
-		}
-		
 		//Getting number of trainings
 		//Jag glömde varför jag gjorde det här....
-		int filesNumber = filesPrefs.getInt("numberOfFiles", 0); //Varför blir den här alltid 0?
+		SharedPreferences filePrefs = getSharedPreferences("StoreSettings", 0);
+		int filesNumber = filePrefs.getInt("numberOfFiles", 0); //Varför blir den här alltid 0?
 		Context context = getApplicationContext();
 		CharSequence toastText = filesNumber + " filer";
 		int duration = Toast.LENGTH_SHORT;
@@ -70,7 +62,6 @@ public class addFile extends SherlockActivity {
 	    		LayoutParams.WRAP_CONTENT,
 	    		LayoutParams.WRAP_CONTENT));
 	    relativeLayout.addView(startWords);
-	    
 	    //Button Click, save
 
 	    //ButtonClick, add new glosa
@@ -78,10 +69,12 @@ public class addFile extends SherlockActivity {
 
 			@Override
 			public void onClick(View v) {
-					TextView word = new TextView(addFile.this);
+					EditText word = new EditText(addFile.this);
 					text++;
-					word.setText("Test" + text);
-					RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+					int dps = 48; 
+					final float scale = getBaseContext().getResources().getDisplayMetrics().density;
+					int pixels = (int) (dps * scale + 0.5f);
+					RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, pixels);
 					word.setLayoutParams(layoutParams);
 					layoutParams.addRule(RelativeLayout.BELOW, counter);
 					counter++;
@@ -93,6 +86,11 @@ public class addFile extends SherlockActivity {
 					          	containerScrollView.fullScroll(View.FOCUS_DOWN);              
 					    }
 					});
+					
+					//animate in the object
+					Animation animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.slide_right_in);
+					animation.setStartOffset(0);
+					word.startAnimation(animation);
 					//Test
 			}	
 		});			
