@@ -7,6 +7,7 @@ import com.actionbarsherlock.view.MenuInflater;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +29,7 @@ public class addFile extends SherlockActivity {
 	EditText nameField;
 	public static final String PREFS_FILE_NUMBER = "StoreSettings";
 	SharedPreferences thisFilePrefs;
+	public final static String REBOOT_MESSAGE = "com.erlaa.glosor.REBOOT_MESSAGE";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -139,8 +141,7 @@ public class addFile extends SherlockActivity {
 			//Writing to StoreSettings
 			filesEditor .putInt("numberOfFiles", filesNumber);
 			String thisFileReferense = "" + filesNumber;
-			filesEditor.putString(thisFileReferense, nameField.getText().toString());
-			filesEditor.commit();
+			
 			
 			//Save the stuff witten into this app
 			String thisPrefName = nameField.getText().toString();
@@ -148,7 +149,30 @@ public class addFile extends SherlockActivity {
 			
 			Toast confirmSaveToast = Toast.makeText(getApplicationContext(), "Sparar...", Toast.LENGTH_LONG);
 			confirmSaveToast.show();
+			if (needTutorialCheck() == true){
+				Toast.makeText(getApplicationContext(), "Skickar intentmeddelande", Toast.LENGTH_LONG).show();
+				
+				Intent intent = new Intent(this, StartPoint.class);
+				intent.putExtra(REBOOT_MESSAGE, true);
+				startActivity(intent);
+				filesEditor.putString(thisFileReferense, nameField.getText().toString());
+				filesEditor.commit();
+				
+				} else {
+					filesEditor.putString(thisFileReferense, nameField.getText().toString());
+					filesEditor.commit();
 			finish();
+			}
 		}
 	}
-}
+	public boolean needTutorialCheck() {
+		//check if first startup
+				final SharedPreferences filesPrefs = getSharedPreferences("StoreSettings", 0);
+				int trueCheck = filesPrefs.getInt("numberOfFiles", 0);
+				if (trueCheck == 0){
+					return true; 
+				} else {
+					return false;
+				}		
+			}
+	}

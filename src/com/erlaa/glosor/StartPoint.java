@@ -7,12 +7,14 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
 import android.os.Bundle;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class StartPoint extends SherlockActivity {
@@ -25,18 +27,7 @@ public class StartPoint extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start_point);
 		
-		//Kollar om det är fösta starten
-		/*final SharedPreferences filesPrefs = getSharedPreferences("StoreSettings", 0);
-		SharedPreferences.Editor filesEditor = filesPrefs.edit();
-		boolean firstTime = filesPrefs.getBoolean("firstTime", true);
-		if (firstTime == true) { 
-		    filesEditor.putBoolean("firstTime", false);
-		    filesEditor.putInt("numberOfFiles", 0);
-		    filesEditor.commit();
-		}*/
-		
-		
-		//get the list of files
+		/*//get the list of files
 		String files;
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		files = settings.getAll().toString();
@@ -61,6 +52,7 @@ public class StartPoint extends SherlockActivity {
 				  android.R.layout.simple_list_item_1, android.R.id.text1, fileListValues);
 		fileListView.setAdapter(fileAdapter);
 		}
+		*/
 		
 		//Nästa steg: Skapa intent och skicka över info om vilken fil som har blivit klickad i listan.
 		
@@ -89,6 +81,25 @@ public class StartPoint extends SherlockActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		
+		//Testar starta om efter jag har fått intent
+		Intent intent = getIntent();
+		String rebootMessage = intent.getStringExtra(addFile.REBOOT_MESSAGE);
+		
+		if (rebootMessage != null){
+			//do reboot
+			
+			finish();
+			startActivity(intent);
+			
+			//DET FUNKA!!!
+		}
+		
+		//Lite test toast
+		Context context = getApplicationContext();
+		int duration = Toast.LENGTH_LONG;
+		////TEST
+
+		
 		//Måste ladda om listan när man kommer tillbaka till appen
 		//efter att man har skrivit in sina glosor. 
 		super.onResume();
@@ -104,17 +115,29 @@ public class StartPoint extends SherlockActivity {
 		
 		//Vid första startup kommer användaren inte
 		//ha några gloslistor. Välkomsmeddelande.
-		if (fileListValues.length == 0){
+		if (needTutorialCheck() == true){
 			TextView tv = (TextView) findViewById(R.id.prompt);
 			tv.setText("\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning.");
 			LinearLayout layout = (LinearLayout) findViewById(R.id.container);
 			layout.setBackgroundResource(R.drawable.gray_line_bg);
+			
+			Toast toast = Toast.makeText(context, "needTutorialCheck() == true", duration);
+			toast.show();
 		}
 		else {
+			
+			
+			//Den här koden körs, men utav någon anledning ger den inget resultat om 
+			// if ovan har redan körts en gång. 
+			
+			
 			fileListView = (ListView) findViewById(R.id.fileListView);
 			ArrayAdapter<String> fileAdapter = new ArrayAdapter<String>(this,
 			android.R.layout.simple_list_item_1, android.R.id.text1, fileListValues);
 			fileListView.setAdapter(fileAdapter);
+			
+			Toast toast = Toast.makeText(context, "needTutorialCheck() == false", duration);
+			toast.show();
 		}
 	}
 	public boolean needTutorialCheck(){
