@@ -27,7 +27,8 @@ public class addFile extends SherlockActivity {
 	int counter;
 	int text;
 	EditText nameField;
-	public static final String PREFS_FILE_NUMBER = "StoreSettings";
+	public static final String PREF_MISC = "StoreSettings";
+	public static final String PREF_FILES = "FileStorage";
 	SharedPreferences thisFilePrefs;
 	public final static String REBOOT_MESSAGE = "com.erlaa.glosor.REBOOT_MESSAGE";
 	@Override
@@ -38,8 +39,8 @@ public class addFile extends SherlockActivity {
 		
 		//Getting number of trainings
 		//Jag glömde varför jag gjorde det här....
-		SharedPreferences filePrefs = getSharedPreferences("StoreSettings", 0);
-		int filesNumber = filePrefs.getInt("numberOfFiles", 0); //Varför blir den här alltid 0?
+		SharedPreferences filePrefs = getSharedPreferences(PREF_MISC, 0);
+		int filesNumber = filePrefs.getInt("numberOfFiles", 0);
 		Context context = getApplicationContext();
 		CharSequence toastText = filesNumber + " filer";
 		int duration = Toast.LENGTH_SHORT;
@@ -134,12 +135,12 @@ public class addFile extends SherlockActivity {
 		}
 		else {
 			
-			SharedPreferences filePrefs = getSharedPreferences("StoreSettings", 0);
+			SharedPreferences filePrefs = getSharedPreferences(PREF_MISC, 0);
 			SharedPreferences.Editor filesEditor = filePrefs.edit();
 			int filesNumber = filePrefs.getInt("numberOfFiles", 0);
 			filesNumber++;
 			//Writing to StoreSettings
-			filesEditor .putInt("numberOfFiles", filesNumber);
+			filesEditor.putInt("numberOfFiles", filesNumber);
 			String thisFileReferense = "" + filesNumber;
 			
 			

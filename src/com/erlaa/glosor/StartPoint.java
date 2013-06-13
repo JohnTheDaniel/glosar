@@ -1,7 +1,5 @@
 package com.erlaa.glosor;
 
-
-
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -16,47 +14,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 public class StartPoint extends SherlockActivity {
 	
 	ListView fileListView;
-	public static final String PREFS_NAME = "StoreSettings";
-	public static final String PREFS_FILE_NUMBER = "numberOfFIles";
+	public static final String PREF_MISC = "StoreSettings"; //Spara som numberOfFiles.
+	public static final String PREF_FILES = "FileStorage"; //Sparar namnen på filer
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start_point);
 		
-		/*//get the list of files
-		String files;
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		files = settings.getAll().toString();
-		
-		//hantera file, dela och ta bort skit
-		files.replace("{", "").replace("}", "");
-		files.replace("=", ", ");
-		
-		String[] fileListValues = files.replace("{", "").replace("}", "").split(", ");
-		
-		//Vid första startup kommer användaren inte ha några gloslistor. Välkomsmeddelande
-		boolean needTutorialCheck = needTutorialCheck();
-		if (needTutorialCheck == true){
-			TextView tv = (TextView) findViewById(R.id.prompt);
-			tv.setText("\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning.");
-			LinearLayout layout = (LinearLayout) findViewById(R.id.container);
-			layout.setBackgroundResource(R.drawable.gray_line_bg);
-		}
-		else {
-		fileListView = (ListView) findViewById(R.id.fileListView);
-		ArrayAdapter<String> fileAdapter = new ArrayAdapter<String>(this,
-				  android.R.layout.simple_list_item_1, android.R.id.text1, fileListValues);
-		fileListView.setAdapter(fileAdapter);
-		}
-		*/
-		
 		//Nästa steg: Skapa intent och skicka över info om vilken fil som har blivit klickad i listan.
-		
-		 
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,7 +73,7 @@ public class StartPoint extends SherlockActivity {
 		super.onResume();
 		//get the list of files
 		
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences settings = getSharedPreferences(PREF_MISC, 0);
 		String files = settings.getAll().toString();
 		
 		//hantera file, dela och ta bort skit
@@ -124,13 +92,10 @@ public class StartPoint extends SherlockActivity {
 			Toast toast = Toast.makeText(context, "needTutorialCheck() == true", duration);
 			toast.show();
 		}
-		else {
-			
-			
+		else {			
 			//Den här koden körs, men utav någon anledning ger den inget resultat om 
 			// if ovan har redan körts en gång. 
-			
-			
+						
 			fileListView = (ListView) findViewById(R.id.fileListView);
 			ArrayAdapter<String> fileAdapter = new ArrayAdapter<String>(this,
 			android.R.layout.simple_list_item_1, android.R.id.text1, fileListValues);
@@ -142,7 +107,7 @@ public class StartPoint extends SherlockActivity {
 	}
 	public boolean needTutorialCheck(){
 		//check if first startup
-		final SharedPreferences filesPrefs = getSharedPreferences("StoreSettings", 0);
+		final SharedPreferences filesPrefs = getSharedPreferences(PREF_MISC, 0);
 		int trueCheck = filesPrefs.getInt("numberOfFiles", 0);
 		if (trueCheck == 0){
 			return true; 
