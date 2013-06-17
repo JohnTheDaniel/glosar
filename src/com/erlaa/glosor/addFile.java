@@ -41,10 +41,11 @@ public class addFile extends SherlockActivity {
 		//Jag glömde varför jag gjorde det här....
 		SharedPreferences filePrefs = getSharedPreferences(PREF_MISC, 0);
 		int filesNumber = filePrefs.getInt("numberOfFiles", 0);
+		
+		//Skriv ut toeast om mängden files
 		Context context = getApplicationContext();
 		CharSequence toastText = filesNumber + " filer";
 		int duration = Toast.LENGTH_SHORT;
-
 		Toast toast = Toast.makeText(context, toastText, duration);
 		toast.show();
 	    
@@ -54,8 +55,7 @@ public class addFile extends SherlockActivity {
 	    final LinearLayout addWordButton = (LinearLayout) findViewById(R.id.bottomButton);
 	    nameField = (EditText) findViewById(R.id.addNewEditText);
 	    
-	    
-	    
+	     
 	    //add first glosa
 	    TextView startWords = new TextView(this);
 	    startWords.setText("Word number 1");
@@ -130,18 +130,28 @@ public class addFile extends SherlockActivity {
 		//first check. Is there any any name?
 		if (nameField.getText().toString().equals("")){
 			//nameField is empty.
-			Toast saveErr = Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG);
+			Toast saveErr = Toast.makeText(getApplicationContext(), "Namnge träningen ", Toast.LENGTH_LONG);
 			saveErr.show();
 		}
 		else {
-			
-			SharedPreferences filePrefs = getSharedPreferences(PREF_MISC, 0);
-			SharedPreferences.Editor filesEditor = filePrefs.edit();
-			int filesNumber = filePrefs.getInt("numberOfFiles", 0);
+			//Få mängden filer
+			SharedPreferences filePrefsMisc = getSharedPreferences(PREF_MISC, 0);
+			SharedPreferences.Editor filesEditorMisc = filePrefsMisc.edit();
+			int filesNumber = filePrefsMisc.getInt("numberOfFiles", 0);
+			//Hämtar mängdfiler igen för att se om det var första gången som det hela gjordes
+			int oldFilesNumber = filesNumber;
 			filesNumber++;
-			//Writing to StoreSettings
-			filesEditor.putInt("numberOfFiles", filesNumber);
+			
+			
+			//Writing to StoreSettings - skriv in ny mängd filer
+			filesEditorMisc.putInt("numberOfFiles", filesNumber);
+			filesEditorMisc.commit();
 			String thisFileReferense = "" + filesNumber;
+			
+			
+			//Få PREF_FILES
+			SharedPreferences filePrefsFiles = getSharedPreferences(PREF_FILES, 0);
+			SharedPreferences.Editor filesEditorFiles = filePrefsFiles.edit();
 			
 			
 			//Save the stuff witten into this app
@@ -150,30 +160,32 @@ public class addFile extends SherlockActivity {
 			
 			Toast confirmSaveToast = Toast.makeText(getApplicationContext(), "Sparar...", Toast.LENGTH_LONG);
 			confirmSaveToast.show();
-			if (needTutorialCheck() == true){
+			if (oldFilesNumber == 0){ //Då behöver starta om MainActivity.
 				Toast.makeText(getApplicationContext(), "Skickar intentmeddelande", Toast.LENGTH_LONG).show();
 				
 				Intent intent = new Intent(this, StartPoint.class);
 				intent.putExtra(REBOOT_MESSAGE, true);
 				startActivity(intent);
-				filesEditor.putString(thisFileReferense, nameField.getText().toString());
-				filesEditor.commit();
 				
+				filesEditorFiles.putString(thisFileReferense, nameField.getText().toString());
+				filesEditorFiles.commit();
+				finish();
 				} else {
-					filesEditor.putString(thisFileReferense, nameField.getText().toString());
-					filesEditor.commit();
+					filesEditorFiles.putString(thisFileReferense, nameField.getText().toString());
+					filesEditorFiles.commit();
+					finish();
 			finish();
 			}
 		}
 	}
-	public boolean needTutorialCheck() {
+/*	public boolean needTutorialCheck() {
 		//check if first startup
-				final SharedPreferences filesPrefs = getSharedPreferences("StoreSettings", 0);
+				final SharedPreferences filesPrefs = getSharedPreferences(PREF_MISC, 0);
 				int trueCheck = filesPrefs.getInt("numberOfFiles", 0);
 				if (trueCheck == 0){
 					return true; 
 				} else {
 					return false;
 				}		
-			}
+			}*/
 	}

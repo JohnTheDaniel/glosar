@@ -73,7 +73,7 @@ public class StartPoint extends SherlockActivity {
 		super.onResume();
 		//get the list of files
 		
-		SharedPreferences settings = getSharedPreferences(PREF_MISC, 0);
+		SharedPreferences settings = getSharedPreferences(PREF_FILES, 0);
 		String files = settings.getAll().toString();
 		
 		//hantera file, dela och ta bort skit
