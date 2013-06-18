@@ -98,7 +98,7 @@ public class StartPoint extends SherlockActivity {
 						
 			fileListView = (ListView) findViewById(R.id.fileListView);
 			ArrayAdapter<String> fileAdapter = new ArrayAdapter<String>(this,
-			android.R.layout.simple_list_item_1, android.R.id.text1, fileListValues);
+			R.layout.listitem_style, android.R.id.text1, fileListValues);
 			fileListView.setAdapter(fileAdapter);
 			
 			Toast toast = Toast.makeText(context, "needTutorialCheck() == false", duration);
