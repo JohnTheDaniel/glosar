@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#D3D3D3">
     
     <LinearLayout
         android:layout_alignParentTop="true"
         android:layout_height="70dp"
-        android:layout_width="fill_parent"
-        android:background="#D3D3D3" 
+        android:layout_width="fill_parent" 
         android:gravity="center"
         android:weightSum="1.0"
         android:id="@+id/topBarNameEditor">
         <EditText
             android:hint="Namge glosträning"
             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
+            android:layout_width="wrap_content"
             android:gravity="center" 
             android:textSize="25sp"
             android:id="@+id/addNewEditText"
@@ -23,12 +23,14 @@
     </LinearLayout>
     <ScrollView 
         android:layout_width="fill_parent"
-        android:padding="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:layout_below="@id/topBarNameEditor"
         android:layout_marginBottom="49dp"
         android:layout_height="fill_parent"
         android:fillViewport="true"
-        android:id="@+id/container">
+        android:id="@+id/container"
+        android:scrollbarStyle="outsideOverlay">
         <RelativeLayout
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
@@ -41,6 +43,8 @@
 		android:layout_alignParentBottom="true"
 	    android:layout_width="fill_parent"
 		android:layout_height="49dp"
+		android:paddingLeft="8dp"
+		android:paddingRight="8dp"
 		android:background="@drawable/border_forlist"
 		android:id="@+id/bottomButton"
 		android:gravity="center"
