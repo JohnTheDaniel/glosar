@@ -22,7 +22,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-@SuppressLint("NewApi")
+/*@SuppressLint("NewApi")*/
 public class addFile extends SherlockActivity {
 	int counter;
 	int text;
@@ -72,17 +72,31 @@ public class addFile extends SherlockActivity {
 
 			@Override
 			public void onClick(View v) {
-					EditText word = new EditText(addFile.this);
+					EditText word1 = new EditText(addFile.this);
+					EditText word2 = new EditText(addFile.this);
+					LinearLayout wordWrapper = new LinearLayout(addFile.this);
+					wordWrapper.setBackgroundColor(0xFFFFFFFF);
+					wordWrapper.setOrientation(LinearLayout.HORIZONTAL);
+					
 					text++;
-					int dps = 48; 
+					int dps = 48; //Hšjd 
 					final float scale = getBaseContext().getResources().getDisplayMetrics().density;
 					int pixels = (int) (dps * scale + 0.5f);
+					LayoutParams weightParams = new LinearLayout.LayoutParams(0, pixels, 1.0f);
+					word1.setLayoutParams(weightParams);
+					word2.setLayoutParams(weightParams);
 					RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, pixels);
-					word.setLayoutParams(layoutParams);
-					layoutParams.addRule(RelativeLayout.BELOW, counter);
+					wordWrapper.addView(word1);
+					wordWrapper.addView(word2);
+					layoutParams.addRule(RelativeLayout.BELOW, counter-1);
+					wordWrapper.setLayoutParams(layoutParams);
+					
 					counter++;
-					word.setId(counter);
-					((RelativeLayout) relativeLayout).addView(word);
+					word1.setId(counter);
+					wordWrapper.setId(counter);
+					counter++;
+					word2.setId(counter);
+					((RelativeLayout) relativeLayout).addView(wordWrapper);
 					containerScrollView.post(new Runnable() {            
 					    @Override
 					    public void run() {
@@ -93,7 +107,7 @@ public class addFile extends SherlockActivity {
 					//animate in the object
 					Animation animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.slide_right_in);
 					animation.setStartOffset(0);
-					word.startAnimation(animation);
+					wordWrapper.startAnimation(animation);
 					//Test
 			}	
 		});			
