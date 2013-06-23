@@ -24,9 +24,9 @@ import android.widget.Toast;
 
 /*@SuppressLint("NewApi")*/
 public class addFile extends SherlockActivity {
-	int counter;
+	int counter; 
 	int text;
-	EditText nameField;
+	EditText nameField; //The name of the training. Needs to be placed here to be accessed by all methods.
 	public static final String PREF_MISC = "StoreSettings";
 	public static final String PREF_FILES = "FileStorage";
 	SharedPreferences thisFilePrefs;
@@ -36,79 +36,101 @@ public class addFile extends SherlockActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new);
+
 		
 		//Getting number of trainings
-		//Jag glömde varför jag gjorde det här....
+		//Used to name file, and also decide if whe need the tutorial on StartPoint.java
 		SharedPreferences filePrefs = getSharedPreferences(PREF_MISC, 0);
 		int filesNumber = filePrefs.getInt("numberOfFiles", 0);
+
 		
-		//Skriv ut toeast om mängden files
+		//Write toast containing the amount of files.
+		//This is for development only, it will get deleted on release. 
 		Context context = getApplicationContext();
 		CharSequence toastText = filesNumber + " filer";
 		int duration = Toast.LENGTH_SHORT;
 		Toast toast = Toast.makeText(context, toastText, duration);
 		toast.show();
-	    
-	    //Pairing id's
-	    final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.RelativeLayout);
-	    final ScrollView containerScrollView = (ScrollView) findViewById(R.id.container);
-	    final LinearLayout addWordButton = (LinearLayout) findViewById(R.id.bottomButton);
-	    nameField = (EditText) findViewById(R.id.addNewEditText);
-	    
-	     
-	    //add first glosa
-	    TextView startWords = new TextView(this);
-	    startWords.setText("Word number 1");
-	    counter = 1;
-	    startWords.setId(counter);
-	    startWords.setLayoutParams(new LayoutParams(
-	    		LayoutParams.WRAP_CONTENT,
-	    		LayoutParams.WRAP_CONTENT));
-	    relativeLayout.addView(startWords);
-	    //Button Click, save
 
-	    //ButtonClick, add new glosa
-		addWordButton.setOnClickListener(new OnClickListener() {
+		//Pairing id's to variables.
+		final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.RelativeLayout);
+		final ScrollView containerScrollView = (ScrollView) findViewById(R.id.container);
+		final LinearLayout addWordButton = (LinearLayout) findViewById(R.id.bottomButton);
+		nameField = (EditText) findViewById(R.id.addNewEditText);
+
+
+		//add first word.
+		TextView startWords = new TextView(this);
+		startWords.setText("Word number 1");
+		counter = 1;
+		startWords.setId(counter);
+		startWords.setLayoutParams(new LayoutParams(
+				LayoutParams.WRAP_CONTENT,
+				LayoutParams.WRAP_CONTENT));
+		relativeLayout.addView(startWords);
+
+	
+		addWordButton.setOnClickListener(new OnClickListener() { //ButtonClick, add new wordset
 
 			@Override
 			public void onClick(View v) {
-					EditText word1 = new EditText(addFile.this);
-					EditText word2 = new EditText(addFile.this);
-					LinearLayout wordWrapper = new LinearLayout(addFile.this);
-					wordWrapper.setBackgroundColor(0xFFFFFFFF);
-					wordWrapper.setOrientation(LinearLayout.HORIZONTAL);
-					
-					text++;
-					int dps = 48; //Höjd 
-					final float scale = getBaseContext().getResources().getDisplayMetrics().density;
-					int pixels = (int) (dps * scale + 0.5f);
-					LayoutParams weightParams = new LinearLayout.LayoutParams(0, pixels, 1.0f);
-					word1.setLayoutParams(weightParams);
-					word2.setLayoutParams(weightParams);
-					RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, pixels);
-					wordWrapper.addView(word1);
-					wordWrapper.addView(word2);
-					layoutParams.addRule(RelativeLayout.BELOW, counter-1);
-					wordWrapper.setLayoutParams(layoutParams);
-					
-					counter++;
-					word1.setId(counter);
-					wordWrapper.setId(counter);
-					counter++;
-					word2.setId(counter);
-					((RelativeLayout) relativeLayout).addView(wordWrapper);
-					containerScrollView.post(new Runnable() {            
-					    @Override
-					    public void run() {
-					          	containerScrollView.fullScroll(View.FOCUS_DOWN);              
-					    }
-					});
-					
-					//animate in the object
-					Animation animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.slide_right_in);
-					animation.setStartOffset(0);
-					wordWrapper.startAnimation(animation);
-					//Test
+				//The two words paired to each other:
+				EditText word1 = new EditText(addFile.this); 
+				EditText word2 = new EditText(addFile.this);
+				
+				//The container of the two EditTexts
+				LinearLayout wordWrapper = new LinearLayout(addFile.this);
+				wordWrapper.setBackgroundColor(0xFFFFFFFF);
+				wordWrapper.setOrientation(LinearLayout.HORIZONTAL);
+
+				int dps = 48; //Value, in this case height, described in density pixels
+				//Calculate the density pixels height in normal pixels.
+				final float scale = getBaseContext().getResources().getDisplayMetrics().density;
+				int pixels = (int) (dps * scale + 0.5f);
+				
+				//The two EditTexts must have same width, therefore they have both the weight of 1 (1.0f)
+				LayoutParams weightParams = new LinearLayout.LayoutParams(0, pixels, 1.0f);
+				word1.setLayoutParams(weightParams);
+				word2.setLayoutParams(weightParams);
+				
+				//add the EditTexts to the container
+				wordWrapper.addView(word1);
+				wordWrapper.addView(word2);
+				
+				//The newly added wordWrapper must always be placed below the already placed wordWrapper
+				RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, pixels);
+				layoutParams.addRule(RelativeLayout.BELOW, counter-1);
+				wordWrapper.setLayoutParams(layoutParams);
+				
+				//Setting up the id's. 
+				/*The idea is to make it possible to get the Strings from id's using a 
+				 * for loop and then printing them to this sharedPreference file. 
+				 * 
+				 * String from id1 = String from id2
+				 * String from id3 = String from id4
+				 * etc.*/
+				counter++;
+				//This part could become problematic. They both have the same id. 
+				//Will go with it for now.
+				word1.setId(counter);
+				wordWrapper.setId(counter);
+				counter++;
+				word2.setId(counter);
+				
+				
+				//Scroll down to bottom after added the new wordWrapper.
+				((RelativeLayout) relativeLayout).addView(wordWrapper);
+				containerScrollView.post(new Runnable() {            
+					@Override
+					public void run() {
+						containerScrollView.fullScroll(View.FOCUS_DOWN);              
+					}
+				});
+				
+				//animate in the wordWrapper
+				Animation animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.slide_right_in);
+				animation.setStartOffset(0);
+				wordWrapper.startAnimation(animation);
 			}	
 		});			
 	}
@@ -126,7 +148,7 @@ public class addFile extends SherlockActivity {
 			Context context = getApplicationContext();
 			CharSequence text = "Sparar...";
 			int duration = Toast.LENGTH_LONG;
-			
+
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
 		}*/
@@ -144,55 +166,69 @@ public class addFile extends SherlockActivity {
 		//first check. Is there any any name?
 		if (nameField.getText().toString().equals("")){
 			//nameField is empty.
-			Toast saveErr = Toast.makeText(getApplicationContext(), "Namnge träningen ", Toast.LENGTH_LONG);
+			Toast saveErr = Toast.makeText(getApplicationContext(), "Namnge träningen", Toast.LENGTH_LONG);
 			saveErr.show();
 		}
 		else {
-			//Få mängden filer
+			//Get the amount of files.
 			SharedPreferences filePrefsMisc = getSharedPreferences(PREF_MISC, 0);
 			SharedPreferences.Editor filesEditorMisc = filePrefsMisc.edit();
 			int filesNumber = filePrefsMisc.getInt("numberOfFiles", 0);
-			//Hämtar mängdfiler igen för att se om det var första gången som det hela gjordes
+			//Get the amount of files again to see if it was the first the saveOperation() was executed. 
+			//Needed to determinate if the tutorial is still necessary. 
 			int oldFilesNumber = filesNumber;
 			filesNumber++;
-			
-			
-			//Writing to StoreSettings - skriv in ny mängd filer
+
+
+			//Writing to StoreSettings - write the new total amount of files
 			filesEditorMisc.putInt("numberOfFiles", filesNumber);
 			filesEditorMisc.commit();
 			String thisFileReferense = "" + filesNumber;
-			
-			
-			//Få PREF_FILES
+
+
+			//Get PREF_FILES
 			SharedPreferences filePrefsFiles = getSharedPreferences(PREF_FILES, 0);
 			SharedPreferences.Editor filesEditorFiles = filePrefsFiles.edit();
-			
-			
+
+
 			//Save the stuff witten into this app
 			String thisPrefName = nameField.getText().toString();
 			thisFilePrefs = getSharedPreferences(thisPrefName, 0);
-			
+
 			Toast confirmSaveToast = Toast.makeText(getApplicationContext(), "Sparar...", Toast.LENGTH_LONG);
 			confirmSaveToast.show();
-			if (oldFilesNumber == 0){ //Då behöver starta om MainActivity.
+			if (oldFilesNumber == 0){
+				/* If the the oldFileNumber is 0, then it means that the tutorial was
+				 * active. We now need to restart StartPoint.java activity to get rid of the
+				 * tutorial. I do it using an intent and then check if an 
+				 * intent was received in StartPoint.java.
+				 * 
+				 *	I'm sure there's a better way to do it. Please make pull request if you have any ideas. */
+				
+				
+				//For development. Deleted on release.
 				Toast.makeText(getApplicationContext(), "Skickar intentmeddelande", Toast.LENGTH_LONG).show();
 				
+				//Making and starting the intent. 
 				Intent intent = new Intent(this, StartPoint.class);
 				intent.putExtra(REBOOT_MESSAGE, true);
 				startActivity(intent);
 				
+				//ThisFileReference is equal to the filesNumber+1
+				//ThisFileReference references to the name of is training in sharedPreferences
+				filesEditorFiles.putString(thisFileReferense, nameField.getText().toString());
+				filesEditorFiles.commit();
+				
+				//Close activity
+				finish();
+			} else { //Just save it.
 				filesEditorFiles.putString(thisFileReferense, nameField.getText().toString());
 				filesEditorFiles.commit();
 				finish();
-				} else {
-					filesEditorFiles.putString(thisFileReferense, nameField.getText().toString());
-					filesEditorFiles.commit();
-					finish();
-			finish();
 			}
 		}
 	}
-/*	public boolean needTutorialCheck() {
+	/*	public boolean needTutorialCheck() {
 		//check if first startup
 				final SharedPreferences filesPrefs = getSharedPreferences(PREF_MISC, 0);
 				int trueCheck = filesPrefs.getInt("numberOfFiles", 0);
@@ -202,4 +238,4 @@ public class addFile extends SherlockActivity {
 					return false;
 				}		
 			}*/
-	}
+}
