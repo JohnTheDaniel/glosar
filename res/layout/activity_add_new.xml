@@ -12,7 +12,7 @@
         android:weightSum="1.0"
         android:id="@+id/topBarNameEditor">
         <EditText
-            android:hint="Namge glosträning"
+            android:hint="@string/name_the_training"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:gravity="center" 
@@ -61,7 +61,7 @@
 			        android:layout_height="wrap_content"
 			        android:gravity="center"
 			        android:paddingLeft="8dp"
-			        android:text="NY GLOSA"
+			        android:text="@string/new_glosa"
 			        android:textSize="15sp"
 			        android:fontFamily="sans-serif-condensed"
 			        android:textStyle="bold" />

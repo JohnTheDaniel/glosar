@@ -1,7 +1,5 @@
 package com.erlaa.glosor;
 
-import java.lang.reflect.Array;
-
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -94,7 +92,7 @@ public class StartPoint extends SherlockActivity {
 		 * This makes a welcome message. */
 		if (needTutorialCheck() == true){
 			TextView tv = (TextView) findViewById(R.id.prompt);
-			tv.setText("\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning.");
+			tv.setText(getString(R.string.guide)/*"\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning."*/);
 			LinearLayout layout = (LinearLayout) findViewById(R.id.container);
 			layout.setBackgroundResource(R.drawable.gray_line_bg);
 

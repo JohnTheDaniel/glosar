@@ -5,7 +5,6 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,7 +21,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/*@SuppressLint("NewApi")*/
 public class addFile extends SherlockActivity {
 	int counter; 
 	int text;
@@ -195,7 +193,7 @@ public class addFile extends SherlockActivity {
 			String thisPrefName = nameField.getText().toString();
 			thisFilePrefs = getSharedPreferences(thisPrefName, 0);
 
-			Toast confirmSaveToast = Toast.makeText(getApplicationContext(), "Sparar...", Toast.LENGTH_LONG);
+			Toast confirmSaveToast = Toast.makeText(getApplicationContext(), getString(R.string.saving___), Toast.LENGTH_LONG);
 			confirmSaveToast.show();
 			if (oldFilesNumber == 0){
 				/* If the the oldFileNumber is 0, then it means that the tutorial was
