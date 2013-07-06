@@ -1,0 +1,55 @@
+/* Main layout-file for mainly computers - all devices over 900px in width */
+/*html, body {
+	height: 100%;
+}
+header {
+	height: 70%;
+	background: #9b9b9b;
+	position: relative;
+}
+header>span {
+	position: absolute;
+	top:50%;
+	background: red;
+	height: 300px;
+	width: 100%;
+	margin-top: -150px;
+	
+	padding-left: 100px;
+} */
+
+html, body{
+	height: 100%;
+}
+body{
+	position:relative;
+}
+.phoneholder {
+	height:100%;
+	float:left;
+	position: relative;
+	z-index: 99;
+}
+.content {
+	float: left;
+	width: 40%;
+	margin-top: 50px;
+}
+.screenshot {
+	position:absolute;
+	top: 50%;
+	left: 50%;
+	height: 160px;
+	z-index: 98;
+	background: url("../img/screenshot.png");
+	background-size: contain;
+}
+footer {
+	clear:both;
+	width: 100%;
+	height: 150px;
+	background:#0099CC;
+	bottom: 146px;
+	position:relative; 
+	padding-top: 10px;
+}

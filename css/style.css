@@ -1,0 +1,57 @@
+/**********************************************
+
+                   CONNTENT
+1. MISC - stuff like zeroing, fonts etc
+
+***********************************************/
+
+
+/**********************************************
+                   1. MISC
+***********************************************/
+
+@font-face {
+	font-family:kepler;
+	font-weight:italic;
+	src:url(fonts/keplerli.otf);
+}
+@font-face {
+	font-family:Roboto-normal;
+	font-weight:normal;
+	src:url(fonts/Roboto-Regular.ttf);
+}
+@font-face {
+	font-family:Roboto;
+	font-weight:italic;
+	src:url(fonts/Roboto-Italic.ttf);
+}
+@font-face {
+	font-family:Roboto-light;
+	/*font-weight:lighter;*/
+	src:url(fonts/Roboto-Light.ttf);
+}
+@font-face {
+	font-family:Roboto;
+	font-weight:bold;
+	src:url(fonts/Roboto-Bold.ttf);
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+body {
+	background: -webkit-linear-gradient(#b7b7b7 0%, #dadada 100%);
+	color: #585858;
+	font-family: Roboto-normal;
+}
+h1 {
+	font-family: kepler;
+	font-style: italic;
+	font-size: 10em;
+	margin: 0;
+	padding: 0;
+}
+footer {
+	color:white;
+}
