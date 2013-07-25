@@ -1,9 +1,11 @@
-package com.erlaa.glosor;
+package com.johndaniel.glosar;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
+import com.erlaa.glosor.R;
+
 import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
