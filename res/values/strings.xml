@@ -8,9 +8,10 @@
     <string name="startPointLabel">Gamla Övningar</string>
     <string name="addNewSave">SPARA</string>
     <string name="addNewDiscard">AVBRYT</string>
-	<string name="guide">\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning.</string>
+    <string name="guide">\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning.</string>
     <string name="saving...">Sparar...</string>
-	<string name="name_the_training">Namnge glosträning</string>
+    <string name="name_the_training">Namnge glosträning</string>
     <string name="new_glosa">NY GLOSA</string>
-	
+    <string name="title_activity_train">Train</string>
+
 </resources>

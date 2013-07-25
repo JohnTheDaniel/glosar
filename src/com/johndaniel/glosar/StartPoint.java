@@ -1,15 +1,21 @@
 package com.johndaniel.glosar;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collections;
+
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
-import com.erlaa.glosor.R;
 
 import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -17,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class StartPoint extends SherlockActivity {
-
+	public static final String EXTRA_POSITION = "com.johndaniel.glosar.POSITION";
 	ListView fileListView;
 	public static final String PREF_MISC = "StoreSettings"; //Saves stuffs like numberOfFiles.
 	public static final String PREF_FILES = "FileStorage"; //Saves the names of the files
@@ -81,11 +87,9 @@ public class StartPoint extends SherlockActivity {
 		String files = settings.getAll().toString();
 
 		//Handle data from getAll().
-		files.replace("{", "").replace("}", "");
-		files.replace("=", ", ");
-		String[] fileListValues = files.replace("{", "").replace("}", "").split(", ");
-
-		//sort
+		String[] fileListValues = files.replace("{", "").replace("}", "").replace("=", ". ").split(", ");
+		//Latest training first
+		Arrays.sort(fileListValues, Collections.reverseOrder());
 
 
 		//Vid första startup kommer användaren inte
@@ -107,7 +111,22 @@ public class StartPoint extends SherlockActivity {
 			ArrayAdapter<String> fileAdapter = new ArrayAdapter<String>(this,
 					R.layout.listitem_style, android.R.id.text1, fileListValues);
 			fileListView.setAdapter(fileAdapter);
+			fileListView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
 
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					Intent intent = new Intent (view.getContext(), Train.class);
+					String positionString = "" + position;
+					String fullname = parent.getItemAtPosition(position).toString();
+					String[] fullnameArr = fullname.split(". ");
+					intent.putExtra(EXTRA_POSITION, fullnameArr[0]);
+					startActivity(intent);
+				}
+				
+			});
+
+			
 			//Development toast. Deleted at release.
 			Toast toast = Toast.makeText(context, "needTutorialCheck() == false", duration);
 			toast.show();
@@ -123,5 +142,6 @@ public class StartPoint extends SherlockActivity {
 			return false;
 		}		
 	}
+	
 }
 

@@ -4,7 +4,6 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
-import com.erlaa.glosor.R;
 
 import android.content.Context;
 import android.content.Intent;
@@ -193,7 +192,10 @@ public class addFile extends SherlockActivity {
 			//Save the stuff witten into this app
 			String thisPrefName = nameField.getText().toString();
 			thisFilePrefs = getSharedPreferences(thisPrefName, 0);
-
+			
+			//Here goes the stuff from the edittexts.'
+			thisFilePrefs.edit().putString("Hello", "Hej").commit();
+			
 			Toast confirmSaveToast = Toast.makeText(getApplicationContext(), getString(R.string.saving___), Toast.LENGTH_LONG);
 			confirmSaveToast.show();
 			if (oldFilesNumber == 0){
@@ -212,15 +214,11 @@ public class addFile extends SherlockActivity {
 				Intent intent = new Intent(this, StartPoint.class);
 				intent.putExtra(REBOOT_MESSAGE, true);
 				startActivity(intent);
-				
+
+				}
+				//Just save it.
 				//ThisFileReference is equal to the filesNumber+1
 				//ThisFileReference references to the name of is training in sharedPreferences
-				filesEditorFiles.putString(thisFileReferense, nameField.getText().toString());
-				filesEditorFiles.commit();
-				
-				//Close activity
-				finish();
-			} else { //Just save it.
 				filesEditorFiles.putString(thisFileReferense, nameField.getText().toString());
 				filesEditorFiles.commit();
 				finish();
@@ -237,4 +235,4 @@ public class addFile extends SherlockActivity {
 					return false;
 				}		
 			}*/
-}
+

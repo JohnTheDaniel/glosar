@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.erlaa.glosor"
+    package="com.johndaniel.glosar"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -25,7 +25,12 @@
         <activity
             android:name="com.johndaniel.glosar.addFile"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/addNewLabel"></activity>
+            android:label="@string/addNewLabel" >
+        </activity>
+        <activity
+            android:name="com.johndaniel.glosar.Train"
+            android:label="@string/title_activity_train" >
+        </activity>
     </application>
 
 </manifest>
