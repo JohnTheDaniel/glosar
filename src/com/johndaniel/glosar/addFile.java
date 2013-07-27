@@ -194,6 +194,7 @@ public class addFile extends SherlockActivity {
 			thisFilePrefs = getSharedPreferences(thisPrefName, 0);
 			
 			//Here goes the stuff from the edittexts.'
+			//This is just some development test
 			thisFilePrefs.edit().putString("Hello", "Hej").commit();
 			
 			Toast confirmSaveToast = Toast.makeText(getApplicationContext(), getString(R.string.saving___), Toast.LENGTH_LONG);
