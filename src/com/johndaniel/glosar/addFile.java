@@ -5,6 +5,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 public class addFile extends SherlockActivity {
 	int counter; 
 	int text;
+	Activity activityRaw;
 	EditText nameField; //The name of the training. Needs to be placed here to be accessed by all methods.
 	public static final String PREF_MISC = "StoreSettings";
 	public static final String PREF_FILES = "FileStorage";
@@ -34,8 +36,7 @@ public class addFile extends SherlockActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new);
-
-		
+		activityRaw = this;
 		//Getting number of trainings
 		//Used to name file, and also decide if whe need the tutorial on StartPoint.java
 		SharedPreferences filePrefs = getSharedPreferences(PREF_MISC, 0);
@@ -61,7 +62,7 @@ public class addFile extends SherlockActivity {
 		TextView startWords = new TextView(this);
 		startWords.setText("Word number 1");
 		counter = 1;
-		startWords.setId(counter);
+		startWords.setId(-counter);
 		startWords.setLayoutParams(new LayoutParams(
 				LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT));
@@ -97,7 +98,7 @@ public class addFile extends SherlockActivity {
 				
 				//The newly added wordWrapper must always be placed below the already placed wordWrapper
 				RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, pixels);
-				layoutParams.addRule(RelativeLayout.BELOW, counter-1);
+				layoutParams.addRule(RelativeLayout.BELOW, -counter+1);
 				wordWrapper.setLayoutParams(layoutParams);
 				
 				//Setting up the id's. 
@@ -111,7 +112,7 @@ public class addFile extends SherlockActivity {
 				//This part could become problematic. They both have the same id. 
 				//Will go with it for now.
 				word1.setId(counter);
-				wordWrapper.setId(counter);
+				wordWrapper.setId(-counter);
 				counter++;
 				word2.setId(counter);
 				
@@ -152,7 +153,7 @@ public class addFile extends SherlockActivity {
 		}*/
 		switch (item.getItemId()) {
 		case R.id.addFileSaveButton:
-			saveOperation();
+			saveOperation(activityRaw);
 			return true;
 		case R.id.addFileCancelButton:
 			finish();
@@ -160,7 +161,7 @@ public class addFile extends SherlockActivity {
 		default: return super.onOptionsItemSelected(item);
 		}
 	}
-	public void saveOperation() {
+	public void saveOperation(Activity activity) {
 		//first check. Is there any any name?
 		if (nameField.getText().toString().equals("")){
 			//nameField is empty.
@@ -195,7 +196,21 @@ public class addFile extends SherlockActivity {
 			
 			//Here goes the stuff from the edittexts.'
 			//This is just some development test
-			thisFilePrefs.edit().putString("Hello", "Hej").commit();
+			//thisFilePrefs.edit().putString("Hello", "Hej").commit();
+			if(counter > 1){ //To avoid null
+				Toast saveErr = Toast.makeText(getApplicationContext(), "For-loop kšrs", Toast.LENGTH_LONG);
+				saveErr.show();
+				for(int i = 2; i < counter; i = i + 2){
+					EditText word1 = (EditText) activity.findViewById(i); //Does'nt work becouse the linearlayout has the same id
+					EditText word2 = (EditText) activity.findViewById(i + 1);
+					String word1Text = word1.getText().toString();
+					String word2Text = word2.getText().toString();
+					
+					
+					thisFilePrefs.edit().putString(word1Text, word2Text).commit();
+				}
+			}
+			
 			
 			Toast confirmSaveToast = Toast.makeText(getApplicationContext(), getString(R.string.saving___), Toast.LENGTH_LONG);
 			confirmSaveToast.show();

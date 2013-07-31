@@ -31,7 +31,7 @@ public class StartPoint extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start_point);
-
+		this.setTitle(getResources().getString(R.string.startPointLabel));
 		//Nästa steg: Skapa intent och skicka över info om vilken fil som har blivit klickad i listan. 
 	}
 	@Override
@@ -90,6 +90,7 @@ public class StartPoint extends SherlockActivity {
 		String[] fileListValues = files.replace("{", "").replace("}", "").replace("=", ". ").split(", ");
 		//Latest training first
 		Arrays.sort(fileListValues, Collections.reverseOrder());
+		
 
 
 		//Vid första startup kommer användaren inte
@@ -118,9 +119,9 @@ public class StartPoint extends SherlockActivity {
 						int position, long id) {
 					Intent intent = new Intent (view.getContext(), Train.class);
 					String positionString = "" + position;
-					String fullname = parent.getItemAtPosition(position).toString();
-					String[] fullnameArr = fullname.split(". ");
-					intent.putExtra(EXTRA_POSITION, fullnameArr[0]);
+					String trainingName = parent.getItemAtPosition(position).toString();
+					String[] trainingNameArr = trainingName.split(". ");
+					intent.putExtra(EXTRA_POSITION, trainingNameArr[0]);
 					startActivity(intent);
 				}
 				
