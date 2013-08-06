@@ -1,9 +1,11 @@
 package com.johndaniel.glosar;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
+
 
 import android.app.Activity;
 import android.content.Context;
@@ -36,6 +38,8 @@ public class addFile extends SherlockActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new);
+		
+		
 		activityRaw = this;
 		//Getting number of trainings
 		//Used to name file, and also decide if whe need the tutorial on StartPoint.java
@@ -61,12 +65,13 @@ public class addFile extends SherlockActivity {
 		//add first word.
 		TextView startWords = new TextView(this);
 		startWords.setText("Word number 1");
-		counter = 1;
+		counter = 2;
 		startWords.setId(-counter);
 		startWords.setLayoutParams(new LayoutParams(
 				LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT));
 		relativeLayout.addView(startWords);
+		counter++;
 
 	
 		addWordButton.setOnClickListener(new OnClickListener() { //ButtonClick, add new wordset
@@ -96,9 +101,16 @@ public class addFile extends SherlockActivity {
 				wordWrapper.addView(word1);
 				wordWrapper.addView(word2);
 				
+				
+				
 				//The newly added wordWrapper must always be placed below the already placed wordWrapper
 				RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, pixels);
-				layoutParams.addRule(RelativeLayout.BELOW, -counter+1);
+				if(counter == -2){
+					layoutParams.addRule(RelativeLayout.BELOW, -2);
+				}else {
+					layoutParams.addRule(RelativeLayout.BELOW, -counter+1);
+				}
+				
 				wordWrapper.setLayoutParams(layoutParams);
 				
 				//Setting up the id's. 
@@ -108,9 +120,11 @@ public class addFile extends SherlockActivity {
 				 * String from id1 = String from id2
 				 * String from id3 = String from id4
 				 * etc.*/
-				counter++;
+				
 				//This part could become problematic. They both have the same id. 
 				//Will go with it for now.
+				
+				counter++;
 				word1.setId(counter);
 				wordWrapper.setId(-counter);
 				counter++;
@@ -201,6 +215,8 @@ public class addFile extends SherlockActivity {
 				Toast saveErr = Toast.makeText(getApplicationContext(), "For-loop kšrs", Toast.LENGTH_LONG);
 				saveErr.show();
 				for(int i = 2; i < counter; i = i + 2){
+					
+					//Currently gives a bug because the first id points to a textview. This gets fixed when the first id gets EditTexts
 					EditText word1 = (EditText) activity.findViewById(i); //Does'nt work becouse the linearlayout has the same id
 					EditText word2 = (EditText) activity.findViewById(i + 1);
 					String word1Text = word1.getText().toString();
