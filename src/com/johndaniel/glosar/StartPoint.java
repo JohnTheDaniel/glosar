@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -32,7 +33,10 @@ public class StartPoint extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start_point);
 		this.setTitle(getResources().getString(R.string.startPointLabel));
-		//NŠsta steg: Skapa intent och skicka šver info om vilken fil som har blivit klickad i listan. 
+		//NŠsta steg: Skapa intent och skicka šver info om vilken fil som har blivit klickad i listan.
+		
+		ActionBar ab = getSupportActionBar();
+		ab.setIcon(getResources().getDrawable(R.drawable.launcher_white));
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
