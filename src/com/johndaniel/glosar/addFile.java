@@ -135,7 +135,21 @@ public class addFile extends SherlockActivity {
 		//Scroll down to bottom after added the new wordWrapper.
 		((RelativeLayout) relativeLayout).addView(initWordWrapper);
 		
-
+		//Scroll down and animate
+		//Scroll down to bottom after added the new wordWrapper.
+		containerScrollView.post(new Runnable() {            
+			@Override
+			public void run() {
+				containerScrollView.fullScroll(View.FOCUS_DOWN);              
+			}
+		});
+		
+		//animate in the wordWrapper
+		Animation animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.slide_right_in);
+		animation.setStartOffset(0);
+		initWordWrapper.startAnimation(animation);
+		
+		nameField.requestFocus();
 		
 		//User clicked addWord button
 		addWordButton.setOnClickListener(new OnClickListener() { //ButtonClick, add new wordset
@@ -205,6 +219,8 @@ public class addFile extends SherlockActivity {
 				Animation animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.slide_right_in);
 				animation.setStartOffset(0);
 				wordWrapper.startAnimation(animation);
+				
+				
 			}	
 		});			
 	}
