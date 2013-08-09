@@ -61,17 +61,78 @@ public class addFile extends SherlockActivity {
 		final LinearLayout addWordButton = (LinearLayout) findViewById(R.id.bottomButton);
 		nameField = (EditText) findViewById(R.id.addNewEditText);
 
-
-		//add first word.
-		TextView startWords = new TextView(this);
-		startWords.setText("Word number 1");
+		int dps = 48; //Value, in this case height, described in density pixels
+		//Calculate the density pixels height in normal pixels.
+		final float scale = getBaseContext().getResources().getDisplayMetrics().density;
+		final int pixels = (int) (dps * scale + 0.5f);
+		
+		final LayoutParams weightParams = new LinearLayout.LayoutParams(0, pixels, 1.0f);
+		
 		counter = 2;
+		
+		//add first word.
+		/*TextView startWords = new TextView(this);
+		startWords.setText("Word number 1");
 		startWords.setId(-counter);
 		startWords.setLayoutParams(new LayoutParams(
 				LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT));
-		relativeLayout.addView(startWords);
+		relativeLayout.addView(startWords);*/
+		
+		//HERE STARTS THE NEW STUFF
+		//The two words paired to each other:
+		EditText initword1 = new EditText(addFile.this); 
+		EditText initword2 = new EditText(addFile.this);
+		
+		//The container of the two EditTexts
+		LinearLayout initWordWrapper = new LinearLayout(addFile.this);
+		initWordWrapper.setBackgroundColor(0xFFFFFFFF);
+		initWordWrapper.setOrientation(LinearLayout.HORIZONTAL);
+
+		/*int dps = 48; //Value, in this case height, described in density pixels
+		//Calculate the density pixels height in normal pixels.
+		final float scale = getBaseContext().getResources().getDisplayMetrics().density;
+		int pixels = (int) (dps * scale + 0.5f);*/
+		
+		//The two EditTexts must have same width, therefore they have both the weight of 1 (1.0f)
+		/*LayoutParams weightParams = new LinearLayout.LayoutParams(0, pixels, 1.0f);*/
+		initword1.setLayoutParams(weightParams);
+		initword2.setLayoutParams(weightParams);
+		
+		//add the EditTexts to the container
+		initWordWrapper.addView(initword1);
+		initWordWrapper.addView(initword2);
+		
+		
+		
+		//The newly added wordWrapper must always be placed below the already placed wordWrapper
+		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, pixels);
+		layoutParams.addRule(RelativeLayout.BELOW, -counter+1);
+		
+		
+		initWordWrapper.setLayoutParams(layoutParams);
+		
+		//Setting up the id's. 
+		/*The idea is to make it possible to get the Strings from id's using a 
+		 * for loop and then printing them to this sharedPreference file. 
+		 * 
+		 * String from id1 = String from id2
+		 * String from id3 = String from id4
+		 * etc.*/
+		
+		//This part could become problematic. They both have the same id. 
+		//Will go with it for now.
+		
 		counter++;
+		initword1.setId(counter);
+		initWordWrapper.setId(-counter);
+		counter++;
+		initword2.setId(counter);
+		
+		
+		//Scroll down to bottom after added the new wordWrapper.
+		((RelativeLayout) relativeLayout).addView(initWordWrapper);
+		
 
 	
 		addWordButton.setOnClickListener(new OnClickListener() { //ButtonClick, add new wordset
@@ -87,13 +148,13 @@ public class addFile extends SherlockActivity {
 				wordWrapper.setBackgroundColor(0xFFFFFFFF);
 				wordWrapper.setOrientation(LinearLayout.HORIZONTAL);
 
-				int dps = 48; //Value, in this case height, described in density pixels
+				/*int dps = 48; //Value, in this case height, described in density pixels
 				//Calculate the density pixels height in normal pixels.
 				final float scale = getBaseContext().getResources().getDisplayMetrics().density;
-				int pixels = (int) (dps * scale + 0.5f);
+				int pixels = (int) (dps * scale + 0.5f);*/
 				
 				//The two EditTexts must have same width, therefore they have both the weight of 1 (1.0f)
-				LayoutParams weightParams = new LinearLayout.LayoutParams(0, pixels, 1.0f);
+				/*LayoutParams weightParams = new LinearLayout.LayoutParams(0, pixels, 1.0f);*/
 				word1.setLayoutParams(weightParams);
 				word2.setLayoutParams(weightParams);
 				
@@ -105,11 +166,8 @@ public class addFile extends SherlockActivity {
 				
 				//The newly added wordWrapper must always be placed below the already placed wordWrapper
 				RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, pixels);
-				if(counter == -2){
-					layoutParams.addRule(RelativeLayout.BELOW, -2);
-				}else {
-					layoutParams.addRule(RelativeLayout.BELOW, -counter+1);
-				}
+				layoutParams.addRule(RelativeLayout.BELOW, -counter+1);
+				
 				
 				wordWrapper.setLayoutParams(layoutParams);
 				
@@ -258,7 +316,7 @@ public class addFile extends SherlockActivity {
 		}
 	}
 	/*	public boolean needTutorialCheck() {
-		//check if first startup
+		//check if we got some words
 				final SharedPreferences filesPrefs = getSharedPreferences(PREF_MISC, 0);
 				int trueCheck = filesPrefs.getInt("numberOfFiles", 0);
 				if (trueCheck == 0){
@@ -267,4 +325,3 @@ public class addFile extends SherlockActivity {
 					return false;
 				}		
 			}*/
-
