@@ -16,7 +16,10 @@
 			    android:textSize="35sp"
 			    android:textStyle="italic"
 			    android:fontFamily="sans-serif-light" 
-			    android:textColor="#33B5E5"/>
+			    android:textColor="#33B5E5"
+			    android:paddingLeft="16dp"
+			    android:paddingRight="16dp"
+			    />
 		    <ListView
 		        android:layout_width="fill_parent"
 		        android:layout_height="wrap_content" 
