@@ -60,7 +60,12 @@ public class addFile extends SherlockActivity {
 		final ScrollView containerScrollView = (ScrollView) findViewById(R.id.container);
 		final LinearLayout addWordButton = (LinearLayout) findViewById(R.id.bottomButton);
 		nameField = (EditText) findViewById(R.id.addNewEditText);
-
+		
+		
+		
+		//Place the initial EditTexts
+		
+		//Calculate width
 		int dps = 48; //Value, in this case height, described in density pixels
 		//Calculate the density pixels height in normal pixels.
 		final float scale = getBaseContext().getResources().getDisplayMetrics().density;
@@ -69,7 +74,6 @@ public class addFile extends SherlockActivity {
 		final LayoutParams weightParams = new LinearLayout.LayoutParams(0, pixels, 1.0f);
 		
 		counter = 2;
-		
 		//add first word.
 		/*TextView startWords = new TextView(this);
 		startWords.setText("Word number 1");
@@ -106,10 +110,10 @@ public class addFile extends SherlockActivity {
 		
 		
 		//The newly added wordWrapper must always be placed below the already placed wordWrapper
+		//In this case, there are no wordwrappers.
 		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, pixels);
 		layoutParams.addRule(RelativeLayout.BELOW, -counter+1);
-		
-		
+
 		initWordWrapper.setLayoutParams(layoutParams);
 		
 		//Setting up the id's. 
@@ -123,18 +127,17 @@ public class addFile extends SherlockActivity {
 		//This part could become problematic. They both have the same id. 
 		//Will go with it for now.
 		
-		counter++;
 		initword1.setId(counter);
 		initWordWrapper.setId(-counter);
 		counter++;
 		initword2.setId(counter);
-		
-		
+				
 		//Scroll down to bottom after added the new wordWrapper.
 		((RelativeLayout) relativeLayout).addView(initWordWrapper);
 		
 
-	
+		
+		//User clicked addWord button
 		addWordButton.setOnClickListener(new OnClickListener() { //ButtonClick, add new wordset
 
 			@Override
