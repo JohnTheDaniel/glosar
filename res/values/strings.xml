@@ -13,5 +13,6 @@
     <string name="name_the_training">Namnge glosträning</string>
     <string name="new_glosa">NY GLOSA</string>
     <string name="title_activity_train">Train</string>
+    <string name="title_activity_settings">Inställningar</string>
 
 </resources>

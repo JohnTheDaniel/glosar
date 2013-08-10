@@ -1,0 +1,8 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference 
+        android:title="Enable ads"
+        android:summary="Help the developer by enabling ads"
+        android:key="adsPreference"
+        android:defaultValue="false"/>
+    <Preference android:title="About the developer" />
+</PreferenceScreen>

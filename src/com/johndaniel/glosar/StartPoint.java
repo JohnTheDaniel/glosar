@@ -53,6 +53,9 @@ public class StartPoint extends SherlockActivity {
 		case R.id.addNewFileButton:
 			Intent intent = new Intent (this, addFile.class);
 			startActivity(intent);
+		case R.id.action_settings:
+			Intent settingsIntent = new Intent (this, SettingsActivity.class);
+			startActivity(settingsIntent);
 		}
 		return super.onOptionsItemSelected(item);
 	}

@@ -11,12 +11,12 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:logo="@drawable/launcher_white"
         android:label="@string/app_name"
+        android:logo="@drawable/launcher_white"
         android:theme="@style/Theme.Glosar" >
         <activity
             android:name="com.johndaniel.glosar.StartPoint"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +30,11 @@
         </activity>
         <activity
             android:name="com.johndaniel.glosar.Train"
-            android:label="@string/title_activity_train">
+            android:label="@string/title_activity_train" >
+        </activity>
+        <activity
+            android:name="com.johndaniel.glosar.SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 
