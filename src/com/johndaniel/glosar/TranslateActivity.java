@@ -43,6 +43,7 @@ public class TranslateActivity extends Activity {
 			}
 		});
 	}
+
 	@SuppressLint("NewApi")
 	private void flip(){
 		if (showingBack){
@@ -58,7 +59,7 @@ public class TranslateActivity extends Activity {
 		getFragmentManager().beginTransaction()
 			.setCustomAnimations(R.anim.card_flip_right_in, R.anim.card_flip_right_out, 
 					R.anim.card_flip_left_in, R.anim.card_flip_left_out)
-			.replace(R.id.translate_container, new TranslateFragment2())
+			.replace(R.id.translate_container, word2)
 			.addToBackStack(null)
 			.commit();
 	}
