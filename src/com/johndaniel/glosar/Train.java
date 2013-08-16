@@ -7,6 +7,8 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,6 +37,19 @@ public class Train extends SherlockActivity {
 		textView.setText(allFromFile);
 		
 		
+		//Button click
+		Button btn = (Button) findViewById(R.id.startTrainingBtn);
+		btn.setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent (Train.this, TranslateActivity.class);
+				startActivity(intent);
+				
+			}
+			
+		});
 	}
 	
 	@Override
