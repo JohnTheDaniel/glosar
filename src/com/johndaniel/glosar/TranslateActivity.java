@@ -6,8 +6,10 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
@@ -15,7 +17,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 
 
-public class TranslateActivity extends Activity {
+public class TranslateActivity extends FragmentActivity {
 	boolean showingBack;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +25,19 @@ public class TranslateActivity extends Activity {
 		setContentView(R.layout.activity_translate);
 		
 		if (savedInstanceState == null) {
-            getFragmentManager()
+            getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.translate_container, new TranslateFragment1())
+                    .add(R.id.main_activity_card_face, new TranslateFragment1())
                     .commit();
+            
+            getSupportFragmentManager().beginTransaction()
+            	.add(R.id.main_activity_card_back, new TranslateFragment2())
+            	.commit();
+                    
             showingBack = false;
         }
 		
-		FrameLayout container = (FrameLayout) findViewById(R.id.translate_container);
+		RelativeLayout container = (RelativeLayout) findViewById(R.id.main_activity_root);
 		container.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -44,26 +51,19 @@ public class TranslateActivity extends Activity {
 		});
 	}
 
-	@SuppressLint("NewApi")
 	private void flip(){
-		if (showingBack){
-			getFragmentManager().popBackStack();
-			showingBack = false;
-			return;
-		}
-		
-		TranslateFragment2 word2 = new TranslateFragment2();;
-		
-		showingBack = true;
-		
-		getFragmentManager().beginTransaction()
-			.setCustomAnimations(R.anim.card_flip_right_in, R.anim.card_flip_right_out, 
-					R.anim.card_flip_left_in, R.anim.card_flip_left_out)
-			.replace(R.id.translate_container, word2)
-			.addToBackStack(null)
-			.commit();
-	}
+		RelativeLayout rootLayout = (RelativeLayout) findViewById(R.id.main_activity_root);
+		RelativeLayout cardFace = (RelativeLayout) findViewById(R.id.main_activity_card_face);
+		RelativeLayout cardBack = (RelativeLayout) findViewById(R.id.main_activity_card_back);
 
-	
+	    FlipAnimation flipAnimation = new FlipAnimation(cardFace, cardBack);
+
+	    if (cardFace.getVisibility() == View.GONE)
+	    {
+	        flipAnimation.reverse();
+	    }
+	    rootLayout.startAnimation(flipAnimation);
+
+	}
 	
 }
