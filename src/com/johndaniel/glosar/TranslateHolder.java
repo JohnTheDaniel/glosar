@@ -45,7 +45,7 @@ public class TranslateHolder extends Fragment {
         }
 		
 		RelativeLayout cont = (RelativeLayout) thisView.findViewById(R.id.main_activity_root);
-		container.setOnClickListener(new View.OnClickListener() {
+		cont.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
