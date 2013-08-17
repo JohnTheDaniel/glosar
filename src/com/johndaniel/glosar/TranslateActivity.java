@@ -17,7 +17,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 
 
-public class TranslateActivity extends FragmentActivity {
+public class TranslateActivity extends SherlockFragmentActivity {
 	boolean showingBack;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
