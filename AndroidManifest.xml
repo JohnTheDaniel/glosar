@@ -44,6 +44,10 @@
             android:name="com.johndaniel.glosar.TranslateHolder"
             android:label="@string/title_activity_translate" >
         </activity>
+        <activity
+            android:name="com.johndaniel.glosar.TranslateActivity"
+            android:label="@string/title_activity_translate" >
+        </activity>
     </application>
 
 </manifest>

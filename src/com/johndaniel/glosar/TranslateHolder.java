@@ -27,7 +27,7 @@ public class TranslateHolder extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		thisView = inflater.inflate(R.layout.activity_translate, container, false);
+		thisView = inflater.inflate(R.layout.fragment_translate_holder, container, false);
 		
 		
 		//Nästa steg: Skapa TranslateActivity igen och låt den innehålla en viewpager
@@ -40,8 +40,6 @@ public class TranslateHolder extends Fragment {
             getChildFragmentManager().beginTransaction()
             	.add(R.id.main_activity_card_back, new TranslateFragment2())
             	.commit();
-                    
-            showingBack = false;
         }
 		
 		RelativeLayout cont = (RelativeLayout) thisView.findViewById(R.id.main_activity_root);
