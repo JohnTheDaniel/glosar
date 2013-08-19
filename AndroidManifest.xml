@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.johndaniel.glosar"
-    android:versionCode="3"
-    android:versionName="beta1" >
+    android:versionCode="4"
+    android:versionName="beta2" >
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -35,14 +35,6 @@
         <activity
             android:name="com.johndaniel.glosar.SettingsActivity"
             android:label="@string/title_activity_settings" >
-        </activity>
-        <activity
-            android:name="com.johndaniel.glosar.TranslateFragment1"
-            android:label="@string/title_activity_translate_fragment1" >
-        </activity>
-        <activity
-            android:name="com.johndaniel.glosar.TranslateHolder"
-            android:label="@string/title_activity_translate" >
         </activity>
         <activity
             android:name="com.johndaniel.glosar.TranslateActivity"

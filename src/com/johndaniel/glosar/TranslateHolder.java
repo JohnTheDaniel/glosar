@@ -33,8 +33,17 @@ public class TranslateHolder extends Fragment {
 		super.onCreate(savedInstanceState);
 		
 		String[] raw = getArguments().getString(TranslateActivity.TRANSLATION).split("=");
-		word = raw[0];
-		translation = raw[1];
+		if (raw[0] != null){
+			word = raw[0];
+		} else {
+			word = "";
+		}
+		
+		if (raw.length != 1){
+			translation = raw[1];
+		} else {
+			translation = "";
+		}
 		
 	}
 
