@@ -23,22 +23,50 @@ import android.app.Activity;
 public class TranslateHolder extends Fragment {
 	boolean showingBack;
 	View thisView;
+	public static final String FRAGMENT_WORD = "com.johndaniel.glosar.FRAGMENT_WORD";
+	public static final String FRAGMENT_TRANSLATION = "com.johndaniel.glosar.FRAGMENT_TRANLATION";
+	
+	private String word, translation;
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		
+		String[] raw = getArguments().getString(TranslateActivity.TRANSLATION).split("=");
+		word = raw[0];
+		translation = raw[1];
+		
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		
 		thisView = inflater.inflate(R.layout.fragment_translate_holder, container, false);
 		
 		
 		//Nästa steg: Skapa TranslateActivity igen och låt den innehålla en viewpager
 		if (savedInstanceState == null) {
+			
+			Fragment wordFragment = new TranslateFragment1();
+			Bundle wordBundle = new Bundle();
+			wordBundle.putString(FRAGMENT_WORD, word);
+			wordFragment.setArguments(wordBundle);
+			
+			
+			Fragment translateFragment = new TranslateFragment2();
+			Bundle translateBundle = new Bundle();
+			translateBundle.putString(FRAGMENT_TRANSLATION, translation);
+			translateFragment.setArguments(translateBundle);
+			
+			
             getChildFragmentManager()
                     .beginTransaction()
-                    .add(R.id.main_activity_card_face, new TranslateFragment1())
+                    .add(R.id.main_activity_card_face, wordFragment)
                     .commit();
             
-            getChildFragmentManager().beginTransaction()
-            	.add(R.id.main_activity_card_back, new TranslateFragment2())
+            getChildFragmentManager()
+            	.beginTransaction()
+            	.add(R.id.main_activity_card_back, translateFragment)
             	.commit();
         }
 		
