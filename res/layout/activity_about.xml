@@ -1,0 +1,34 @@
+  <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".AboutActivity"
+    android:fillViewport="true">
+	
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:orientation="vertical">
+        <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/john_d" />
+        <TextView 
+            android:text="John Daniel"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="40sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Glosar är utvecklad av John Daniel - 17 år från Stockholm. En John Daniel är en väldigt speciell organism. Den utnyttjar varken cellandningen eller fotosyntesen för att skapa energi, utan konsumerar kaffe och skapar en biprodukt i form av kod. Därför är det väldigt viktigt att John Daniel får kaffe om utvecklingen av denna app ska fortsätta." >
+            
+        </TextView>	
+    </LinearLayout>
+
+</ScrollView>

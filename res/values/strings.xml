@@ -16,5 +16,6 @@
     <string name="title_activity_settings">Inställningar</string>
     <string name="title_activity_translate_fragment1">TranslateFragment1</string>
     <string name="title_activity_translate">TranslateActivity</string>
+    <string name="title_activity_about">About</string>
 
 </resources>

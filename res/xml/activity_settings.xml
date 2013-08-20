@@ -2,7 +2,17 @@
     <CheckBoxPreference 
         android:title="Enable ads"
         android:summary="Help the developer by enabling ads"
-        android:key="adsPreference"
+        android:key="ads_preference"
         android:defaultValue="false"/>
-    <Preference android:title="About the developer" />
+    
+    <CheckBoxPreference 
+        android:title="Keep count"
+        android:summary="Show the amount of trainnings you've ever done"
+        android:key="keep_count"
+        android:defaultValue="false"/>
+    
+    <Preference android:title="About the developer" >
+        <intent android:action="glosar.action.ACTION_ABOUT_DEVELOPER" >
+        </intent>
+    </Preference>
 </PreferenceScreen>

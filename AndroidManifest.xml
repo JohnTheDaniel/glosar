@@ -40,6 +40,14 @@
             android:name="com.johndaniel.glosar.TranslateActivity"
             android:label="@string/title_activity_translate" >
         </activity>
+        <activity
+            android:name="com.johndaniel.glosar.AboutActivity"
+            android:label="@string/title_activity_about" >            
+            <intent-filter>
+                <action android:name="glosar.action.ACTION_ABOUT_DEVELOPER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
