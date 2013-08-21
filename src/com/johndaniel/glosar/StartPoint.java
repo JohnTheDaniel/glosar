@@ -23,6 +23,28 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/*
+ * Hej Daniel! Välkommen tillbaka!
+ * Idag ska du skriva om sättet filerna skrivs in i listan.
+ * Skapa en array med samma längd som number of files, och
+ * skriv en for loop som skickar ut en fil per siffra.
+ * Om keep count inställningen är checkat så ska
+ * även siffran ingå i namnet om printas ut. 
+ * 
+ * Det måste även vara ett säkert system som inte printar ut filer
+ * som inte existerar. T.ex fil nummer 3 kanske raderas av användaren,
+ * det ska inte komma upp en tom lista. 3 får inte printas ut. 
+ * Kan göras genom att kolla om filnamnet är tomt? addFile.java
+ * tillåter inte att man missar filnamnet, så på det sättet kan man 
+ * känna igen om det är en fil som inte existerar med en default output 
+ * från sharedpreferences. 
+ * 
+ * Aja... Du kommer alltid på allt efter ett en stund a frustation. 
+ * 
+ * Lycka till!
+ * 
+ * */
+
 public class StartPoint extends SherlockActivity {
 	public static final String EXTRA_POSITION = "com.johndaniel.glosar.POSITION";
 	ListView fileListView;
