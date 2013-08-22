@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:background="#93c"
     android:padding="16dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:id="@+id/translate2_container">
 
     <TextView android:id="@+id/text2"
         style="?android:textAppearanceLarge"

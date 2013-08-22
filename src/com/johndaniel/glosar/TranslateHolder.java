@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Color;
 
 
 public class TranslateHolder extends Fragment {
@@ -27,13 +28,15 @@ public class TranslateHolder extends Fragment {
 	public static final String FRAGMENT_TRANSLATION = "com.johndaniel.glosar.FRAGMENT_TRANLATION";
 	
 	private String word, translation;
+	private int colorChooser;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		colorChooser = getArguments().getInt("COLOR");
 		
 		String[] raw = getArguments().getString(TranslateActivity.TRANSLATION).split("=");
-		if (raw[0] != null){
+		if (raw.length != 0){
 			word = raw[0];
 		} else {
 			word = "";
@@ -45,16 +48,17 @@ public class TranslateHolder extends Fragment {
 			translation = "";
 		}
 		
+		
+		
 	}
+	
+	
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		
-		thisView = inflater.inflate(R.layout.fragment_translate_holder, container, false);
-		
-		
-		//Nästa steg: Skapa TranslateActivity igen och låt den innehålla en viewpager
-		if (savedInstanceState == null) {
+	/*@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+			
 			
 			Fragment wordFragment = new TranslateFragment1();
 			Bundle wordBundle = new Bundle();
@@ -65,6 +69,55 @@ public class TranslateHolder extends Fragment {
 			Fragment translateFragment = new TranslateFragment2();
 			Bundle translateBundle = new Bundle();
 			translateBundle.putString(FRAGMENT_TRANSLATION, translation);
+			translateFragment.setArguments(translateBundle);
+			
+			
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.main_activity_card_face, wordFragment)
+                    .commit();
+            
+            getChildFragmentManager()
+            	.beginTransaction()
+            	.add(R.id.main_activity_card_back, translateFragment)
+            	.commit();
+		
+		RelativeLayout cont = (RelativeLayout) thisView.findViewById(R.id.main_activity_root);
+		cont.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+				//Snurra
+				flip();
+				
+			}
+		});
+	}*/
+
+
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		
+		thisView = inflater.inflate(R.layout.fragment_translate_holder, container, false);
+		
+		//Nästa steg: Skapa TranslateActivity igen och låt den innehålla en viewpager
+		if (savedInstanceState == null) {
+			
+			
+			Fragment wordFragment = new TranslateFragment1();
+			Bundle wordBundle = new Bundle();
+			wordBundle.putString(FRAGMENT_WORD, word);
+			wordBundle.putInt("COLOR", colorChooser);
+			wordFragment.setArguments(wordBundle);
+			
+			
+			Fragment translateFragment = new TranslateFragment2();
+			Bundle translateBundle = new Bundle();
+			translateBundle.putString(FRAGMENT_TRANSLATION, translation);
+			translateBundle.putInt("COLOR", colorChooser);
 			translateFragment.setArguments(translateBundle);
 			
 			

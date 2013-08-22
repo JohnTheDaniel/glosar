@@ -3,7 +3,8 @@
     android:layout_height="match_parent"
     android:background="#a6c"
     android:padding="16dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:id="@+id/translate1_container">
 
     <TextView android:id="@+id/text1"
         style="?android:textAppearanceLarge"
