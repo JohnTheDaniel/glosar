@@ -1,5 +1,7 @@
 package com.johndaniel.glosar;
 
+import java.io.File;
+
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
@@ -10,6 +12,7 @@ import android.support.v4.app.NavUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
@@ -18,6 +21,7 @@ public class Train extends SherlockActivity {
 	public static final String PREF_FILES = "FileStorage";
 	public static final String TRANSLATIONS = "com.johndaniel.glosar.TRANSLATIONS";
 	public static final String NUM_TRANS = "com.johndaniel.glosar.NUM_TRANS";
+	String training;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +32,7 @@ public class Train extends SherlockActivity {
 		
 		//Print out an overview of the words the training holds.
 		Intent intent = getIntent();
-		String training = intent.getStringExtra(StartPoint.EXTRA_POSITION);
+		training = intent.getStringExtra(StartPoint.EXTRA_POSITION);
 		
 		SharedPreferences settings = getSharedPreferences(PREF_FILES, 0); 
 		String header = settings.getString(training, "Not Found");
@@ -89,7 +93,32 @@ public class Train extends SherlockActivity {
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				return true;
+		case R.id.trainDeleteBtn:
+				//Place dialog here! If positive pressed, deleteThis()
+				//deleteThis(this);
+				return true;
             default: return super.onOptionsItemSelected(item);
 		}
+	}
+	private void deleteThis(SherlockActivity activity){
+		
+		//This code works
+		/*//Remove contents
+		SharedPreferences filePrefs = getSharedPreferences(PREF_FILES, 0);
+		
+		String thisPrefsName = filePrefs.getString(training, "ghshf3gtsh78isfdhsiv").toString();
+		SharedPreferences thisPrefs = getSharedPreferences(thisPrefsName, 0);
+		SharedPreferences.Editor thisPrefsEditor = thisPrefs.edit();
+		thisPrefsEditor.clear().commit();
+		
+		
+		//Remove file
+		File file1 = new File("/data/data/com.johndaniel.glosar/shared_prefs/" + thisPrefsName + ".xml");
+		file1.delete();
+		
+		File file2 = new File("/data/data/com.johndaniel.glosar/shared_prefs/" + thisPrefsName + ".bak");
+		if(file2.exists()){
+			file2.delete();
+		}*/
 	}
 }
