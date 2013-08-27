@@ -18,5 +18,6 @@
     <string name="title_activity_translate">TranslateActivity</string>
     <string name="title_activity_about">About</string>
     <string name="title_activity_start_point">StartPoint</string>
+    <string name="title_activity_icon_and_text_fragment">IconAndTextFragment</string>
 
 </resources>

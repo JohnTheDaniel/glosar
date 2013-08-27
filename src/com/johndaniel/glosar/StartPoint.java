@@ -20,17 +20,15 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start_point);
-		
 		boolean isTablet = getResources().getBoolean(R.bool.isTablet);
 		if(isTablet){ //We are on a TABLET, folks!!
-			FrameLayout container = (FrameLayout) findViewById(R.id.start_point_container);
 			FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
 			
-			fm.add(R.id.start_point_container, new ListOfFilesFragment()).commit();
+			fm.add(R.id.start_point_container, new ListOfFilesFragment())
+			.add(R.id.list_of_files_container, new IconAndTextFragment())
+			.commit();
 		} else { 
-			FrameLayout container = (FrameLayout) findViewById(R.id.start_point_container);
 			FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
-			
 			fm.add(R.id.start_point_container, new ListOfFilesFragment()).commit();
 		}
 	}
@@ -63,10 +61,10 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 	public void showTraining(String chosenTraining) {
 		// TODO Auto-generated method stub
 		boolean isTablet = getResources().getBoolean(R.bool.isTablet);
-		if (isTablet){
+		if (isTablet){ //On tablet: should replace the fragment at the right side
 			
 			
-		} else { //On tablet: should replace the fragment at the right side
+		} else { 
 			OverviewFragment overviewFragment = new OverviewFragment();
 			Bundle args = new Bundle();
 			args.putString("TRAINING", chosenTraining);
