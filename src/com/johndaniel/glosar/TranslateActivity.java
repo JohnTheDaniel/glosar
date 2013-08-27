@@ -49,7 +49,7 @@ public class TranslateActivity extends SherlockFragmentActivity {
 		setContentView(R.layout.activity_translate);
 		
 		Intent intent = getIntent();
-		NUM_PAGES = intent.getExtras().getInt(Train.NUM_TRANS);
+		NUM_PAGES = intent.getExtras().getInt(OverviewFragment.NUM_TRANS);
 		
 		//Edit ActionBar
 		final ActionBar ab = getSupportActionBar();
@@ -63,7 +63,7 @@ public class TranslateActivity extends SherlockFragmentActivity {
 		pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
 		pager.setAdapter(pagerAdapter);
 		
-		translations = intent.getExtras().getStringArray(Train.TRANSLATIONS);
+		translations = intent.getExtras().getStringArray(OverviewFragment.TRANSLATIONS);
 		
 		pager.setOnPageChangeListener(new OnPageChangeListener(){
 
@@ -126,7 +126,7 @@ public class TranslateActivity extends SherlockFragmentActivity {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()){
 		case android.R.id.home: 
-			Intent intent = new Intent(this, StartPoint.class);
+			Intent intent = new Intent(this, ListOfFilesFragment.class);
 			startActivity(intent);
 			finish();
 			return true;

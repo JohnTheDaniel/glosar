@@ -36,7 +36,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		
 		switch(item.getItemId()){
 		case android.R.id.home:
-			Intent intent = new Intent(this, StartPoint.class);
+			Intent intent = new Intent(this, ListOfFilesFragment.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			finish();

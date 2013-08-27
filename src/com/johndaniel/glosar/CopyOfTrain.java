@@ -28,7 +28,7 @@ public class CopyOfTrain extends SherlockActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		Intent intent = getIntent();
-		String training = intent.getStringExtra(StartPoint.EXTRA_POSITION);
+		String training = intent.getStringExtra(ListOfFilesFragment.EXTRA_POSITION);
 		
 		SharedPreferences settings = getSharedPreferences(PREF_FILES, 0); 
 		String header = settings.getString(training, "Not Found");
@@ -67,7 +67,7 @@ public class CopyOfTrain extends SherlockActivity {
 		
 		switch(item.getItemId()){
 		case android.R.id.home:
-				Intent intent = new Intent(this, StartPoint.class);
+				Intent intent = new Intent(this, ListOfFilesFragment.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				return true;
