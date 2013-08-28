@@ -15,11 +15,12 @@ import android.content.Intent;
 
 
 public class StartPoint extends SherlockFragmentActivity implements ListOfFilesFragment.OnTrainingSelectedListener {
-
+	boolean showingOverview;
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start_point);
+		ActionBar actionBar = getSupportActionBar();
 		boolean isTablet = getResources().getBoolean(R.bool.isTablet);
 		if(isTablet){ //We are on a TABLET, folks!!
 			FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
@@ -27,11 +28,35 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 			fm.add(R.id.start_point_container, new ListOfFilesFragment())
 			.add(R.id.list_of_files_container, new IconAndTextFragment())
 			.commit();
+			actionBar.setTitle("Glosar");
 		} else { 
 			FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
 			fm.add(R.id.start_point_container, new ListOfFilesFragment()).commit();
+			actionBar.setTitle("Gamla švningar");
 		}
+		showingOverview = false;
 	}
+	
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+		boolean isTablet = getResources().getBoolean(R.bool.isTablet);
+		if(isTablet){ //We are on a TABLET, folks!!
+			FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+			
+			fm.replace(R.id.start_point_container, new ListOfFilesFragment())
+			.replace(R.id.list_of_files_container, new IconAndTextFragment())
+			.commit();
+		} else { 
+			FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+			fm.replace(R.id.start_point_container, new ListOfFilesFragment()).commit();
+		}
+		showingOverview = false;
+	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -39,7 +64,6 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 		getSupportMenuInflater().inflate(R.menu.start_point, menu);
 		return true;
 	}
-	
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -61,22 +85,49 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 	public void showTraining(String chosenTraining) {
 		// TODO Auto-generated method stub
 		boolean isTablet = getResources().getBoolean(R.bool.isTablet);
+		
+		OverviewFragment overviewFragment = new OverviewFragment();
+		Bundle args = new Bundle();
+		args.putString("TRAINING", chosenTraining);
+		overviewFragment.setArguments(args);
+		
+		FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+		
 		if (isTablet){ //On tablet: should replace the fragment at the right side
-			
+			fm.replace(R.id.list_of_files_container, overviewFragment);
 			
 		} else { 
-			OverviewFragment overviewFragment = new OverviewFragment();
-			Bundle args = new Bundle();
-			args.putString("TRAINING", chosenTraining);
-			overviewFragment.setArguments(args);
-			
-			FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
-			fm
 			//.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-			.replace(R.id.start_point_container, overviewFragment)
-			.addToBackStack(null)
-			.commit();
+			fm.replace(R.id.start_point_container, overviewFragment);
+			
+			ActionBar actionBar = getSupportActionBar();
+			actionBar.setTitle(chosenTraining);
 		}
+		fm.addToBackStack(null)
+		.commit();
+		showingOverview = true;
+	}
+
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		boolean isTablet = getResources().getBoolean(R.bool.isTablet);
+		
+		if (!isTablet && showingOverview){
+				showingOverview = false;
+				
+				ActionBar actionBar = getSupportActionBar();
+				actionBar.setTitle("Gamla švningar");
+		}
+	}
+
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		
+		super.onSaveInstanceState(outState);
 	}
 	
 
