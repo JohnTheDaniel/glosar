@@ -19,26 +19,46 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_start_point);
-		ActionBar actionBar = getSupportActionBar();
-		boolean isTablet = getResources().getBoolean(R.bool.isTablet);
-		if(isTablet){ //We are on a TABLET, folks!!
-			FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
-			
-			fm.add(R.id.start_point_container, new ListOfFilesFragment())
-			.add(R.id.list_of_files_container, new IconAndTextFragment())
-			.commit();
-			actionBar.setTitle("Glosar");
-		} else { 
-			FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
-			fm.add(R.id.start_point_container, new ListOfFilesFragment()).commit();
-			actionBar.setTitle("Gamla švningar");
+		if(savedInstanceState != null){ //We had a reboot. We need to replace, not add, the fragments
+			setContentView(R.layout.activity_start_point);
+			ActionBar actionBar = getSupportActionBar();
+			boolean isTablet = getResources().getBoolean(R.bool.isTablet);
+			if(isTablet){ //We are on a TABLET, folks!!
+				FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+				
+				fm.replace(R.id.start_point_container, new ListOfFilesFragment())
+				.replace(R.id.list_of_files_container, new IconAndTextFragment())
+				.commit();
+				actionBar.setTitle("Glosar");
+			} else { 
+				FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+				fm.replace(R.id.start_point_container, new ListOfFilesFragment()).commit();
+				actionBar.setTitle("Gamla švningar");
+			}
+			showingOverview = false;
+		} else if (savedInstanceState == null) {
+			setContentView(R.layout.activity_start_point);
+			ActionBar actionBar = getSupportActionBar();
+			boolean isTablet = getResources().getBoolean(R.bool.isTablet);
+			if(isTablet){ //We are on a TABLET, folks!!
+				FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+				
+				fm.add(R.id.start_point_container, new ListOfFilesFragment())
+				.add(R.id.list_of_files_container, new IconAndTextFragment())
+				.commit();
+				actionBar.setTitle("Glosar");
+			} else { 
+				FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+				fm.add(R.id.start_point_container, new ListOfFilesFragment()).commit();
+				actionBar.setTitle("Gamla švningar");
+			}
+			showingOverview = false;
 		}
-		showingOverview = false;
+		
 	}
 	
 
-	@Override
+	/*@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
@@ -55,7 +75,7 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 			fm.replace(R.id.start_point_container, new ListOfFilesFragment()).commit();
 		}
 		showingOverview = false;
-	}
+	} */
 
 
 	@Override
@@ -128,6 +148,7 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 		// TODO Auto-generated method stub
 		
 		super.onSaveInstanceState(outState);
+		outState.putBoolean("Reboot", true);
 	}
 	
 
