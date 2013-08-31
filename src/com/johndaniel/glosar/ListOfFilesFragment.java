@@ -6,6 +6,7 @@ import java.util.Collections;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
@@ -49,7 +50,7 @@ import android.widget.Toast;
  * 
  * */
 
-public class ListOfFilesFragment extends Fragment {
+public class ListOfFilesFragment extends SherlockFragment {
 	public static final String EXTRA_POSITION = "com.johndaniel.glosar.POSITION";
 	ListView fileListView;
 	public static final String PREF_MISC = "StoreSettings"; //Saves stuffs like numberOfFiles.
@@ -61,6 +62,33 @@ public class ListOfFilesFragment extends Fragment {
 		public void showTraining(String chosenTraining);
 	}
 	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu,
+			MenuInflater inflater) {
+		// TODO Auto-generated method stub
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.list_files_fragment_menu, menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()){
+		case R.id.addNewFileButton:
+			Intent intent = new Intent(getActivity(), addFile.class);
+			startActivity(intent);
+			return true;
+		default: return super.onOptionsItemSelected(item);
+		}
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

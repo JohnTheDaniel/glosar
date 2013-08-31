@@ -4,6 +4,7 @@ import java.io.File;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
@@ -15,17 +16,63 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-public class OverviewFragment extends Fragment {
+public class OverviewFragment extends SherlockFragment {
 	public static final String PREF_MISC = "StoreSettings";
 	public static final String PREF_FILES = "FileStorage";
 	public static final String TRANSLATIONS = "com.johndaniel.glosar.TRANSLATIONS";
 	public static final String NUM_TRANS = "com.johndaniel.glosar.NUM_TRANS";
 	String training;
+	/*FileDeleteOnClickListener mlistener;
 	
+	public interface FileDeleteOnClickListener{
+		public void deleteFile(String training);
+	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+		// TODO Auto-generated method stub
+		super.onAttach(activity);
+		// This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mlistener = (FileDeleteOnClickListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement FileDeleteOnClickListener");
+        }
+	}*/
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Auto-generated method stub
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.train, menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.trainDeleteBtn: 
+			//Do delete operation over
+			deleteThis(training);
+			return true;
+		default: return super.onOptionsItemSelected(item);
+		}
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -80,6 +127,41 @@ public class OverviewFragment extends Fragment {
 		return thisView;
 	}
 	
+	private void deleteThis(String currentTraining){	
+		//This code works
+		//Remove contents
+		SharedPreferences filePrefs = getActivity().getSharedPreferences(PREF_FILES, 0);
+		
+		String thisPrefsName = filePrefs.getString(currentTraining, "ghshf3gtsh78isfdhsiv").toString();
+		SharedPreferences thisPrefs = getActivity().getSharedPreferences(thisPrefsName, 0);
+		SharedPreferences.Editor thisPrefsEditor = thisPrefs.edit();
+		thisPrefsEditor.clear().commit();
+		
+		
+		//Remove file
+		File file1 = new File("/data/data/com.johndaniel.glosar/shared_prefs/" + thisPrefsName + ".xml");
+		file1.delete();
+		
+		File file2 = new File("/data/data/com.johndaniel.glosar/shared_prefs/" + thisPrefsName + ".bak");
+		if(file2.exists()){
+			file2.delete();
+		}
+		
+		//Remove reference
+		SharedPreferences.Editor filePrefsEditor = filePrefs.edit();
+		filePrefsEditor.putString(currentTraining, "").commit();
+		
+		boolean isTablet = getResources().getBoolean(R.bool.isTablet);
+		if (!isTablet){
+			getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.start_point_container, new ListOfFilesFragment()).commit();
+			getActivity().setTitle("Gamla švningar");
+		} else if (isTablet){
+			getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.list_of_files_container, new IconAndTextFragment())
+			.replace(R.id.start_point_container, new ListOfFilesFragment())
+			.commit();
+		}
+	}
+	
 	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -104,26 +186,6 @@ public class OverviewFragment extends Fragment {
 				return true;
             default: return super.onOptionsItemSelected(item);
 		}
-	}
-	private void deleteThis(SherlockActivity activity){*/
-		
-		//This code works
-		/*//Remove contents
-		SharedPreferences filePrefs = getSharedPreferences(PREF_FILES, 0);
-		
-		String thisPrefsName = filePrefs.getString(training, "ghshf3gtsh78isfdhsiv").toString();
-		SharedPreferences thisPrefs = getSharedPreferences(thisPrefsName, 0);
-		SharedPreferences.Editor thisPrefsEditor = thisPrefs.edit();
-		thisPrefsEditor.clear().commit();
-		
-		
-		//Remove file
-		File file1 = new File("/data/data/com.johndaniel.glosar/shared_prefs/" + thisPrefsName + ".xml");
-		file1.delete();
-		
-		File file2 = new File("/data/data/com.johndaniel.glosar/shared_prefs/" + thisPrefsName + ".bak");
-		if(file2.exists()){
-			file2.delete();
-		}*/
+	}*/
 }
 

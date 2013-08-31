@@ -1,5 +1,8 @@
 package com.johndaniel.glosar;
 
+import java.io.File;
+
+import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
@@ -12,9 +15,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 
 public class StartPoint extends SherlockFragmentActivity implements ListOfFilesFragment.OnTrainingSelectedListener {
+	public static final String PREF_MISC = "StoreSettings";
+	public static final String PREF_FILES = "FileStorage";
 	boolean showingOverview;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +41,6 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 				fm.replace(R.id.start_point_container, new ListOfFilesFragment()).commit();
 				actionBar.setTitle("Gamla švningar");
 			}
-			showingOverview = false;
 		} else if (savedInstanceState == null) {
 			setContentView(R.layout.activity_start_point);
 			ActionBar actionBar = getSupportActionBar();
@@ -52,9 +57,8 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 				fm.add(R.id.start_point_container, new ListOfFilesFragment()).commit();
 				actionBar.setTitle("Gamla švningar");
 			}
-			showingOverview = false;
 		}
-		
+		showingOverview = false;
 	}
 	
 
@@ -142,14 +146,10 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 		}
 	}
 
-
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
-		
 		super.onSaveInstanceState(outState);
 		outState.putBoolean("Reboot", true);
 	}
-	
-
 }
