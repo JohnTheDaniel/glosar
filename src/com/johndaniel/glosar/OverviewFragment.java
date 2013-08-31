@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
@@ -67,12 +68,31 @@ public class OverviewFragment extends SherlockFragment {
 		switch (item.getItemId()) {
 		case R.id.trainDeleteBtn: 
 			//Do delete operation over
-			deleteThis(training);
+			//deleteThis(training);
+			//Show dialog
+			confirmDeleteDialog();
 			return true;
 		default: return super.onOptionsItemSelected(item);
 		}
 	}
-
+	
+	public void confirmDeleteDialog(){
+		new AlertDialog.Builder(getActivity())
+	    .setMessage("Are you sure you want to delete this entry?")
+	    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+	        public void onClick(DialogInterface dialog, int which) { 
+	            // continue with delete
+	        	deleteThis(training);
+	        }
+	     })
+	    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	        public void onClick(DialogInterface dialog, int which) { 
+	            // do nothing
+	        }
+	     })
+	     .show();
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -88,7 +108,9 @@ public class OverviewFragment extends SherlockFragment {
 		SharedPreferences settings = getActivity().getSharedPreferences(PREF_FILES, 0); 
 		String header = settings.getString(training, "Not Found");
 		
-		//getSherlockActivity().getSupportActionBar().setTitle(header);
+		// Set title bar
+	    ((StartPoint) getActivity())
+	            .setActionBarTitle(header);
 		TextView textView = (TextView) thisView.findViewById(R.id.trainHeader);
 		SharedPreferences thisFile = getActivity().getSharedPreferences(header, 0);
 		String allFromFile = thisFile.getAll().toString();
@@ -154,7 +176,9 @@ public class OverviewFragment extends SherlockFragment {
 		boolean isTablet = getResources().getBoolean(R.bool.isTablet);
 		if (!isTablet){
 			getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.start_point_container, new ListOfFilesFragment()).commit();
-			getActivity().setTitle("Gamla švningar");
+			// Set title bar
+		    ((StartPoint) getActivity())
+		            .setActionBarTitle("Gamla …vningar");
 		} else if (isTablet){
 			getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.list_of_files_container, new IconAndTextFragment())
 			.replace(R.id.start_point_container, new ListOfFilesFragment())

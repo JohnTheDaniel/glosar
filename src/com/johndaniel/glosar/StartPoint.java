@@ -125,7 +125,7 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 			fm.replace(R.id.start_point_container, overviewFragment);
 			
 			ActionBar actionBar = getSupportActionBar();
-			actionBar.setTitle(chosenTraining);
+			//actionBar.setTitle(chosenTraining);
 		}
 		fm.addToBackStack(null)
 		.commit();
@@ -151,5 +151,9 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
 		outState.putBoolean("Reboot", true);
+	}
+	
+	public void setActionBarTitle(String title) {
+	    getSupportActionBar().setTitle(title);
 	}
 }

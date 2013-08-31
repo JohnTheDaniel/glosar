@@ -12,6 +12,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -155,14 +156,39 @@ public class ListOfFilesFragment extends SherlockFragment {
 
 
 		//get the list of files
-		SharedPreferences settings = getActivity().getSharedPreferences(PREF_FILES, 0);
-		String files = settings.getAll().toString();
+		SharedPreferences filesPrefs = getActivity().getSharedPreferences(PREF_FILES, 0);
+		String files = filesPrefs.getAll().toString();
 
-		//Handle data from getAll().
+		/*//Handle data from getAll().
 		String[] fileListValues = files.replace("{", "").replace("}", "").replace("=", ". ").split(", ");
 		//Latest training first
-		Arrays.sort(fileListValues, Collections.reverseOrder());
+		Arrays.sort(fileListValues, Collections.reverseOrder());*/
+		//Arrays.sort(fileListValues);
+		int numberOfFiles = getActivity().getSharedPreferences(PREF_MISC, 0).getInt("numberOfFiles", 0);
 		
+		
+		String[] fileListValues = new String[0];
+		for (int i = 0; i < numberOfFiles; i++){
+			String training = filesPrefs.getString(i + 1 + "", "hello");
+			//String training = "hello";
+			//fileListValues[i] = i + 1 + ". " + training;
+			if (training != ""){
+				/*if (fileListValues.length == 1){
+					fileListValues[0] = i + 1 + ". " + training;
+				} else {*/
+					//Make array bigger first
+					fileListValues = expandArray(fileListValues);
+					SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+					boolean keepCountSetting = settingsPrefs.getBoolean("keep_count", false);
+					if (keepCountSetting){
+						fileListValues[fileListValues.length - 1] = i + 1 + ". " + training;
+					} else {
+						fileListValues[fileListValues.length - 1] = training;
+					}
+				
+			}
+		}
+		Arrays.sort(fileListValues, Collections.reverseOrder());
 
 
 		//Vid fšrsta startup kommer anvŠndaren inte
@@ -227,6 +253,13 @@ public class ListOfFilesFragment extends SherlockFragment {
 		} else {
 			return false;
 		}		
+	}
+	public String[] expandArray(String[] oldArray) {
+		String[] newArray = new String[oldArray.length + 1];
+		
+		System.out.print(newArray);
+		System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);
+		return newArray;
 	}
 	
 }
