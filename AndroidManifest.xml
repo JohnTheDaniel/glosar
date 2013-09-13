@@ -17,7 +17,7 @@
         <activity
             android:name="com.johndaniel.glosar.addFile"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/addNewLabel" >
+            android:label="@string/new_exercise" >
         </activity>
         <activity
             android:name="com.johndaniel.glosar.SettingsActivity"
@@ -38,7 +38,7 @@
         </activity>
         <activity
             android:name="com.johndaniel.glosar.StartPoint"
-            android:label="Glosar" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

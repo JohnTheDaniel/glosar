@@ -12,7 +12,7 @@
         android:weightSum="1.0"
         android:id="@+id/topBarNameEditor">
         <EditText
-            android:hint="@string/name_the_training"
+            android:hint="@string/name_the_exercise"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:gravity="center" 

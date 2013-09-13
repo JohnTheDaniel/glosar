@@ -256,7 +256,7 @@ public class addFile extends SherlockActivity {
 		//first check. Is there any any name?
 		if (nameField.getText().toString().equals("")){
 			//nameField is empty.
-			Toast saveErr = Toast.makeText(getApplicationContext(), "Namnge träningen", Toast.LENGTH_LONG);
+			Toast saveErr = Toast.makeText(getApplicationContext(), getResources().getString(R.string.name_the_exercise).toString(), Toast.LENGTH_LONG);
 			saveErr.show();
 		}
 		else {

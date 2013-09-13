@@ -6,18 +6,28 @@
     <string name="hello_world">Hello world!</string>
     <string name="addNewLabel">Ny glosövning</string>
     <string name="startPointLabel">Gamla Övningar</string>
-    <string name="addNewSave">SPARA</string>
-    <string name="addNewDiscard">AVBRYT</string>
     <string name="guide">\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning.</string>
-    <string name="saving...">Sparar...</string>
-    <string name="name_the_training">Namnge glosträning</string>
     <string name="new_glosa">NY GLOSA</string>
     <string name="title_activity_train">Train</string>
-    <string name="title_activity_settings">Inställningar</string>
     <string name="title_activity_translate_fragment1">TranslateFragment1</string>
-    <string name="title_activity_translate">TranslateActivity</string>
-    <string name="title_activity_about">About</string>
-    <string name="title_activity_start_point">StartPoint</string>
     <string name="title_activity_icon_and_text_fragment">IconAndTextFragment</string>
-
+	
+    <!-- addFile.java  Activity -->
+    <string name="name_the_exercise">Name The Exercise</string>
+    <string name="saving...">Saving...</string>
+    <string name="addNewSave">SPARA</string>
+    <string name="addNewDiscard">AVBRYT</string>
+    <string name="new_exercise">New Exercise</string> <!-- acts as label for addFile activity -->
+    
+    <!-- SettingsActivity.java -->
+    <string name="title_activity_settings">Settings</string>
+    
+    <!-- TranslateActivity.java -->
+    <string name="title_activity_translate">Practise Translations</string>
+    
+    <!-- AboutActivity.java -->
+    <string name="title_activity_about">About Me</string>
+    
+    <!-- StartPoint.java Activity -->
+    <string name="title_activity_start_point">StartPoint</string>
 </resources>
