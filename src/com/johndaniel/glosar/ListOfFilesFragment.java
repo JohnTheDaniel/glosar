@@ -197,7 +197,7 @@ public class ListOfFilesFragment extends SherlockFragment {
 		 * This makes a welcome message. */
 		if (needTutorialCheck() == true){
 			TextView tv = (TextView) thisView.findViewById(R.id.prompt);
-			tv.setText(getString(R.string.guide)/*"\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning."*/);
+			tv.setText(getString(R.string.start_point_no_files_message)/*"\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning."*/);
 			LinearLayout layout = (LinearLayout) thisView.findViewById(R.id.container);
 			layout.setBackgroundResource(R.drawable.gray_line_bg);
 

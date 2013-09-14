@@ -3,24 +3,16 @@
 
     <string name="app_name">Glosar</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="addNewLabel">Ny glosövning</string>
-    <string name="startPointLabel">Gamla Övningar</string>
-    <string name="guide">\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning.</string>
-    <string name="new_glosa">NY GLOSA</string>
-    <string name="title_activity_train">Train</string>
-    <string name="title_activity_translate_fragment1">TranslateFragment1</string>
-    <string name="title_activity_icon_and_text_fragment">IconAndTextFragment</string>
-	
+
     <!-- addFile.java  Activity -->
     <string name="name_the_exercise">Name The Exercise</string>
     <string name="saving...">Saving...</string>
-    <string name="addNewSave">SPARA</string>
-    <string name="addNewDiscard">AVBRYT</string>
+    <string name="save">save</string>
+    <string name="addNewDiscard">CANCEL</string>
     <string name="new_exercise">New Exercise</string> <!-- acts as label for addFile activity -->
+    <string name="new_glosa">NEW GLOSS</string>
     
     <!-- SettingsActivity.java -->
-    <string name="title_activity_settings">Settings</string>
     
     <!-- TranslateActivity.java -->
     <string name="title_activity_translate">Practise Translations</string>
@@ -30,4 +22,8 @@
     
     <!-- StartPoint.java Activity -->
     <string name="title_activity_start_point">StartPoint</string>
+    <string name="start_point_no_files_message">\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning.</string>
+    
+    <!-- OverviewFragment -->
+    <string name="start_the_exercise">Start The Exercise</string>
 </resources>
