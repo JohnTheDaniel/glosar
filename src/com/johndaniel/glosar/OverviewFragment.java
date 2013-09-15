@@ -81,13 +81,13 @@ public class OverviewFragment extends SherlockFragment {
 	public void confirmDeleteDialog(){
 		new AlertDialog.Builder(getActivity())
 	    .setMessage("Are you sure you want to delete this entry?")
-	    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+	    .setPositiveButton(getResources().getString(R.string.yes) , new DialogInterface.OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) { 
 	            // continue with delete
 	        	deleteThis(training);
 	        }
 	     })
-	    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	    .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) { 
 	            // do nothing
 	        }
