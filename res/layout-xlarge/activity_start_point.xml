@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-	android:id="@+id/start_point_container"
     tools:context=".StartPoint"
+    android:baselineAligned="false"
     android:orientation="horizontal" 
     android:weightSum="3">
     

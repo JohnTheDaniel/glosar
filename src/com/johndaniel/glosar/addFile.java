@@ -320,7 +320,7 @@ public class addFile extends SherlockActivity {
 				Toast.makeText(getApplicationContext(), "Skickar intentmeddelande", Toast.LENGTH_LONG).show();
 				
 				//Making and starting the intent. 
-				Intent intent = new Intent(this, ListOfFilesFragment.class);
+				Intent intent = new Intent(this, StartPoint.class);
 				intent.putExtra(REBOOT_MESSAGE, true);
 				startActivity(intent);
 

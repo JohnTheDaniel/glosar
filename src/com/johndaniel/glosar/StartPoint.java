@@ -2,7 +2,6 @@ package com.johndaniel.glosar;
 
 import java.io.File;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
@@ -10,10 +9,8 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
@@ -35,11 +32,11 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 				fm.replace(R.id.start_point_container, new ListOfFilesFragment())
 				.replace(R.id.list_of_files_container, new IconAndTextFragment())
 				.commit();
-				actionBar.setTitle("Glosar");
+				actionBar.setTitle(getResources().getString(R.string.app_name));
 			} else { 
 				FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
 				fm.replace(R.id.start_point_container, new ListOfFilesFragment()).commit();
-				actionBar.setTitle("Gamla švningar");
+				actionBar.setTitle(getResources().getString(R.string.old_exercises));
 			}
 		} else if (savedInstanceState == null) {
 			setContentView(R.layout.activity_start_point);
@@ -51,7 +48,7 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 				fm.add(R.id.start_point_container, new ListOfFilesFragment())
 				.add(R.id.list_of_files_container, new IconAndTextFragment())
 				.commit();
-				actionBar.setTitle("Glosar");
+				actionBar.setTitle(getResources().getString(R.string.app_name));
 			} else { 
 				FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
 				fm.add(R.id.start_point_container, new ListOfFilesFragment()).commit();
@@ -142,7 +139,7 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 				showingOverview = false;
 				
 				ActionBar actionBar = getSupportActionBar();
-				actionBar.setTitle("Gamla švningar");
+				actionBar.setTitle(getString(R.string.old_exercises));
 		}
 	}
 

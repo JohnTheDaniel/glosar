@@ -23,6 +23,7 @@
     <!-- StartPoint.java Activity -->
     <string name="title_activity_start_point">StartPoint</string>
     <string name="start_point_no_files_message">\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning.</string>
+    <string name="old_exercises">Old exercises</string>
     
     <!-- OverviewFragment -->
     <string name="start_the_exercise">Start the exercise</string>

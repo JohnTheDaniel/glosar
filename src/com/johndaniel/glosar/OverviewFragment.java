@@ -16,8 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -181,8 +183,15 @@ public class OverviewFragment extends SherlockFragment {
 		            .setActionBarTitle("Gamla …vningar");
 		} else if (isTablet){
 			getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.list_of_files_container, new IconAndTextFragment())
-			.replace(R.id.start_point_container, new ListOfFilesFragment())
 			.commit();
+			
+			getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.start_point_container, new ListOfFilesFragment()).commit();
+			
+			Context context = getActivity();
+			CharSequence toastText = "I did the replacement, sir!";
+			int duration = Toast.LENGTH_SHORT;
+			Toast toast = Toast.makeText(context, toastText, duration);
+			toast.show();
 		}
 	}
 	
