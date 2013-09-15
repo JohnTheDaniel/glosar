@@ -6,13 +6,13 @@
         android:showAsAction="never"
         android:title="@string/action_settings"/> -->
 	<item
-	    android:title="spara"
+	    android:title="@string/save"
 	    android:id="@+id/addFileSaveButton"
 	    android:orderInCategory="99" 
 	    android:showAsAction="always" >
 	</item>
 	<item
-	    android:title="kasta"
+	    android:title="@string/cancel_discard"
 	    android:id="@+id/addFileCancelButton"
 	    android:orderInCategory="98" 
 	    android:icon="@drawable/discard" 
