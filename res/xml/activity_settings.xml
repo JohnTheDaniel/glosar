@@ -1,13 +1,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <CheckBoxPreference 
-        android:title="Enable ads"
-        android:summary="Help the developer by enabling ads"
+        android:title="@string/enable_ads"
+        android:summary="@string/help_the_developer_by_enabling_ads"
         android:key="ads_preference"
         android:defaultValue="false"/>
     
     <CheckBoxPreference 
-        android:title="Keep count"
-        android:summary="Show the amount of trainnings you've ever done"
+        android:title="@string/keep_count"
+        android:summary="@string/show_the_amount_of_trainings_youve_ever_done"
         android:key="keep_count"
         android:defaultValue="false"/>
     

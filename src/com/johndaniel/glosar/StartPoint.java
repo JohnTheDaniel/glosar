@@ -52,7 +52,7 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 			} else { 
 				FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
 				fm.add(R.id.start_point_container, new ListOfFilesFragment()).commit();
-				actionBar.setTitle("Gamla švningar");
+				actionBar.setTitle(getString(R.string.old_exercises));
 			}
 		}
 		showingOverview = false;

@@ -80,7 +80,7 @@ public class OverviewFragment extends SherlockFragment {
 	
 	public void confirmDeleteDialog(){
 		new AlertDialog.Builder(getActivity())
-	    .setMessage("Are you sure you want to delete this entry?")
+	    .setMessage(getString(R.string.are_you_sure_you_want_to_delete_this_entry))
 	    .setPositiveButton(getResources().getString(R.string.yes) , new DialogInterface.OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) { 
 	            // continue with delete
@@ -108,11 +108,15 @@ public class OverviewFragment extends SherlockFragment {
 		training = getArguments().getString("TRAINING");
 		
 		SharedPreferences settings = getActivity().getSharedPreferences(PREF_FILES, 0); 
-		String header = settings.getString(training, "Not Found");
+		String header = settings.getString(training, getString(R.string.not_found));
 		
-		// Set title bar
-	    ((StartPoint) getActivity())
-	            .setActionBarTitle(header);
+		// Set title bar if not tablet
+		boolean isTablet = getResources().getBoolean(R.bool.isTablet);
+		if (!isTablet){
+		    ((StartPoint) getActivity())
+            .setActionBarTitle(header);
+		}
+	    
 		TextView textView = (TextView) thisView.findViewById(R.id.trainHeader);
 		SharedPreferences thisFile = getActivity().getSharedPreferences(header, 0);
 		String allFromFile = thisFile.getAll().toString();
@@ -180,7 +184,7 @@ public class OverviewFragment extends SherlockFragment {
 			getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.start_point_container, new ListOfFilesFragment()).commit();
 			// Set title bar
 		    ((StartPoint) getActivity())
-		            .setActionBarTitle("Gamla …vningar");
+		            .setActionBarTitle(getString(R.string.old_exercises));
 		} else if (isTablet){
 			getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.list_of_files_container, new IconAndTextFragment())
 			.commit();

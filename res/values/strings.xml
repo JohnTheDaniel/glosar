@@ -15,9 +15,13 @@
     <string name="new_glosa">NEW GLOSS</string>
     
     <!-- SettingsActivity.java -->
+    <string name="enable_ads">Enable ads</string>
+    <string name="help_the_developer_by_enabling_ads">Help the developer by enabling ads</string>
+    <string name="keep_count">Keep count</string>
+    <string name="show_the_amount_of_trainings_youve_ever_done">Show the amount of trainings you\'ve ever done</string>
     
     <!-- TranslateActivity.java -->
-    <string name="title_activity_translate">Practise Translations</string>
+    <string name="title_activity_translate">Practise translations</string>
     
     <!-- AboutActivity.java -->
     <string name="title_activity_about">About Me</string>
@@ -30,4 +34,6 @@
     <!-- OverviewFragment -->
     <string name="start_the_exercise">Start the exercise</string>
     <string name="switch_translation_order">Revert translation order</string>
+    <string name="not_found">Not found</string>
+    <string name="are_you_sure_you_want_to_delete_this_entry">Are you sure you want to delete this entry?</string>
 </resources>
