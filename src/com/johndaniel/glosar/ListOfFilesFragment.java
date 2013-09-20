@@ -220,7 +220,7 @@ public class ListOfFilesFragment extends SherlockFragment {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
-					theListener.showTraining(positionReferer[position] + "");
+					theListener.showTraining(positionReferer[position]);
 				}
 				
 			});
@@ -255,13 +255,6 @@ public class ListOfFilesFragment extends SherlockFragment {
 	}
 	public String[] expandStringArray(String[] oldArray) {
 		String[] newArray = new String[oldArray.length + 1];
-		
-		System.out.print(newArray);
-		System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);
-		return newArray;
-	}
-	public int[] expandIntArray(int[] oldArray) {
-		int[] newArray = new int[oldArray.length + 1];
 		
 		System.out.print(newArray);
 		System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);

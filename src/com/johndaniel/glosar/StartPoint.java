@@ -93,11 +93,25 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 		case R.id.addNewFileButton: 
 			Intent addIntent = new Intent(this, addFile.class);
 			startActivity(addIntent);
+			finish();
 			return true;
 		case R.id.action_settings:
 			Intent settingsIntent = new Intent(this, SettingsActivity.class);
 			startActivity(settingsIntent);
 			return true;
+		case android.R.id.home:
+			boolean isTablet = getResources().getBoolean(R.bool.isTablet);
+			if(!isTablet & showingOverview){
+				getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+				getSupportActionBar().setHomeButtonEnabled(false);
+				
+				getSupportFragmentManager().beginTransaction()
+					.replace(R.id.start_point_container, new ListOfFilesFragment())
+					.commit();
+				getSupportActionBar().setTitle(R.string.old_exercises);
+				showingOverview = false;
+			}
+			
 		default: return super.onOptionsItemSelected(item);
 		}
 	}
@@ -117,29 +131,40 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 		if (isTablet){ //On tablet: should replace the fragment at the right side
 			fm.replace(R.id.list_of_files_container, overviewFragment);
 			
-		} else { 
+		} else { //on a phone
 			//.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 			fm.replace(R.id.start_point_container, overviewFragment);
 			
 			ActionBar actionBar = getSupportActionBar();
 			//actionBar.setTitle(chosenTraining);
+			
+			actionBar.setDisplayHomeAsUpEnabled(true);
+			actionBar.setHomeButtonEnabled(true);
 		}
-		fm.addToBackStack(null)
-		.commit();
+		//fm.addToBackStack(null)
+		fm.commit();
 		showingOverview = true;
 	}
 
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
-		super.onBackPressed();
+		//super.onBackPressed();
 		boolean isTablet = getResources().getBoolean(R.bool.isTablet);
 		
 		if (!isTablet && showingOverview){
 				showingOverview = false;
 				
+				FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+				fm.replace(R.id.start_point_container, new ListOfFilesFragment())
+				.commit();
+				
 				ActionBar actionBar = getSupportActionBar();
+				actionBar.setHomeButtonEnabled(false);
+				actionBar.setDisplayHomeAsUpEnabled(false);
 				actionBar.setTitle(getString(R.string.old_exercises));
+		} else {
+			super.onBackPressed();
 		}
 	}
 
