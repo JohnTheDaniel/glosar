@@ -11,7 +11,7 @@
     <string name="saving...">Saving...</string>
     <string name="save">save</string>
     <string name="cancel_discard">CANCEL</string>
-    <string name="new_exercise">New Exercise</string> <!-- acts as label for addFile activity -->
+    <string name="new_exercise">New exercise</string> <!-- acts as label for addFile activity -->
     <string name="new_glosa">NEW GLOSS</string>
     
     <!-- SettingsActivity.java -->

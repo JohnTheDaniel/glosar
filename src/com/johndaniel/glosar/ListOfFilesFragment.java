@@ -54,6 +54,7 @@ import android.widget.Toast;
 public class ListOfFilesFragment extends SherlockFragment {
 	public static final String EXTRA_POSITION = "com.johndaniel.glosar.POSITION";
 	ListView fileListView;
+	String[] positionReferer = new String[0];
 	public static final String PREF_MISC = "StoreSettings"; //Saves stuffs like numberOfFiles.
 	public static final String PREF_FILES = "FileStorage"; //Saves the names of the files
 	View thisView;
@@ -177,18 +178,22 @@ public class ListOfFilesFragment extends SherlockFragment {
 					fileListValues[0] = i + 1 + ". " + training;
 				} else {*/
 					//Make array bigger first
-					fileListValues = expandArray(fileListValues);
+					fileListValues = expandStringArray(fileListValues);
+					positionReferer = expandStringArray(positionReferer);
+					positionReferer[positionReferer.length - 1] = i + 1 + "";
 					SharedPreferences settingsPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 					boolean keepCountSetting = settingsPrefs.getBoolean("keep_count", false);
 					if (keepCountSetting){
-						fileListValues[fileListValues.length - 1] = i + 1 + ". " + training;
+						fileListValues[fileListValues.length - 1] = positionReferer[positionReferer.length - 1] + ". " + training;
 					} else {
 						fileListValues[fileListValues.length - 1] = training;
 					}
 				
 			}
 		}
-		Arrays.sort(fileListValues, Collections.reverseOrder());
+		//Arrays.sort(fileListValues, Collections.reverseOrder());	
+		fileListValues = reverseArray(fileListValues);
+		positionReferer = reverseArray(positionReferer);
 
 
 		//Vid första startup kommer användaren inte
@@ -215,13 +220,7 @@ public class ListOfFilesFragment extends SherlockFragment {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
-					//Intent intent = new Intent (view.getContext(), OverviewFragment.class);
-					String positionString = "" + position;
-					String trainingName = parent.getItemAtPosition(position).toString();
-					String[] trainingNameArr = trainingName.split(". ");
-					//intent.putExtra(EXTRA_POSITION, trainingNameArr[0]);
-					//startActivity(intent);*/
-					theListener.showTraining(trainingNameArr[0]);
+					theListener.showTraining(positionReferer[position] + "");
 				}
 				
 			});
@@ -254,13 +253,36 @@ public class ListOfFilesFragment extends SherlockFragment {
 			return false;
 		}		
 	}
-	public String[] expandArray(String[] oldArray) {
+	public String[] expandStringArray(String[] oldArray) {
 		String[] newArray = new String[oldArray.length + 1];
 		
 		System.out.print(newArray);
 		System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);
 		return newArray;
 	}
+	public int[] expandIntArray(int[] oldArray) {
+		int[] newArray = new int[oldArray.length + 1];
+		
+		System.out.print(newArray);
+		System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);
+		return newArray;
+	}
 	
+	public static String[] reverseArray(String[] data) {
+	    int left = 0;
+	    int right = data.length - 1;
+
+	    while( left < right ) {
+	        // swap the values at the left and right indices
+	        String temp = data[left];
+	        data[left] = data[right];
+	        data[right] = temp;
+
+	        // move the left and right index pointers in toward the center
+	        left++;
+	        right--;
+	    }
+	    return data;
+	}
 }
 
