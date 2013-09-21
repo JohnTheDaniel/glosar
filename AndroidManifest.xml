@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.johndaniel.glosar"
-    android:versionCode="7"
-    android:versionName="alpha5" >
+    android:versionCode="8"
+    android:versionName="alpha6" >
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -16,8 +16,9 @@
         android:theme="@style/Theme.Glosar" >
         <activity
             android:name="com.johndaniel.glosar.addFile"
-            android:configChanges="orientation|keyboardHidden"
-            android:label="@string/new_exercise" >
+            android:configChanges="orientation"
+            android:label="@string/new_exercise" 
+            android:windowSoftInputMode="stateAlwaysVisible" >
         </activity>
         <activity
             android:name="com.johndaniel.glosar.SettingsActivity"

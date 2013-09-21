@@ -15,8 +15,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -103,11 +106,12 @@ public class addFile extends SherlockActivity {
 		initword1.setLayoutParams(weightParams);
 		initword2.setLayoutParams(weightParams);
 		
+		
 		//add the EditTexts to the container
 		initWordWrapper.addView(initword1);
 		initWordWrapper.addView(initword2);
-		
-		
+		initword1.setHint("word");
+		initword2.setHint("translation");
 		
 		//The newly added wordWrapper must always be placed below the already placed wordWrapper
 		//In this case, there are no wordwrappers.
@@ -135,12 +139,13 @@ public class addFile extends SherlockActivity {
 		//Scroll down to bottom after added the new wordWrapper.
 		((RelativeLayout) relativeLayout).addView(initWordWrapper);
 		
+		
 		//Scroll down and animate
 		//Scroll down to bottom after added the new wordWrapper.
 		containerScrollView.post(new Runnable() {            
 			@Override
 			public void run() {
-				containerScrollView.fullScroll(View.FOCUS_DOWN);              
+				//containerScrollView.fullScroll(View.FOCUS_DOWN);              
 			}
 		});
 		
@@ -149,7 +154,13 @@ public class addFile extends SherlockActivity {
 		animation.setStartOffset(0);
 		initWordWrapper.startAnimation(animation);
 		
-		nameField.requestFocus();
+		//Make the editTexts single line
+		initword1.setSingleLine();
+		initword2.setSingleLine();
+		
+		//nameField.requestFocus();
+		initword1.requestFocus();
+		initword1.setNextFocusDownId(initword2.getId());
 		
 		//User clicked addWord button
 		addWordButton.setOnClickListener(new OnClickListener() { //ButtonClick, add new wordset
@@ -175,10 +186,13 @@ public class addFile extends SherlockActivity {
 				word1.setLayoutParams(weightParams);
 				word2.setLayoutParams(weightParams);
 				
+				/*//Set next key on keyboard
+				word1.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+				word2.setImeOptions(EditorInfo.IME_ACTION_NEXT);*/
+				
 				//add the EditTexts to the container
 				wordWrapper.addView(word1);
 				wordWrapper.addView(word2);
-				
 				
 				
 				//The newly added wordWrapper must always be placed below the already placed wordWrapper
@@ -205,13 +219,13 @@ public class addFile extends SherlockActivity {
 				counter++;
 				word2.setId(counter);
 				
-				
+			
 				//Scroll down to bottom after added the new wordWrapper.
 				((RelativeLayout) relativeLayout).addView(wordWrapper);
 				containerScrollView.post(new Runnable() {            
 					@Override
 					public void run() {
-						containerScrollView.fullScroll(View.FOCUS_DOWN);              
+						//containerScrollView.fullScroll(View.FOCUS_DOWN);              
 					}
 				});
 				
@@ -220,7 +234,16 @@ public class addFile extends SherlockActivity {
 				animation.setStartOffset(0);
 				wordWrapper.startAnimation(animation);
 				
+				word1.setSingleLine();
+				word2.setSingleLine();
 				
+				word1.setFocusableInTouchMode(true);
+				word1.requestFocus();
+				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.showSoftInput(word1, InputMethodManager.SHOW_IMPLICIT);
+				word1.setNextFocusDownId(word2.getId());
+				/*word2 = (EditText)word1.focusSearch(View.FOCUS_RIGHT);
+				word2.requestFocus();*/
 			}	
 		});			
 	}
@@ -247,6 +270,8 @@ public class addFile extends SherlockActivity {
 			saveOperation(activityRaw);
 			return true;
 		case R.id.addFileCancelButton:
+			Intent intent = new Intent(this, StartPoint.class);
+			startActivity(intent);
 			finish();
 			return true;
 		default: return super.onOptionsItemSelected(item);
@@ -333,6 +358,13 @@ public class addFile extends SherlockActivity {
 				finish();
 			}
 		}
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent(this, StartPoint.class);
+		startActivity(intent);
+	}
+	
 	}
 	/*	public boolean needTutorialCheck() {
 		//check if we got some words
