@@ -7,7 +7,7 @@
     <string name="cancel">Cancel</string>
 
     <!-- addFile.java  Activity -->
-    <string name="name_the_exercise">Name The Exercise</string>
+    <string name="name_the_exercise">Name the exercise</string>
     <string name="saving...">Saving...</string>
     <string name="save">save</string>
     <string name="cancel_discard">CANCEL</string>
