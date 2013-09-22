@@ -58,7 +58,7 @@ public class addFile extends SherlockActivity {
 		Toast toast = Toast.makeText(context, toastText, duration);
 		toast.show();
 
-		//Pairing id's to variables.
+		//Pairing constant views id's to variables.
 		final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.RelativeLayout);
 		final ScrollView containerScrollView = (ScrollView) findViewById(R.id.container);
 		final LinearLayout addWordButton = (LinearLayout) findViewById(R.id.bottomButton);
@@ -73,52 +73,50 @@ public class addFile extends SherlockActivity {
 		//Calculate the density pixels height in normal pixels.
 		final float scale = getBaseContext().getResources().getDisplayMetrics().density;
 		final int pixels = (int) (dps * scale + 0.5f);
+		//The layoutparams for the editTexts. This will give the EditTexts an height of pixels (calculated dps), the weight 1.
+		//The weight will cause the EditTexts to share the amount of space inside the container. 
+		final LayoutParams editTextWeightParams = new LinearLayout.LayoutParams(0, pixels, 1.0f);
 		
-		final LayoutParams weightParams = new LinearLayout.LayoutParams(0, pixels, 1.0f);
 		
 		counter = 2;
-		//add first word.
-		/*TextView startWords = new TextView(this);
-		startWords.setText("Word number 1");
-		startWords.setId(-counter);
-		startWords.setLayoutParams(new LayoutParams(
-				LayoutParams.WRAP_CONTENT,
-				LayoutParams.WRAP_CONTENT));
-		relativeLayout.addView(startWords);*/
+		/* The counter is the key for this operation. It helps 
+		 * us to keep track on the id's for the editTexts and the 
+		 * wrapper. Each editText has a value given from the counter,
+		 * and each wrapper has the -counter id value. */
 		
-		//HERE STARTS THE NEW STUFF
-		//The two words paired to each other:
+		//Here begins the creation of the editTexts.
+		//Create two editTexts, one for the word (key), and one for the translation
 		EditText initword1 = new EditText(addFile.this); 
 		EditText initword2 = new EditText(addFile.this);
 		
-		//The container of the two EditTexts
+		//Create the container for the two editTexts
 		LinearLayout initWordWrapper = new LinearLayout(addFile.this);
 		initWordWrapper.setBackgroundColor(0xFFFFFFFF);
 		initWordWrapper.setOrientation(LinearLayout.HORIZONTAL);
 
-		/*int dps = 48; //Value, in this case height, described in density pixels
-		//Calculate the density pixels height in normal pixels.
-		final float scale = getBaseContext().getResources().getDisplayMetrics().density;
-		int pixels = (int) (dps * scale + 0.5f);*/
 		
 		//The two EditTexts must have same width, therefore they have both the weight of 1 (1.0f)
-		/*LayoutParams weightParams = new LinearLayout.LayoutParams(0, pixels, 1.0f);*/
-		initword1.setLayoutParams(weightParams);
-		initword2.setLayoutParams(weightParams);
+		initword1.setLayoutParams(editTextWeightParams);
+		initword2.setLayoutParams(editTextWeightParams);
 		
 		
 		//add the EditTexts to the container
 		initWordWrapper.addView(initword1);
 		initWordWrapper.addView(initword2);
+		
+		//Set default help texts.
 		initword1.setHint(getString(R.string.word));
 		initword2.setHint(getString(R.string.translation));
 		
 		//The newly added wordWrapper must always be placed below the already placed wordWrapper
 		//In this case, there are no wordwrappers.
-		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, pixels);
-		layoutParams.addRule(RelativeLayout.BELOW, -counter+1);
+		RelativeLayout.LayoutParams wrapperParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, pixels);
+		/* The wrapper must always be placed under the previous wrapper. 
+		 * The wrapper has the id -counter, counter+1 will give the us the
+		 * id of the previously added counter. */
+		wrapperParams.addRule(RelativeLayout.BELOW, -counter+1);
 
-		initWordWrapper.setLayoutParams(layoutParams);
+		initWordWrapper.setLayoutParams(wrapperParams);
 		
 		//Setting up the id's. 
 		/*The idea is to make it possible to get the Strings from id's using a 
@@ -127,9 +125,6 @@ public class addFile extends SherlockActivity {
 		 * String from id1 = String from id2
 		 * String from id3 = String from id4
 		 * etc.*/
-		
-		//This part could become problematic. They both have the same id. 
-		//Will go with it for now.
 		
 		initword1.setId(counter);
 		initWordWrapper.setId(-counter);
@@ -161,6 +156,7 @@ public class addFile extends SherlockActivity {
 		//nameField.requestFocus();
 		initword1.requestFocus();
 		initword1.setNextFocusDownId(initword2.getId());
+		initword2.setNextFocusDownId(initword2.getId() + 1);
 		
 		//User clicked addWord button
 		addWordButton.setOnClickListener(new OnClickListener() { //ButtonClick, add new wordset
@@ -183,8 +179,8 @@ public class addFile extends SherlockActivity {
 				
 				//The two EditTexts must have same width, therefore they have both the weight of 1 (1.0f)
 				/*LayoutParams weightParams = new LinearLayout.LayoutParams(0, pixels, 1.0f);*/
-				word1.setLayoutParams(weightParams);
-				word2.setLayoutParams(weightParams);
+				word1.setLayoutParams(editTextWeightParams);
+				word2.setLayoutParams(editTextWeightParams);
 				
 				/*//Set next key on keyboard
 				word1.setImeOptions(EditorInfo.IME_ACTION_NEXT);
@@ -242,6 +238,7 @@ public class addFile extends SherlockActivity {
 				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.showSoftInput(word1, InputMethodManager.SHOW_IMPLICIT);
 				word1.setNextFocusDownId(word2.getId());
+				word2.setNextFocusDownId(word2.getId() + 1);
 				/*word2 = (EditText)word1.focusSearch(View.FOCUS_RIGHT);
 				word2.requestFocus();*/
 			}	
