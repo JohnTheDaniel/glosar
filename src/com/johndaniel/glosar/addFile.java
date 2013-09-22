@@ -110,8 +110,8 @@ public class addFile extends SherlockActivity {
 		//add the EditTexts to the container
 		initWordWrapper.addView(initword1);
 		initWordWrapper.addView(initword2);
-		initword1.setHint("word");
-		initword2.setHint("translation");
+		initword1.setHint(getString(R.string.word));
+		initword2.setHint(getString(R.string.translation));
 		
 		//The newly added wordWrapper must always be placed below the already placed wordWrapper
 		//In this case, there are no wordwrappers.

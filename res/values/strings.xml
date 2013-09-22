@@ -10,6 +10,8 @@
     <string name="name_the_exercise">Name the exercise</string>
     <string name="saving...">Saving...</string>
     <string name="save">save</string>
+    <string name="word">word</string>
+    <string name="translation">translation</string>
     <string name="cancel_discard">CANCEL</string>
     <string name="new_exercise">New exercise</string> <!-- acts as label for addFile activity -->
     <string name="new_glosa">NEW GLOSS</string>
