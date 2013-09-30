@@ -50,8 +50,7 @@ public class OverviewFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case R.id.trainDeleteBtn: 
-			//Do delete operation over
-			//deleteThis(training);
+			//Confirm delete
 			//Show dialog
 			confirmDeleteDialog();
 			return true;
@@ -124,7 +123,6 @@ public class OverviewFragment extends SherlockFragment {
 				bundle.putStringArray(TRANSLATIONS, translations);
 				intent.putExtras(bundle);
 				startActivity(intent);
-				
 			}
 			
 		});

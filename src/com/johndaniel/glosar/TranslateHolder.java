@@ -51,52 +51,6 @@ public class TranslateHolder extends Fragment {
 		
 		
 	}
-	
-	
-
-	/*@Override
-	public void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-			
-			
-			Fragment wordFragment = new TranslateFragment1();
-			Bundle wordBundle = new Bundle();
-			wordBundle.putString(FRAGMENT_WORD, word);
-			wordFragment.setArguments(wordBundle);
-			
-			
-			Fragment translateFragment = new TranslateFragment2();
-			Bundle translateBundle = new Bundle();
-			translateBundle.putString(FRAGMENT_TRANSLATION, translation);
-			translateFragment.setArguments(translateBundle);
-			
-			
-            getChildFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.main_activity_card_face, wordFragment)
-                    .commit();
-            
-            getChildFragmentManager()
-            	.beginTransaction()
-            	.add(R.id.main_activity_card_back, translateFragment)
-            	.commit();
-		
-		RelativeLayout cont = (RelativeLayout) thisView.findViewById(R.id.main_activity_root);
-		cont.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				//Snurra
-				flip();
-				
-			}
-		});
-	}*/
-
-
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

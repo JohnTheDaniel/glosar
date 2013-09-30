@@ -12,8 +12,6 @@ public class IconAndTextFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		//super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_icon_and_text_fragment);
 		View thisView = inflater.inflate(R.layout.activity_icon_and_text_fragment, container, false);
 		
 		return thisView;

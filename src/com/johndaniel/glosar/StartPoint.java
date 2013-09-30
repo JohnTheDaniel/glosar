@@ -58,27 +58,6 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 		showingOverview = false;
 	}
 	
-
-	/*@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		
-		boolean isTablet = getResources().getBoolean(R.bool.isTablet);
-		if(isTablet){ //We are on a TABLET, folks!!
-			FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
-			
-			fm.replace(R.id.start_point_container, new ListOfFilesFragment())
-			.replace(R.id.list_of_files_container, new IconAndTextFragment())
-			.commit();
-		} else { 
-			FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
-			fm.replace(R.id.start_point_container, new ListOfFilesFragment()).commit();
-		}
-		showingOverview = false;
-	} */
-
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

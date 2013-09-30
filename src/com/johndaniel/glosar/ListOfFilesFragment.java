@@ -29,28 +29,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/*
- * Hej Daniel! Välkommen tillbaka!
- * Idag ska du skriva om sättet filerna skrivs in i listan.
- * Skapa en array med samma längd som number of files, och
- * skriv en for loop som skickar ut en fil per siffra.
- * Om keep count inställningen är checkat så ska
- * även siffran ingå i namnet om printas ut. 
- * 
- * Det måste även vara ett säkert system som inte printar ut filer
- * som inte existerar. T.ex fil nummer 3 kanske raderas av användaren,
- * det ska inte komma upp en tom lista. 3 får inte printas ut. 
- * Kan göras genom att kolla om filnamnet är tomt? addFile.java
- * tillåter inte att man missar filnamnet, så på det sättet kan man 
- * känna igen om det är en fil som inte existerar med en default output 
- * från sharedpreferences. 
- * 
- * Aja... Du kommer alltid på allt efter ett en stund a frustation. 
- * 
- * Lycka till!
- * 
- * */
-
 public class ListOfFilesFragment extends SherlockFragment {
 	public static final String EXTRA_POSITION = "com.johndaniel.glosar.POSITION";
 	ListView fileListView;
@@ -102,54 +80,12 @@ public class ListOfFilesFragment extends SherlockFragment {
 		//ab.setIcon(getResources().getDrawable(R.drawable.launcher_white));
 		return thisView;
 	}
-	/*@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.start_point, menu);
-		return true;		
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		//Plus-button pressed. Make a new file.
-		case R.id.addNewFileButton:
-			Intent intent = new Intent (this, addFile.class);
-			startActivity(intent);
-			return true;
-		case R.id.action_settings:
-			Intent settingsIntent = new Intent (this, SettingsActivity.class);
-			startActivity(settingsIntent);
-			return true;
-		default: return super.onOptionsItemSelected(item);
-		}
-		
-	}*/
 
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
-
-		/*
-		 * It turned out, this wasn't needed
-		Intent intent = getIntent();
-		String rebootMessage = intent.getStringExtra(addFile.REBOOT_MESSAGE);
-
-		if (rebootMessage != null){
-			//do reboot
-
-			finish();
-			startActivity(intent);
-
-			//DET FUNKA!!!
-		}
-		 */
-
-		/* Everything was plased in the resumed, because we need to refresh the list after the user comes back from 
-		 * addFile.java. When addFile.java is launched, this activity gets paused. 
-		 * When the user turns back from addFile.java, the onResume() method is called, and makes a refresh of the 
-		 * list of files. */
+		//All of this code can now be placed in onCreateView. 
+		
 		super.onResume();
 		//Some stuffs for test toast, not present in release.
 		Context context = getActivity();
@@ -171,12 +107,8 @@ public class ListOfFilesFragment extends SherlockFragment {
 		String[] fileListValues = new String[0];
 		for (int i = 0; i < numberOfFiles; i++){
 			String training = filesPrefs.getString(i + 1 + "", "hello");
-			//String training = "hello";
-			//fileListValues[i] = i + 1 + ". " + training;
+
 			if (training != ""){
-				/*if (fileListValues.length == 1){
-					fileListValues[0] = i + 1 + ". " + training;
-				} else {*/
 					//Make array bigger first
 					fileListValues = expandStringArray(fileListValues);
 					positionReferer = expandStringArray(positionReferer);
