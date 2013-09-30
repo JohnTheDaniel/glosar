@@ -178,4 +178,9 @@ public class StartPoint extends SherlockFragmentActivity implements ListOfFilesF
 	public void setActionBarTitle(String title) {
 	    getSupportActionBar().setTitle(title);
 	}
+	public void removeSetHomeAsUp(){
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(false);
+		actionBar.setDisplayHomeAsUpEnabled(false);
+	}
 }

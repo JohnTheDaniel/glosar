@@ -30,25 +30,6 @@ public class OverviewFragment extends SherlockFragment {
 	public static final String TRANSLATIONS = "com.johndaniel.glosar.TRANSLATIONS";
 	public static final String NUM_TRANS = "com.johndaniel.glosar.NUM_TRANS";
 	String training;
-	/*FileDeleteOnClickListener mlistener;
-	
-	public interface FileDeleteOnClickListener{
-		public void deleteFile(String training);
-	}
-	
-	@Override
-	public void onAttach(Activity activity) {
-		// TODO Auto-generated method stub
-		super.onAttach(activity);
-		// This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
-        try {
-            mlistener = (FileDeleteOnClickListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement FileDeleteOnClickListener");
-        }
-	}*/
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -99,12 +80,7 @@ public class OverviewFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View thisView = inflater.inflate(R.layout.activity_train, container, false);
-		
-		//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		
-		//Print out an overview of the words the training holds.
-		//Intent intent = getIntent();
-		//training = intent.getStringExtra(StartPoint.EXTRA_POSITION);
+
 		training = getArguments().getString("TRAINING");
 		
 		SharedPreferences settings = getActivity().getSharedPreferences(PREF_FILES, 0); 
@@ -167,10 +143,10 @@ public class OverviewFragment extends SherlockFragment {
 		
 		
 		//Remove file
-		File file1 = new File("/data/data/com.johndaniel.glosar/shared_prefs/" + thisPrefsName + ".xml");
+		File file1 = new File(getActivity().getApplicationContext().getFilesDir().getParentFile().getPath() + "/shared_prefs/" + thisPrefsName + ".xml");
 		file1.delete();
 		
-		File file2 = new File("/data/data/com.johndaniel.glosar/shared_prefs/" + thisPrefsName + ".bak");
+		File file2 = new File(getActivity().getApplicationContext().getFilesDir().getParentFile().getPath() + "/shared_prefs/" + thisPrefsName + ".bak");
 		if(file2.exists()){
 			file2.delete();
 		}
@@ -185,6 +161,9 @@ public class OverviewFragment extends SherlockFragment {
 			// Set title bar
 		    ((StartPoint) getActivity())
 		            .setActionBarTitle(getString(R.string.old_exercises));
+		    ((StartPoint) getActivity()).removeSetHomeAsUp();
+		    
+		    
 		} else if (isTablet){
 			getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.list_of_files_container, new IconAndTextFragment())
 			.commit();
@@ -198,31 +177,5 @@ public class OverviewFragment extends SherlockFragment {
 			toast.show();
 		}
 	}
-	
-	/*@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.train, menu);
-			
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
-		
-		switch(item.getItemId()){
-		case android.R.id.home:
-				Intent intent = new Intent(this, StartPoint.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-				return true;
-		case R.id.trainDeleteBtn:
-				//Place dialog here! If positive pressed, deleteThis()
-				//deleteThis(this);
-				return true;
-            default: return super.onOptionsItemSelected(item);
-		}
-	}*/
 }
 
