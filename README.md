@@ -1,6 +1,7 @@
-glosor
+Glosar
 ======
 En simpel app till android som använder sig av SharedPreferences för att hjälpa dig lära dig glosor!
+
 Alphatesta appen på [Google+communityt.](https://plus.google.com/u/0/communities/117588032053950560300)
 
 <p><h2>Screenshot</h2>
