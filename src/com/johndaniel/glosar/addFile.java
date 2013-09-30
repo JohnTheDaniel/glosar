@@ -223,12 +223,13 @@ public class addFile extends SherlockActivity {
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent = new Intent(this, StartPoint.class);
 		switch (item.getItemId()) {
 		case R.id.addFileSaveButton:
 			saveOperation(activityRaw);
+			startActivity(intent);
 			return true;
 		case R.id.addFileCancelButton:
-			Intent intent = new Intent(this, StartPoint.class);
 			startActivity(intent);
 			finish();
 			return true;
