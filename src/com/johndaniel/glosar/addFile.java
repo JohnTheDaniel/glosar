@@ -134,16 +134,6 @@ public class addFile extends SherlockActivity {
 		//Scroll down to bottom after added the new wordWrapper.
 		((RelativeLayout) relativeLayout).addView(initWordWrapper);
 		
-		
-		//Scroll down and animate
-		//Scroll down to bottom after added the new wordWrapper.
-		containerScrollView.post(new Runnable() {            
-			@Override
-			public void run() {
-				//containerScrollView.fullScroll(View.FOCUS_DOWN);              
-			}
-		});
-		
 		//animate in the wordWrapper
 		Animation animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.slide_right_in);
 		animation.setStartOffset(0);
@@ -171,20 +161,10 @@ public class addFile extends SherlockActivity {
 				LinearLayout wordWrapper = new LinearLayout(addFile.this);
 				wordWrapper.setBackgroundColor(0xFFFFFFFF);
 				wordWrapper.setOrientation(LinearLayout.HORIZONTAL);
-
-				/*int dps = 48; //Value, in this case height, described in density pixels
-				//Calculate the density pixels height in normal pixels.
-				final float scale = getBaseContext().getResources().getDisplayMetrics().density;
-				int pixels = (int) (dps * scale + 0.5f);*/
 				
 				//The two EditTexts must have same width, therefore they have both the weight of 1 (1.0f)
-				/*LayoutParams weightParams = new LinearLayout.LayoutParams(0, pixels, 1.0f);*/
 				word1.setLayoutParams(editTextWeightParams);
 				word2.setLayoutParams(editTextWeightParams);
-				
-				/*//Set next key on keyboard
-				word1.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-				word2.setImeOptions(EditorInfo.IME_ACTION_NEXT);*/
 				
 				//add the EditTexts to the container
 				wordWrapper.addView(word1);
@@ -205,42 +185,32 @@ public class addFile extends SherlockActivity {
 				 * String from id1 = String from id2
 				 * String from id3 = String from id4
 				 * etc.*/
-				
-				//This part could become problematic. They both have the same id. 
-				//Will go with it for now.
-				
+
 				counter++;
 				word1.setId(counter);
 				wordWrapper.setId(-counter);
 				counter++;
 				word2.setId(counter);
 				
-			
-				//Scroll down to bottom after added the new wordWrapper.
+				//Add the wordwrapper. 
 				((RelativeLayout) relativeLayout).addView(wordWrapper);
-				containerScrollView.post(new Runnable() {            
-					@Override
-					public void run() {
-						//containerScrollView.fullScroll(View.FOCUS_DOWN);              
-					}
-				});
 				
 				//animate in the wordWrapper
 				Animation animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.slide_right_in);
 				animation.setStartOffset(0);
 				wordWrapper.startAnimation(animation);
 				
+				//Remove enter button 
 				word1.setSingleLine();
 				word2.setSingleLine();
-				
 				word1.setFocusableInTouchMode(true);
 				word1.requestFocus();
+				//Request keyboard
 				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.showSoftInput(word1, InputMethodManager.SHOW_IMPLICIT);
+				//Set focus order. 
 				word1.setNextFocusDownId(word2.getId());
 				word2.setNextFocusDownId(word2.getId() + 1);
-				/*word2 = (EditText)word1.focusSearch(View.FOCUS_RIGHT);
-				word2.requestFocus();*/
 			}	
 		});			
 	}
@@ -253,15 +223,6 @@ public class addFile extends SherlockActivity {
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		/*int id = item.getItemId();
-		if (id == R.id.addFileSaveButton){
-			Context context = getApplicationContext();
-			CharSequence text = "Sparar...";
-			int duration = Toast.LENGTH_LONG;
-
-			Toast toast = Toast.makeText(context, text, duration);
-			toast.show();
-		}*/
 		switch (item.getItemId()) {
 		case R.id.addFileSaveButton:
 			saveOperation(activityRaw);
@@ -308,15 +269,11 @@ public class addFile extends SherlockActivity {
 			thisFilePrefs = getSharedPreferences(thisPrefName, 0);
 			
 			//Here goes the stuff from the edittexts.'
-			//This is just some development test
-			//thisFilePrefs.edit().putString("Hello", "Hej").commit();
 			if(counter > 1){ //To avoid null
 				Toast saveErr = Toast.makeText(getApplicationContext(), "For-loop kšrs", Toast.LENGTH_LONG);
 				saveErr.show();
 				for(int i = 2; i < counter; i = i + 2){
-					
-					//Currently gives a bug because the first id points to a textview. This gets fixed when the first id gets EditTexts
-					EditText word1 = (EditText) activity.findViewById(i); //Does'nt work becouse the linearlayout has the same id
+					EditText word1 = (EditText) activity.findViewById(i);
 					EditText word2 = (EditText) activity.findViewById(i + 1);
 					String word1Text = word1.getText().toString();
 					String word2Text = word2.getText().toString();
