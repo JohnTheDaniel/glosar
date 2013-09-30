@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal" 
+    android:background="@drawable/cards_ui"
+    android:layout_height="wrap_content"
+    android:minHeight="48dp">
+    
+    <TextView 
+        android:id="@+id/overview_fragment_list_word"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="18sp"/>
+    
+    <TextView 
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="="
+        android:gravity="center"
+        android:textSize="18sp"/>
+    
+    <TextView 
+        android:id="@+id/overview_fragment_list_translations"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        android:textSize="18sp"/>
+</LinearLayout>

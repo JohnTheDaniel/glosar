@@ -1,62 +1,22 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".OverviewFragment"
+    android:background="#ffeeeeee">
+	<!-- android:background="#ffeeeeee" -->
+    <ListView 
+            
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
+	android:scrollbarStyle="outsideOverlay"
+	android:dividerHeight="8.0dp"
+	android:clipToPadding="false"
+	android:divider="@android:color/transparent"
+	android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".OverviewFragment" 
-    android:fillViewport="true"
-    android:scrollbarStyle="insideOverlay" >
-    <RelativeLayout 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/trainHeader" />
-    
-    	<LinearLayout 
-    	    android:layout_width="match_parent"
-    	    android:layout_height="wrap_content"
-    	    android:orientation="vertical"
-    	    android:layout_alignParentBottom="true" 
-    	    android:id="@+id/overview_settings_section">
-    	    
-    	    <TextView
-		    android:layout_height="wrap_content"
-		    android:layout_width="match_parent"
-		    android:text="@string/action_settings"
-		    style="?android:attr/listSeparatorTextViewStyle"/>
-    	    
-    	    <LinearLayout 
-    	        android:layout_width="match_parent"
-    	        android:layout_height="wrap_content" >
-
-	    	    <TextView
-	    	        android:layout_width="0dp"
-	    	        android:layout_height="wrap_content"
-	    	        android:paddingBottom="16dp"
-	    	        android:paddingLeft="8dp"
-	    	        android:paddingTop="16dp"
-	    	        android:textSize="16sp"
-	    	        android:text="@string/switch_translation_order"
-	    	        android:layout_weight="1" >
-					</TextView>
-				<CheckBox 
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"
-				    android:gravity="center"
-				    android:paddingLeft="8dp"/>
-    	    </LinearLayout>
-    	</LinearLayout>
-    <Button android:id="@+id/startTrainingBtn"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="@string/start_the_exercise"
-        android:layout_above="@id/overview_settings_section"
-        ></Button>
-	</RelativeLayout>
-</ScrollView>
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
+   	android:id="@+id/overview_fragment_listview" >
+    </ListView>
+</LinearLayout>

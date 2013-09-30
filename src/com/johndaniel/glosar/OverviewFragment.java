@@ -14,7 +14,15 @@ import android.support.v4.app.NavUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
@@ -30,7 +38,8 @@ public class OverviewFragment extends SherlockFragment {
 	public static final String TRANSLATIONS = "com.johndaniel.glosar.TRANSLATIONS";
 	public static final String NUM_TRANS = "com.johndaniel.glosar.NUM_TRANS";
 	String training;
-
+	RelativeLayout wordsContainer;
+	int counter = 4;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -92,10 +101,20 @@ public class OverviewFragment extends SherlockFragment {
             .setActionBarTitle(header);
 		}
 	    
-		TextView textView = (TextView) thisView.findViewById(R.id.trainHeader);
+		//TextView textView = (TextView) thisView.findViewById(R.id.trainHeader);
 		SharedPreferences thisFile = getActivity().getSharedPreferences(header, 0);
 		String allFromFile = thisFile.getAll().toString();
-		textView.setText(allFromFile);
+		//textView.setText(allFromFile);
+		
+		//Getting the amount of translations
+		final int numberOfTranslations = allFromFile.split(", ").length;
+		
+		
+		String words[] = allFromFile.replace("{", "").replace("}", "").split(", ");
+		ListView wordsListView = (ListView) thisView.findViewById(R.id.overview_fragment_listview);
+		View footerView =  inflater.inflate(R.layout.overview_fragment_listview_footer, null, false);
+        wordsListView.addFooterView(footerView);
+        wordsListView.setAdapter(new OverviewFragmentListAdapter(getActivity(), words));
 		
 		
 		/*
@@ -105,13 +124,11 @@ public class OverviewFragment extends SherlockFragment {
 		 * 
 		 * b) The translations the TranslateHolders will translate between.
 		 */
-		//Getting the amount of translations
-		final int numberOfTranslations = allFromFile.split(", ").length;
 		//Getting all the translations
 		final String translations[] = allFromFile.replace("{", "").replace("}", "").split(", ");
 		
 		//Button click
-		Button btn = (Button) thisView.findViewById(R.id.startTrainingBtn);
+		Button btn = (Button) footerView.findViewById(R.id.startTrainingBtn);
 		btn.setOnClickListener(new View.OnClickListener(){
 
 			@Override
@@ -174,6 +191,77 @@ public class OverviewFragment extends SherlockFragment {
 			Toast toast = Toast.makeText(context, toastText, duration);
 			toast.show();
 		}
+	}
+	public void makeWordsViews(String word1, String word2){
+		//Calculate width
+		int dps = 48; //Value, in this case height, described in density pixels
+		//Calculate the density pixels height in normal pixels.
+		final float scale = getActivity().getResources().getDisplayMetrics().density;
+		final int pixels = (int) (dps * scale + 0.5f);
+		//The layoutparams for the editTexts. This will give the EditTexts an height of pixels (calculated dps), the weight 1.
+		//The weight will cause the EditTexts to share the amount of space inside the container. 
+		final LayoutParams textWeightParams = new LinearLayout.LayoutParams(0, pixels, 1.0f);
+		
+		
+		/* The counter is the key for this operation. It helps 
+		 * us to keep track on the id's for the editTexts and the 
+		 * wrapper. Each editText has a value given from the counter,
+		 * and each wrapper has the -counter id value. */
+		
+		//Here begins the creation of the editTexts.
+		//Create two editTexts, one for the word (key), and one for the translation
+		TextView initword1 = new TextView(getActivity()); 
+		TextView initword2 = new TextView(getActivity());
+		initword1.setText(word1);
+		initword2.setText(word2);
+		
+		//Create the container for the two editTexts
+		LinearLayout initWordWrapper = new LinearLayout(getActivity());
+		//initWordWrapper.setBackgroundColor(0xFFFFFFFF);
+		initWordWrapper.setOrientation(LinearLayout.HORIZONTAL);
+
+		
+		//The two EditTexts must have same width, therefore they have both the weight of 1 (1.0f)
+		initword1.setLayoutParams(textWeightParams);
+		initword2.setLayoutParams(textWeightParams);
+		
+		
+		//add the EditTexts to the container
+		initWordWrapper.addView(initword1);
+		initWordWrapper.addView(initword2);
+		
+
+		//The newly added wordWrapper must always be placed below the already placed wordWrapper
+		//In this case, there are no wordwrappers.
+		RelativeLayout.LayoutParams wrapperParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, pixels);
+		/* The wrapper must always be placed under the previous wrapper. 
+		 * The wrapper has the id -counter, counter+1 will give the us the
+		 * id of the previously added counter. */
+		
+		wrapperParams.addRule(RelativeLayout.BELOW, -counter+2);
+
+		initWordWrapper.setLayoutParams(wrapperParams);
+		
+		//Setting up the id's. 
+		/*The idea is to make it possible to get the Strings from id's using a 
+		 * for loop and then printing them to this sharedPreference file. 
+		 * 
+		 * String from id1 = String from id2
+		 * String from id3 = String from id4
+		 * etc.*/
+		counter++;
+		initWordWrapper.setId(-counter);
+		initword1.setId(counter);
+		counter++;
+		initword2.setId(counter);
+				
+		//Scroll down to bottom after added the new wordWrapper.
+		((RelativeLayout) wordsContainer).addView(initWordWrapper);
+		
+		//animate in the wordWrapper
+		Animation animation = AnimationUtils.loadAnimation(getActivity().getBaseContext(), R.anim.slide_right_in);
+		animation.setStartOffset(0);
+		//initWordWrapper.startAnimation(animation);
 	}
 }
 
