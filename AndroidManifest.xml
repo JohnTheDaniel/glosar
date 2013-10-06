@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.johndaniel.glosar"
     android:versionCode="8"
-    android:versionName="alpha6" >
+    android:versionName="alpha7" >
 
     <uses-sdk
         android:minSdkVersion="7"

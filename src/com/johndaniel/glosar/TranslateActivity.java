@@ -27,6 +27,8 @@ public class TranslateActivity extends SherlockFragmentActivity {
 	
 	private int NUM_PAGES;
 	
+	private boolean REVERSE_TRANSLATION;
+	
 	private String[] translations;
 	
 	private ViewPager pager;
@@ -50,6 +52,7 @@ public class TranslateActivity extends SherlockFragmentActivity {
 		
 		Intent intent = getIntent();
 		NUM_PAGES = intent.getExtras().getInt(OverviewFragment.NUM_TRANS);
+		REVERSE_TRANSLATION = intent.getExtras().getBoolean(OverviewFragment.REVERSE_TRANSLATION);
 		
 		//Edit ActionBar
 		final ActionBar ab = getSupportActionBar();
@@ -144,6 +147,7 @@ public class TranslateActivity extends SherlockFragmentActivity {
         	TranslateHolder tHolder = new TranslateHolder();
         	Bundle args = new Bundle();
         	args.putString(TRANSLATION, translations[position]);
+        	args.putBoolean(OverviewFragment.REVERSE_TRANSLATION, REVERSE_TRANSLATION);
         	colorChooser = position % 5;
         	args.putInt("COLOR", colorChooser);
         	tHolder.setArguments(args);

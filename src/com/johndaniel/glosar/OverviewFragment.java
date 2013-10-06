@@ -13,12 +13,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -37,9 +39,13 @@ public class OverviewFragment extends SherlockFragment {
 	public static final String PREF_FILES = "FileStorage";
 	public static final String TRANSLATIONS = "com.johndaniel.glosar.TRANSLATIONS";
 	public static final String NUM_TRANS = "com.johndaniel.glosar.NUM_TRANS";
+	public static final String REVERSE_TRANSLATION = "com.johndaniel.glosar.REVERSE_TRAINING";
 	String training;
 	RelativeLayout wordsContainer;
 	int counter = 4;
+	CheckBox reverseTrainingBox;
+	boolean reverseTraining = false;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -88,7 +94,7 @@ public class OverviewFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View thisView = inflater.inflate(R.layout.activity_train, container, false);
-
+		
 		training = getArguments().getString("TRAINING");
 		
 		SharedPreferences settings = getActivity().getSharedPreferences(PREF_FILES, 0); 
@@ -129,6 +135,9 @@ public class OverviewFragment extends SherlockFragment {
 		
 		//Button click
 		Button btn = (Button) footerView.findViewById(R.id.startTrainingBtn);
+		
+		//Find the checkboxes, which is placed in the footerView.
+		reverseTrainingBox = (CheckBox) footerView.findViewById(R.id.overview_reverse_training_box);
 		btn.setOnClickListener(new View.OnClickListener(){
 
 			@Override
@@ -136,6 +145,8 @@ public class OverviewFragment extends SherlockFragment {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent (getActivity().getBaseContext(), TranslateActivity.class);
 				Bundle bundle = new Bundle();
+				boolean reverseTraining = reverseTrainingBox.isChecked();
+				bundle.putBoolean(REVERSE_TRANSLATION, reverseTraining);
 				bundle.putInt(NUM_TRANS, numberOfTranslations);
 				bundle.putStringArray(TRANSLATIONS, translations);
 				intent.putExtras(bundle);
@@ -143,6 +154,8 @@ public class OverviewFragment extends SherlockFragment {
 			}
 			
 		});
+		
+		
 		return thisView;
 	}
 	
@@ -185,6 +198,7 @@ public class OverviewFragment extends SherlockFragment {
 			
 			getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.start_point_container, new ListOfFilesFragment()).commit();
 			
+			//Development toast!
 			Context context = getActivity();
 			CharSequence toastText = "I did the replacement, sir!";
 			int duration = Toast.LENGTH_SHORT;

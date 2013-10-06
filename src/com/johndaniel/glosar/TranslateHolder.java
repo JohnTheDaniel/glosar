@@ -29,11 +29,13 @@ public class TranslateHolder extends Fragment {
 	
 	private String word, translation;
 	private int colorChooser;
+	private boolean reverseTranslation;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		colorChooser = getArguments().getInt("COLOR");
+		reverseTranslation = getArguments().getBoolean(OverviewFragment.REVERSE_TRANSLATION);
 		
 		String[] raw = getArguments().getString(TranslateActivity.TRANSLATION).split("=");
 		if (raw.length != 0){
@@ -74,16 +76,27 @@ public class TranslateHolder extends Fragment {
 			translateBundle.putInt("COLOR", colorChooser);
 			translateFragment.setArguments(translateBundle);
 			
-			
-            getChildFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.main_activity_card_face, wordFragment)
-                    .commit();
-            
-            getChildFragmentManager()
-            	.beginTransaction()
-            	.add(R.id.main_activity_card_back, translateFragment)
-            	.commit();
+			if (reverseTranslation){
+	            getChildFragmentManager()
+                .beginTransaction()
+                .add(R.id.main_activity_card_face, translateFragment)
+                .commit();
+        
+		        getChildFragmentManager()
+		        .beginTransaction()
+		        .add(R.id.main_activity_card_back, wordFragment)
+		        .commit();
+			} else {
+	            getChildFragmentManager()
+                .beginTransaction()
+                .add(R.id.main_activity_card_face, wordFragment)
+                .commit();
+        
+		        getChildFragmentManager()
+		        .beginTransaction()
+		        .add(R.id.main_activity_card_back, translateFragment)
+		        .commit();
+			}
         }
 		
 		RelativeLayout cont = (RelativeLayout) thisView.findViewById(R.id.main_activity_root);

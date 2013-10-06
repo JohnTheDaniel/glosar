@@ -36,6 +36,7 @@
 				    android:layout_width="wrap_content"
 				    android:layout_height="wrap_content"
 				    android:gravity="center"
-				    android:paddingLeft="8dp"/>
+				    android:paddingLeft="8dp"
+				    android:id="@+id/overview_reverse_training_box"/>
     	    </LinearLayout>
 </LinearLayout>
