@@ -1,0 +1,78 @@
+html, body {
+	height: 100%;
+	min-width: 500px;
+}
+body {
+	min-height: 100%;
+	overflow: scroll;
+}
+/* First section */
+.first-section {
+	height: 100%;
+	background-image: url(../img/background1.jpg);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	/*box-shadow: inset 0px 0px 200px rgba(0,0,0,0.64);*/
+	text-align: center;
+	-webkit-background-size: cover;
+	overflow: hidden;
+	z-index: 2;
+}
+h1 {
+	font-family: serif;
+	font-style: italic;
+	font-size: 100px;
+}
+#logo {
+	margin-right:auto;
+	margin-left: auto;
+	display: block;
+	height: 200px;
+	padding-top: 5%;
+}
+#first-phone {
+	z-index: 2;
+	max-width: 500px;
+	width: 100%;
+	min-height: 40%;
+}
+.first-bottom-bar {
+	height:20px;
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	background: #cbcbcb;
+	box-shadow: 0px -8px 8px rgba(78,78,78,0.47);
+}
+.top-bottom-bar {
+	height:20px;
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	background: #cbcbcb;
+	z-index: 4;
+}
+
+/* Second section */
+.second-section{
+	background: -webkit-linear-gradient(#cbcbcb 100%, #e7e7e7 100%);
+	background: -moz-linear-gradient(#cbcbcb 100%, #e7e7e7 100%);
+	background-attachment:fixed;
+	/*position: relative;
+	top: -20px;*/
+	height:100%;
+	z-index: 3;
+}
+
+/* Footer related */
+footer {
+	height: 30%;
+	min-height: 200px;
+}
+#footer-logo {
+	background: red;
+	height: 100%;
+	float:right;
+	margin-right: 3%;
+	background: #5ec7ff;
+}
