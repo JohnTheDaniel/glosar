@@ -62,17 +62,41 @@ h1 {
 	top: -20px;*/
 	height:100%;
 	z-index: 3;
+	min-height: 400px;
 }
-
+.second-section > article{
+	padding-right: 5%;
+}
+.second-section > article > p {
+	margin-bottom: 20px;
+}
+.second-section > article > h2 {
+	font-size: 40px;
+	margin-bottom: 20px;
+}
+#devices {
+	width: 50%;
+	float: left;
+	height: 100%;
+	display: block;
+}
+#devices > img {
+	float; right;
+}
 /* Footer related */
 footer {
 	height: 30%;
 	min-height: 200px;
 }
+footer > p {
+	float: left;
+}
 #footer-logo {
 	background: red;
 	height: 100%;
 	float:right;
+	display: block;
 	margin-right: 3%;
 	background: #5ec7ff;
+	
 }

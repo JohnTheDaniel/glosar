@@ -49,6 +49,8 @@ Firefox super responsive scroll (c) Keith Clark - MIT Licensed
 
 $(document).ready(function(){
 	var $window = $(window);
+	deviceCenterMargin();
+	newDevice();
     $('section[data-type="background"]').each(function(){
         var $bgobj = $(this); // assigning the object
 		
@@ -68,6 +70,34 @@ $(document).ready(function(){
     $(window).resize(function(){
 	    height = $("footer").height();
 	    $("#footer-logo").width(height);
+	    deviceCenterMargin();
+	    newDevice();
     });    
-    
 }); 
+
+function deviceCenterMargin(){
+		var imgHeight = $("#devices > img").height();
+		var divHeight = $("#devices").height();
+		var deltaH = divHeight - imgHeight;
+		var marginTop = deltaH/3;
+		$("#devices > img").css({marginTop: marginTop});
+		if ($(window).width() >= 900){
+			$(".second-section > article > h2").css({paddingTop: marginTop});
+		} else {
+			$(".second-section > article > h2").css({paddingTop: "20px"});
+		}
+		}
+	$("#devices > img").click(function(){
+		alert("doc height is" + $(window).height() + "\n doc wodth is " + $(window).width());
+	});
+function newDevice(){
+	var $window = $(window);
+	var img = $("#devices > img");
+	var container = $("#devices");
+	if($window.width() > 800){
+		img.attr("src","img/nexus7.png");
+		container.css({display: "block"});
+	} else if ($window.width() < 800) {
+		container.css({display: "none"});
+	}
+}

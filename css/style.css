@@ -2,6 +2,38 @@
 	margin: 0px;
 	padding: 0px;
 }
+@font-face {
+	font-family:kepler;
+	font-weight:italic;
+	src:url(fonts/keplerli.otf);
+}
+@font-face {
+	font-family:Roboto-normal;
+	font-weight:normal;
+	src:url(fonts/Roboto-Regular.ttf);
+}
+@font-face {
+	font-family:Roboto;
+	font-weight:italic;
+	src:url(fonts/Roboto-Italic.ttf);
+}
+@font-face {
+	font-family:Roboto-light;
+	/*font-weight:lighter;*/
+	src:url(fonts/Roboto-Light.ttf);
+}
+@font-face {
+	font-family:Roboto;
+	font-weight:bold;
+	src:url(fonts/Roboto-Bold.ttf);
+}
+.second-section{
+	font-family: Roboto;
+}
+.second-section > article > h2 {
+	font-family: Roboto-light;
+	font-style: italic;
+	}
 footer {
 	background-color: #22aeff;
 	border-top: 5px solid #5ec7ff;
