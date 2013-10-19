@@ -318,6 +318,7 @@ public class addFile extends SherlockActivity {
 		// TODO Auto-generated method stub
 		Intent intent = new Intent(this, StartPoint.class);
 		startActivity(intent);
+		finish();
 	}
 	
 	}
