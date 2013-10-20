@@ -227,7 +227,6 @@ public class addFile extends SherlockActivity {
 		switch (item.getItemId()) {
 		case R.id.addFileSaveButton:
 			saveOperation(activityRaw);
-			startActivity(intent);
 			return true;
 		case R.id.addFileCancelButton:
 			startActivity(intent);
@@ -311,6 +310,9 @@ public class addFile extends SherlockActivity {
 				filesEditorFiles.putString(thisFileReferense, nameField.getText().toString());
 				filesEditorFiles.commit();
 				finish();
+				
+				Intent intent = new Intent(this, StartPoint.class);
+				startActivity(intent);
 			}
 		}
 	@Override
