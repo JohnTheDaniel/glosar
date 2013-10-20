@@ -129,8 +129,6 @@ public class TranslateActivity extends SherlockFragmentActivity {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()){
 		case android.R.id.home: 
-			/*Intent intent = new Intent(this, StartPoint.class);
-			startActivity(intent);*/
 			finish();
 			return true;
 		default: return super.onOptionsItemSelected(item);
