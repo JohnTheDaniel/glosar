@@ -30,14 +30,28 @@ public class OverviewFragmentListAdapter extends ArrayAdapter<String> {
 		TextView textViewWord = (TextView) rowView.findViewById(R.id.overview_fragment_list_word);
 		TextView textViewTranslations = (TextView) rowView.findViewById(R.id.overview_fragment_list_translations);
 		String[] twoStrings = values[position].split("=");
-		if(twoStrings[0].length() == 0){
+		if (twoStrings.length > 1){
+			if (twoStrings[0].length() == 0){
+				twoStrings[0] = "";
+			}
+			if (twoStrings[1].length() == 0) {
+				twoStrings[1] = "";
+			}
+			textViewWord.setText(twoStrings[0]);
+			textViewTranslations.setText(twoStrings[1]);
+		} else {
+			String[] elseStrings = new String[2];
+			elseStrings[0] = values[position].replace("=", "");
+			elseStrings[1] = "";
+			textViewWord.setText(elseStrings[0]);
+			textViewTranslations.setText(elseStrings[1]);
+		}
+		/*if(twoStrings[0].length() == 1){
 			twoStrings[0] = "";
 		}
 		if(twoStrings[1].length() == 0){
 			twoStrings[1] = "";
-		}
-		textViewWord.setText(twoStrings[0]);
-		textViewTranslations.setText(twoStrings[1]);
+		}*/
   
 		return rowView;
 	}
