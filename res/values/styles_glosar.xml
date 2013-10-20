@@ -85,5 +85,9 @@
         <item name="popupMenuStyle">@style/PopupMenu.Glosar</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Glosar</item>
     </style>
+    
+    <style name="Theme.StartPointBackground" parent="Theme.Glosar">
+        <item name="android:windowBackground">@color/my_gray</item>
+    </style>
 
 </resources>

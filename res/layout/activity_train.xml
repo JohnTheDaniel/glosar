@@ -1,14 +1,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".OverviewFragment"
-    android:background="#ffeeeeee">
+    android:layout_height="wrap_content"
+    tools:context=".OverviewFragment">
 	<!-- android:background="#ffeeeeee" -->
     <ListView 
             
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
 	android:scrollbarStyle="outsideOverlay"
 	android:dividerHeight="8.0dp"
 	android:clipToPadding="false"
