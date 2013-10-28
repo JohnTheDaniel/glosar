@@ -240,12 +240,6 @@ public class addFile extends SherlockActivity {
 	}
 	public void saveOperation(Activity activity) {
 		//first check. Is there any any name?
-		if (nameField.getText().toString().equals("")){
-			//nameField is empty.
-			Toast saveErr = Toast.makeText(getApplicationContext(), getResources().getString(R.string.name_the_exercise).toString(), Toast.LENGTH_LONG);
-			saveErr.show();
-		}
-		else {
 			//Get the amount of files.
 			SharedPreferences filePrefsMisc = getSharedPreferences(PREF_MISC, 0);
 			SharedPreferences.Editor filesEditorMisc = filePrefsMisc.edit();
@@ -316,7 +310,6 @@ public class addFile extends SherlockActivity {
 				
 				Intent intent = new Intent(this, StartPoint.class);
 				startActivity(intent);
-			}
 		}
 	@Override
 	public void onBackPressed() {
@@ -339,12 +332,32 @@ public class addFile extends SherlockActivity {
 		 * c) Check if there are any empty words/translations?
 		 */
 		
+		//b)
+		if (nameField.getText().toString().equals("")){
+			//nameField is empty.
+			Toast saveErr = Toast.makeText(getApplicationContext(), getResources().getString(R.string.name_the_exercise).toString(), Toast.LENGTH_LONG);
+			saveErr.show();
+			return false;
+		}
+		
+		//c)
+		//Why counter-1? That is the amount of words. 
+		//Why is i = 2? The first word has always the id 2.
+		for (int i = 2; i <= counter-1; i++){
+			EditText examField = (EditText) findViewById(i);
+			if (examField.getText().toString().equals("")){
+				Toast.makeText(getApplicationContext(), "There is an empty word or translation, please fix it", Toast.LENGTH_LONG).show();
+				return false;
+			}
+		}
 		
 		//a)
 		//Print in all the words into an array
 		String[] words = new String[(counter-2)/2 + 1]; 
 		int debugCounter = counter;
 		int wordsIndexCounter = 0;
+		//Why counter-1? That is the amount of words. 
+		//Why is i = 2? The first word has always the id 2.
 		for (int i = 2; i <= counter-1; i = i + 2){
 			 EditText word = (EditText) findViewById(i);		 
 			 words[wordsIndexCounter] = word.getText().toString();
