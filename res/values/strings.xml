@@ -15,6 +15,8 @@
     <string name="cancel_discard">CANCEL</string>
     <string name="new_exercise">New exercise</string> <!-- acts as label for addFile activity -->
     <string name="new_glosa">NEW GLOSS</string>
+    <string name="there_is_an_empty_word_or_translation_please_fix_it">There is an empty word or translation, please fix it.</string>
+    <string name="two_words_are_equal_to_each_other">Two words are equal to each other. Please fix it before saving.</string>
     
     <!-- SettingsActivity.java -->
     <string name="enable_ads">Enable ads</string>

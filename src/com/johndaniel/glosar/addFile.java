@@ -346,15 +346,14 @@ public class addFile extends SherlockActivity {
 		for (int i = 2; i <= counter-1; i++){
 			EditText examField = (EditText) findViewById(i);
 			if (examField.getText().toString().equals("")){
-				Toast.makeText(getApplicationContext(), "There is an empty word or translation, please fix it", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), getResources().getString(R.string.there_is_an_empty_word_or_translation_please_fix_it), Toast.LENGTH_LONG).show();
 				return false;
 			}
 		}
 		
 		//a)
 		//Print in all the words into an array
-		String[] words = new String[(counter-2)/2 + 1]; 
-		int debugCounter = counter;
+		String[] words = new String[(counter-1)/2]; 
 		int wordsIndexCounter = 0;
 		//Why counter-1? That is the amount of words. 
 		//Why is i = 2? The first word has always the id 2.
@@ -370,7 +369,7 @@ public class addFile extends SherlockActivity {
 					String wordB = words[a];
 					if (wordA.equals(words[a])){
 						//We got a match!
-						Toast.makeText(getApplicationContext(), "We got a match!", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getApplicationContext(), getResources().getString(R.string.two_words_are_equal_to_each_other), Toast.LENGTH_SHORT).show();
 						return false;
 					}
 				}
