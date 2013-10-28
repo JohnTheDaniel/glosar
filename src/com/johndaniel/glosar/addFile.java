@@ -226,8 +226,10 @@ public class addFile extends SherlockActivity {
 		Intent intent = new Intent(this, StartPoint.class);
 		switch (item.getItemId()) {
 		case R.id.addFileSaveButton:
+			//int[] emptyCheckArray = emptyCheck();
+			int runInt = 1;
 			boolean allClear = wordCheck();
-			if (allClear) {
+			if (allClear && (runInt == 1)) {
 				saveOperation(activityRaw);
 			}
 			return true;
@@ -270,13 +272,14 @@ public class addFile extends SherlockActivity {
 				Toast saveErr = Toast.makeText(getApplicationContext(), "For-loop kšrs", Toast.LENGTH_LONG);
 				saveErr.show();
 				for(int i = 2; i < counter; i = i + 2){
-					EditText word1 = (EditText) activity.findViewById(i);
-					EditText word2 = (EditText) activity.findViewById(i + 1);
-					String word1Text = word1.getText().toString();
-					String word2Text = word2.getText().toString();
-					
-					
-					thisFilePrefs.edit().putString(word1Text, word2Text).commit();
+						EditText word1 = (EditText) activity.findViewById(i);
+						EditText word2 = (EditText) activity.findViewById(i + 1);
+						String word1Text = word1.getText().toString();
+						String word2Text = word2.getText().toString();
+						
+						if(!(word1Text.equals("") && word2Text.equals(""))){
+							thisFilePrefs.edit().putString(word1Text, word2Text).commit();
+						}
 				}
 			}
 			
@@ -319,6 +322,48 @@ public class addFile extends SherlockActivity {
 		finish();
 	}
 	
+	/*public int[] emptyCheck(){
+		int standard = 0; 
+		int[] emptyCheckArray = new int[1];
+		int runInt = 1; //1 means run saveOperation, 0 means do not run...
+
+		
+		int[] collectedJumpIds = new int[0];
+		int collectedJumpIdsIndex = 1;
+		for (int i = 2; i > counter; i = i + 2){
+			EditText word = (EditText) findViewById(i);
+			EditText translation = (EditText) findViewById(i + 1);
+			
+			if (word.equals("") && translation.equals("")){
+				emptyCheckArray = expandIntArray(emptyCheckArray);
+				emptyCheckArray[collectedJumpIdsIndex] = i;
+				collectedJumpIdsIndex++;
+			}
+			if (word.equals("") || translation.equals("")){
+				runInt = 0;
+				Toast.makeText(getApplicationContext(), 
+						getResources().getString(R.string.there_is_an_empty_word_or_translation_please_fix_it), 
+						Toast.LENGTH_LONG)
+						.show();
+			}
+		}
+		
+		emptyCheckArray[0] = runInt; //The first place says wether or not the save operation should run.
+		return emptyCheckArray;
+	}
+	
+	private boolean checkIfEmptyPair(int wordId, int[] emptyCheckArray) {
+		
+		for (int i = 1; i < emptyCheckArray.length; i++){
+			int emptyCheckInt = emptyCheckArray[i];
+			if (emptyCheckInt == wordId){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	*/
 	public boolean wordCheck(){
 		boolean allClear = true;
 		/*
@@ -343,11 +388,14 @@ public class addFile extends SherlockActivity {
 		//c)
 		//Why counter-1? That is the amount of words. 
 		//Why is i = 2? The first word has always the id 2.
-		for (int i = 2; i <= counter-1; i++){
-			EditText examField = (EditText) findViewById(i);
-			if (examField.getText().toString().equals("")){
-				Toast.makeText(getApplicationContext(), getResources().getString(R.string.there_is_an_empty_word_or_translation_please_fix_it), Toast.LENGTH_LONG).show();
-				return false;
+		for (int i = 2; i <= counter-1; i = i+2){
+			EditText word = (EditText) findViewById(i);
+			EditText translation = (EditText) findViewById(i + 1);
+			if (!(word.getText().toString().equals("") && translation.getText().toString().equals(""))){
+				if ((word.getText().toString().equals("")) || (translation.getText().toString().equals(""))){
+					Toast.makeText(getApplicationContext(), getResources().getString(R.string.there_is_an_empty_word_or_translation_please_fix_it), Toast.LENGTH_LONG).show();
+					return false;
+				}
 			}
 		}
 		
@@ -364,13 +412,15 @@ public class addFile extends SherlockActivity {
 		}
 		for (int i = 0; i < words.length; i++){
 			String wordA = words[i];
-			for (int a = 0; a < words.length; a++){
-				if (a != i){
-					String wordB = words[a];
-					if (wordA.equals(words[a])){
-						//We got a match!
-						Toast.makeText(getApplicationContext(), getResources().getString(R.string.two_words_are_equal_to_each_other), Toast.LENGTH_SHORT).show();
-						return false;
+			if(!(wordA.equals(""))){
+				for (int a = 0; a < words.length; a++){
+					if (a != i){
+						String wordB = words[a];
+						if (wordA.equals(words[a])){
+							//We got a match!
+							Toast.makeText(getApplicationContext(), getResources().getString(R.string.two_words_are_equal_to_each_other), Toast.LENGTH_SHORT).show();
+							return false;
+						}
 					}
 				}
 			}
@@ -379,6 +429,13 @@ public class addFile extends SherlockActivity {
 		
 		
 		return allClear;
+	}
+	public int[] expandIntArray(int[] oldArray) {
+		int[] newArray = new int[oldArray.length + 1];
+		
+		System.out.print(newArray);
+		System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);
+		return newArray;
 	}
 	}
 	/*	public boolean needTutorialCheck() {
