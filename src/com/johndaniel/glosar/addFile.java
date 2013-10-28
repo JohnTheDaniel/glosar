@@ -226,7 +226,10 @@ public class addFile extends SherlockActivity {
 		Intent intent = new Intent(this, StartPoint.class);
 		switch (item.getItemId()) {
 		case R.id.addFileSaveButton:
-			saveOperation(activityRaw);
+			boolean allClear = wordCheck();
+			if (allClear) {
+				saveOperation(activityRaw);
+			}
 			return true;
 		case R.id.addFileCancelButton:
 			startActivity(intent);
@@ -323,6 +326,48 @@ public class addFile extends SherlockActivity {
 		finish();
 	}
 	
+	public boolean wordCheck(){
+		boolean allClear = true;
+		/*
+		 * There are two things we need to check before saving the training
+		 * a) Are there any words that are equal to each other?
+		 *  - The word (left side on the screen) are used as keys in SharedPreferences
+		 *    If they are equal to each other, it will cause an overwrite.
+		 * 
+		 * b) Check if the exercise got a name (currently plased in saveOperation()) 
+		 * 
+		 * c) Check if there are any empty words/translations?
+		 */
+		
+		
+		//a)
+		//Print in all the words into an array
+		String[] words = new String[(counter-2)/2 + 1]; 
+		int debugCounter = counter;
+		int wordsIndexCounter = 0;
+		for (int i = 2; i <= counter-1; i = i + 2){
+			 EditText word = (EditText) findViewById(i);		 
+			 words[wordsIndexCounter] = word.getText().toString();
+			 wordsIndexCounter++;
+		}
+		for (int i = 0; i < words.length; i++){
+			String wordA = words[i];
+			for (int a = 0; a < words.length; a++){
+				if (a != i){
+					String wordB = words[a];
+					if (wordA.equals(words[a])){
+						//We got a match!
+						Toast.makeText(getApplicationContext(), "We got a match!", Toast.LENGTH_SHORT).show();
+						return false;
+					}
+				}
+			}
+		}
+		
+		
+		
+		return allClear;
+	}
 	}
 	/*	public boolean needTutorialCheck() {
 		//check if we got some words
