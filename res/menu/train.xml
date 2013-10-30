@@ -1,8 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:title="@string/edit"
+        android:id="@+id/overviewEditBtn"
+        android:orderInCategory="98"
+        android:icon="@drawable/edit"
+        android:showAsAction="ifRoom|withText">
+        
+    </item>
    <item
-	    android:title="kasta"
+	    android:title="@string/delete"
 	    android:id="@+id/trainDeleteBtn"
-	    android:orderInCategory="98" 
+	    android:orderInCategory="97" 
 	    android:icon="@drawable/discard" 
 	    android:showAsAction="ifRoom|withText" >
 	</item>

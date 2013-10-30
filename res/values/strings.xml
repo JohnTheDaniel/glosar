@@ -17,27 +17,32 @@
     <string name="new_glosa">NEW GLOSS</string>
     <string name="there_is_an_empty_word_or_translation_please_fix_it">There is an empty word or translation, please fix it.</string>
     <string name="two_words_are_equal_to_each_other">Two words are equal to each other. Please fix it before saving.</string>
-    
+
     <!-- SettingsActivity.java -->
     <string name="enable_ads">Enable ads</string>
     <string name="help_the_developer_by_enabling_ads">Help the developer by enabling ads</string>
     <string name="keep_count">Keep count</string>
     <string name="show_the_amount_of_trainings_youve_ever_done">Show the amount of trainings you\'ve ever done</string>
-    
+
     <!-- TranslateActivity.java -->
     <string name="title_activity_translate">Practise translations</string>
-    
+
     <!-- AboutActivity.java -->
     <string name="title_activity_about">About Me</string>
-    
+
     <!-- StartPoint.java Activity -->
     <string name="title_activity_start_point">StartPoint</string>
     <string name="start_point_no_files_message">\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning.</string>
     <string name="old_exercises">Old exercises</string>
-    
+
     <!-- OverviewFragment -->
     <string name="start_the_exercise">Start the exercise</string>
     <string name="switch_translation_order">Reverse translation order</string>
     <string name="not_found">Not found</string>
     <string name="are_you_sure_you_want_to_delete_this_entry">Are you sure you want to delete this entry?</string>
+    <string name="delete">delete</string>
+    <string name="edit">edit</string>
+    <string name="title_activity_edit">EditActivity</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>

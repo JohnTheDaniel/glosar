@@ -69,6 +69,13 @@ public class OverviewFragment extends SherlockFragment {
 			//Show dialog
 			confirmDeleteDialog();
 			return true;
+		case R.id.overviewEditBtn:
+			Intent intent = new Intent(getActivity(), EditActivity.class);
+			Bundle bndl = new Bundle();
+			bndl.putString("TRAINING", training);
+			intent.putExtras(bndl);
+			startActivity(intent);
+			return true;
 		default: return super.onOptionsItemSelected(item);
 		}
 	}
