@@ -16,9 +16,9 @@
         android:theme="@style/Theme.Glosar" >
         <activity
             android:name="com.johndaniel.glosar.addFile"
-            android:configChanges="orientation"
             android:label="@string/new_exercise"
-            android:windowSoftInputMode="stateAlwaysVisible" >
+            android:windowSoftInputMode="stateAlwaysVisible" 
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name="com.johndaniel.glosar.SettingsActivity"
@@ -49,7 +49,8 @@
         </activity>
         <activity
             android:name="com.johndaniel.glosar.EditActivity"
-            android:label="@string/title_activity_edit" >
+            android:label="@string/title_activity_edit"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
     </application>
 
