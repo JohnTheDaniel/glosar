@@ -29,6 +29,7 @@
         <item name="actionModeBackground">@drawable/cab_background_top_glosar</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_glosar</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Glosar</item>
+        
 
                 <!-- Light.DarkActionBar specific -->
         <item name="actionBarWidgetTheme">@style/Theme.Glosar.Widget</item>
