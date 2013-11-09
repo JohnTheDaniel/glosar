@@ -2,11 +2,13 @@ package com.johndaniel.glosar;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -30,6 +32,8 @@ public class EditActivity extends Activity {
 		
 		//Pairing constant views id's to variables.
 		nameField = (EditText) findViewById(R.id.addNewEditText);
+		nameField.clearFocus();
+		nameField.setSelected(false);
 		relativeLayout = (RelativeLayout) findViewById(R.id.RelativeLayout);
 		final LinearLayout addWordButton = (LinearLayout) findViewById(R.id.bottomButton);
 		
@@ -61,7 +65,7 @@ public class EditActivity extends Activity {
 			String[] group = wordsAndTranslations[i].split("=");
 			String word = group[0];
 			String translation = group[1];
-			addWord(i, word, translation);
+			addWord(i, word, translation, true);
 		}
 		
 		//Check for addWordButton press
@@ -76,7 +80,7 @@ public class EditActivity extends Activity {
 				} else {
 					idPlus = 0;
 				}*/
-				addWord(1, "", "");
+				addWord(1, "", "", false);
 			}
 		});
 		
@@ -118,7 +122,7 @@ public class EditActivity extends Activity {
 		}*/
 		
 	}
-	private void addWord(int loopCount, String word, String translation){
+	private void addWord(int loopCount, String word, String translation, boolean fromInitLoop){
 		LinearLayout wordWrapper = new LinearLayout(EditActivity.this);
 		wordWrapper.setBackgroundColor(0xFFFFFFFF);
 		wordWrapper.setOrientation(LinearLayout.HORIZONTAL);
@@ -147,6 +151,25 @@ public class EditActivity extends Activity {
 		
 		//Add the wordwrapper. 
 		((RelativeLayout) relativeLayout).addView(wordWrapper);
+		
+		editTextWord.setSingleLine();
+		editTextTranslation.setSingleLine();
+		if(!fromInitLoop){
+			editTextWord.setFocusableInTouchMode(true);
+			editTextWord.requestFocus();
+			//Request keyboard
+			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.showSoftInput(editTextWord, InputMethodManager.SHOW_IMPLICIT);
+		} else {
+			editTextTranslation.setFocusableInTouchMode(true);
+			editTextTranslation.requestFocus();
+			//Request keyboard
+			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.showSoftInput(editTextTranslation, InputMethodManager.SHOW_IMPLICIT);
+		}
+		//Set focus order. 
+		editTextWord.setNextFocusDownId(editTextTranslation.getId());
+		editTextTranslation.setNextFocusDownId(editTextTranslation.getId() + 1);
 	}
 
 	@Override
