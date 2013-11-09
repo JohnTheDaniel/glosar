@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -152,6 +154,12 @@ public class EditActivity extends Activity {
 		//Add the wordwrapper. 
 		((RelativeLayout) relativeLayout).addView(wordWrapper);
 		
+		//Animate in the wordWraper
+		Animation animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.slide_right_in);
+		animation.setStartOffset(0);
+		wordWrapper.startAnimation(animation);
+		
+		//Set singleLine and focus order
 		editTextWord.setSingleLine();
 		editTextTranslation.setSingleLine();
 		if(!fromInitLoop){
