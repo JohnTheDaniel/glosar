@@ -31,7 +31,8 @@
         </activity>
         <activity
             android:name="com.johndaniel.glosar.AboutActivity"
-            android:label="@string/title_activity_about" >
+            android:label="@string/title_activity_about"
+            android:theme="@style/Theme.Glosar.NoActionShadow" >
             <intent-filter>
                 <action android:name="glosar.action.ACTION_ABOUT_DEVELOPER" />
 

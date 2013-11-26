@@ -21,11 +21,13 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textSize="40sp"
+            android:padding="8dp"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="8dp"
             android:text="Glosar är utvecklad av John Daniel - 17 år från Stockholm. En John Daniel är en väldigt speciell organism. Den utnyttjar varken cellandningen eller fotosyntesen för att skapa energi, utan konsumerar kaffe och skapar en biprodukt i form av kod. Därför är det väldigt viktigt att John Daniel får kaffe om utvecklingen av denna app ska fortsätta." >
             
         </TextView>	
