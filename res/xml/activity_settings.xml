@@ -1,9 +1,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <CheckBoxPreference 
+    <!-- <CheckBoxPreference 
         android:title="@string/enable_ads"
         android:summary="@string/help_the_developer_by_enabling_ads"
         android:key="ads_preference"
-        android:defaultValue="false"/>
+        android:defaultValue="false"/> -->
     
     <CheckBoxPreference 
         android:title="@string/keep_count"
