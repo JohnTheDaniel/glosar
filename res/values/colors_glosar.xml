@@ -20,5 +20,6 @@
 <resources>
     <!-- Created by Action Bar Style Generator -->
     <!--  <color name="pressed_glosar">#CC33B5E5</color> -->
-    <color name="pressed_glosar">#408c8c8c</color>
+    <!--<color name="pressed_glosar">#408c8c8c</color>-->
+    <color name="pressed_glosar">#10000000</color>
 </resources>

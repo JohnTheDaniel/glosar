@@ -18,7 +18,12 @@
 -->
 
 <resources>
-
+	<style name="Theme.Glosar.NoActionShadow" parent="@style/Theme.Glosar">
+	    <item name="android:windowContentOverlay">@null</item>
+	</style>
+	
+	<style name="Theme.Glosar.NoActionShadow.TransparentNavStat" parent="@style/Theme.Glosar.NoActionShadow">
+	</style>
     <style name="Theme.Glosar" parent="@style/Theme.Sherlock.Light.DarkActionBar">
         <item name="actionBarItemBackground">@drawable/selectable_background_glosar</item>
         <item name="popupMenuStyle">@style/PopupMenu.Glosar</item>

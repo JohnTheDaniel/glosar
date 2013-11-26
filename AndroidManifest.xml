@@ -27,7 +27,7 @@
         <activity
             android:name="com.johndaniel.glosar.TranslateActivity"
             android:label="@string/title_activity_translate" 
-            android:theme="@style/Theme.Glosar.NoActionShadow" >
+            android:theme="@style/Theme.Glosar.NoActionShadow.TransparentNavStat" >
         </activity>
         <activity
             android:name="com.johndaniel.glosar.AboutActivity"
