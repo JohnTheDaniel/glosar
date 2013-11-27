@@ -1,11 +1,13 @@
 package com.johndaniel.glosar;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
@@ -17,7 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
-public class EditActivity extends Activity {
+public class EditActivity extends SherlockActivity {
 	EditText nameField;
 	String training;
 	int counter;
@@ -183,7 +185,7 @@ public class EditActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.edit, menu);
+		getSupportMenuInflater().inflate(R.menu.add_file, menu);
 		return true;
 	}
 
