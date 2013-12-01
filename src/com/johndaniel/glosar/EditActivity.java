@@ -2,6 +2,7 @@ package com.johndaniel.glosar;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -21,7 +22,8 @@ import android.widget.Toast;
 
 public class EditActivity extends SherlockActivity {
 	EditText nameField;
-	String training;
+	String trainingId;
+	String trainingName;
 	int counter;
 	LayoutParams editTextWeightParams;
 	int wrapperCounter;
@@ -42,9 +44,9 @@ public class EditActivity extends SherlockActivity {
 		final LinearLayout addWordButton = (LinearLayout) findViewById(R.id.bottomButton);
 		
 		//Setting up the name in the nameField
-		training = getIntent().getExtras().getString("TRAINING");
+		trainingId = getIntent().getExtras().getString("TRAINING");
 		SharedPreferences prefFiles = getSharedPreferences(StartPoint.PREF_FILES, 0);
-		String trainingName = prefFiles.getString(training, "");
+		trainingName = prefFiles.getString(trainingId, "");
 		nameField.setText(trainingName);
 		
 		//Calculate width
@@ -188,5 +190,37 @@ public class EditActivity extends SherlockActivity {
 		getSupportMenuInflater().inflate(R.menu.add_file, menu);
 		return true;
 	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch(item.getItemId()){
+		case R.id.addFileSaveButton: 
+			doReplacement();
+			Intent intent = new Intent(this, StartPoint.class);
+			startActivity(intent);
+			finish();
+			return true;	
+		default: 
+			return super.onOptionsItemSelected(item); 
+		}
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		Intent intent = new Intent(this, StartPoint.class);
+		startActivity(intent);
+	}
+	private void doReplacement() {
+		// TODO Auto-generated method stub
+		GlosarFileHandler glosFH = new GlosarFileHandler(getApplicationContext(), this, this);
+		boolean allClear = glosFH.wordCheck(nameField.getText().toString(), counter);
+		if (allClear){
+			glosFH.deleteOperation(trainingId, PREF_FILES);
+			glosFH.saveOperation(PREF_FILES, PREF_MISC, trainingName, counter);
+		}
+	}
+	
 
 }

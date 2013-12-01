@@ -30,11 +30,9 @@ import android.widget.Toast;
 public class addFile extends SherlockActivity {
 	int counter; 
 	int text;
-	Activity activityRaw;
 	EditText nameField; //The name of the training. Needs to be placed here to be accessed by all methods.
 	public static final String PREF_MISC = "StoreSettings";
 	public static final String PREF_FILES = "FileStorage";
-	SharedPreferences thisFilePrefs;
 	public final static String REBOOT_MESSAGE = "com.erlaa.glosor.REBOOT_MESSAGE";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +41,6 @@ public class addFile extends SherlockActivity {
 		setContentView(R.layout.activity_add_new);
 		
 		
-		activityRaw = this;
 		//Getting number of trainings
 		//Used to name file, and also decide if whe need the tutorial on StartPoint.java
 		SharedPreferences filePrefs = getSharedPreferences(PREF_MISC, 0);
@@ -230,7 +227,7 @@ public class addFile extends SherlockActivity {
 			int runInt = 1;
 			boolean allClear = wordCheck();
 			if (allClear && (runInt == 1)) {
-				saveOperation(activityRaw);
+				saveOperation(this);
 			}
 			return true;
 		case R.id.addFileCancelButton:
@@ -265,7 +262,7 @@ public class addFile extends SherlockActivity {
 
 			//Save the stuff witten into this app
 			String thisPrefName = nameField.getText().toString();
-			thisFilePrefs = getSharedPreferences(thisPrefName, 0);
+			SharedPreferences thisFilePrefs = getSharedPreferences(thisPrefName, 0);
 			
 			//Here goes the stuff from the edittexts.'
 			if(counter > 1){ //To avoid null

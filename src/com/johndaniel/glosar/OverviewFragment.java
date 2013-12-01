@@ -75,6 +75,7 @@ public class OverviewFragment extends SherlockFragment {
 			bndl.putString("TRAINING", training);
 			intent.putExtras(bndl);
 			startActivity(intent);
+			getActivity().finish();
 			return true;
 		default: return super.onOptionsItemSelected(item);
 		}
@@ -213,6 +214,7 @@ public class OverviewFragment extends SherlockFragment {
 			toast.show();
 		}
 	}
+	//This method is unused
 	public void makeWordsViews(String word1, String word2){
 		//Calculate width
 		int dps = 48; //Value, in this case height, described in density pixels
