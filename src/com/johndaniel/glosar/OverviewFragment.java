@@ -43,7 +43,6 @@ public class OverviewFragment extends SherlockFragment {
 	String training;
 	RelativeLayout wordsContainer;
 	int counter = 4;
-	CheckBox reverseTrainingBox;
 	boolean reverseTraining = false;
 	
 	@Override
@@ -142,16 +141,24 @@ public class OverviewFragment extends SherlockFragment {
 		final String translations[] = allFromFile.replace("{", "").replace("}", "").split(", ");
 		
 		//Button click
-		Button btn = (Button) footerView.findViewById(R.id.startTrainingBtn);
+		Button cardFlipbtn = (Button) footerView.findViewById(R.id.startCardTrainingBtn);
+		Button spellBtn = (Button) footerView.findViewById(R.id.startSpellTrainingBtn);
 		
 		//Find the checkboxes, which is placed in the footerView.
-		reverseTrainingBox = (CheckBox) footerView.findViewById(R.id.overview_reverse_training_box);
-		btn.setOnClickListener(new View.OnClickListener(){
-
+		final CheckBox reverseTrainingBox = (CheckBox) footerView.findViewById(R.id.overview_reverse_training_box);
+		View.OnClickListener trainingClickListener = new View.OnClickListener() {
+			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent (getActivity().getBaseContext(), TranslateActivity.class);
+				Intent intent;
+				if(v.getId() == R.id.startCardTrainingBtn){
+					intent = new Intent(getActivity().getBaseContext(), TranslateActivity.class);
+				} else if (v.getId() == R.id.startSpellTrainingBtn){
+					intent = new Intent(getActivity().getBaseContext(), SpellActivity.class);
+				} else {
+					intent = new Intent(getActivity().getBaseContext(), TranslateActivity.class);
+				}
 				Bundle bundle = new Bundle();
 				boolean reverseTraining = reverseTrainingBox.isChecked();
 				bundle.putBoolean(REVERSE_TRANSLATION, reverseTraining);
@@ -160,10 +167,9 @@ public class OverviewFragment extends SherlockFragment {
 				intent.putExtras(bundle);
 				startActivity(intent);
 			}
-			
-		});
-		
-		
+		};
+		cardFlipbtn.setOnClickListener(trainingClickListener);
+		spellBtn.setOnClickListener(trainingClickListener);
 		return thisView;
 	}
 	

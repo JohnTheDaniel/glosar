@@ -36,7 +36,7 @@
     <string name="old_exercises">Old exercises</string>
 
     <!-- OverviewFragment -->
-    <string name="start_the_exercise">Start the exercise</string>
+    <string name="start_cardflip_exercise">Start card flip exercise</string>
     <string name="switch_translation_order">Reverse translation order</string>
     <string name="not_found">Not found</string>
     <string name="are_you_sure_you_want_to_delete_this_entry">Are you sure you want to delete this entry?</string>
@@ -44,5 +44,6 @@
     <string name="edit">edit</string>
     <string name="title_activity_edit">Edit exercise</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_spell">SpellActivity</string>
 
 </resources>

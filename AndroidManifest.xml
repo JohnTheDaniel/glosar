@@ -16,9 +16,9 @@
         android:theme="@style/Theme.Glosar" >
         <activity
             android:name="com.johndaniel.glosar.addFile"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/new_exercise"
-            android:windowSoftInputMode="stateAlwaysVisible" 
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:windowSoftInputMode="stateAlwaysVisible" >
         </activity>
         <activity
             android:name="com.johndaniel.glosar.SettingsActivity"
@@ -26,7 +26,7 @@
         </activity>
         <activity
             android:name="com.johndaniel.glosar.TranslateActivity"
-            android:label="@string/title_activity_translate" 
+            android:label="@string/title_activity_translate"
             android:theme="@style/Theme.Glosar.NoActionShadow.TransparentNavStat" >
         </activity>
         <activity
@@ -51,8 +51,12 @@
         </activity>
         <activity
             android:name="com.johndaniel.glosar.EditActivity"
-            android:label="@string/title_activity_edit"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_edit" >
+        </activity>
+        <activity
+            android:name="com.johndaniel.glosar.SpellActivity"
+            android:label="@string/title_activity_spell" >
         </activity>
     </application>
 

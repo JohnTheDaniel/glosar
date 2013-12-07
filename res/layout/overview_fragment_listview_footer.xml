@@ -6,11 +6,25 @@
     	    android:paddingTop="8dp"
     	    android:id="@+id/overview_settings_section">
     	    
-	    	<Button android:id="@+id/startTrainingBtn"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="@string/start_the_exercise"
-        ></Button>
+	    	<LinearLayout 
+	    	    android:layout_height="wrap_content"
+	    	    android:layout_width="match_parent"
+	    	    android:orientation="horizontal" 
+	    	    android:weightSum="2">
+	    	    
+	    	    <Button android:id="@+id/startCardTrainingBtn"
+        			android:layout_height="wrap_content"
+        			android:layout_width="0dp"
+        			android:layout_weight="1"
+        			android:text="@string/start_cardflip_exercise" >    	    
+	    		</Button>
+	    		
+	    	    <Button android:id="@+id/startSpellTrainingBtn"
+	    	        android:layout_weight="1"
+	    	        android:layout_height="match_parent"
+	    	        android:layout_width="0dp"
+	    	        android:text="Start spell training"/>
+	    	</LinearLayout>
 	    	
     	    <TextView
 		    android:layout_height="wrap_content"
