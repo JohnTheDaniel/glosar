@@ -56,7 +56,8 @@
         </activity>
         <activity
             android:name="com.johndaniel.glosar.SpellActivity"
-            android:label="@string/title_activity_spell" >
+            android:label="@string/title_activity_spell" 
+            android:windowSoftInputMode="adjustResize">
         </activity>
     </application>
 

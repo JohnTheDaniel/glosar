@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="50sp"
+        android:textSize="@dimen/training_text_size"
         android:text="Hej Världen" />
 
     <!-- <TextView style="?android:textAppearanceSmall"
