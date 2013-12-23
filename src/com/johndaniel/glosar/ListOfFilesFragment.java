@@ -1,33 +1,25 @@
 package com.johndaniel.glosar;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collections;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuInflater;
-
-import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.support.v4.app.Fragment;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 public class ListOfFilesFragment extends SherlockFragment {
 	public static final String EXTRA_POSITION = "com.johndaniel.glosar.POSITION";
@@ -135,11 +127,11 @@ public class ListOfFilesFragment extends SherlockFragment {
 		if (needTutorialCheck() == true){
 			TextView tv = (TextView) thisView.findViewById(R.id.prompt);
 			tv.setText(getString(R.string.start_point_no_files_message)/*"\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning."*/);
-			LinearLayout layout = (LinearLayout) thisView.findViewById(R.id.container);
+			RelativeLayout layout = (RelativeLayout) thisView.findViewById(R.id.container);
 			layout.setBackgroundResource(R.drawable.gray_line_bg);
 
-			Toast toast = Toast.makeText(context, "needTutorialCheck() == true", duration);
-			toast.show();
+			//Toast toast = Toast.makeText(context, "needTutorialCheck() == true", duration);
+			//toast.show();
 		}
 		else {			
 			//The tutorial is not needed. Loading the ListView of trainings.
@@ -159,8 +151,8 @@ public class ListOfFilesFragment extends SherlockFragment {
 
 			
 			//Development toast. Deleted at release.
-			Toast toast = Toast.makeText(context, "needTutorialCheck() == false", duration);
-			toast.show();
+			//Toast toast = Toast.makeText(context, "needTutorialCheck() == false", duration);
+			//toast.show();
 		}
 	}
 	

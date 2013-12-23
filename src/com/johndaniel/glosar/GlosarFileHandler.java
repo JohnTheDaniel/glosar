@@ -49,8 +49,8 @@ public class GlosarFileHandler {
 			
 			//Here goes the stuff from the edittexts.'
 			if(counter > 1){ //To avoid null
-				Toast saveErr = Toast.makeText(appContext, "For-loop kšrs", Toast.LENGTH_LONG);
-				saveErr.show();
+				//Toast saveErr = Toast.makeText(appContext, "For-loop kšrs", Toast.LENGTH_LONG);
+				//saveErr.show();
 				for(int i = 2; i < counter; i = i + 2){
 						EditText word1 = (EditText) activity.findViewById(i);
 						EditText word2 = (EditText) activity.findViewById(i + 1);
@@ -76,7 +76,7 @@ public class GlosarFileHandler {
 				
 				
 				//For development. Deleted on release.
-				Toast.makeText(appContext, "Skickar intentmeddelande", Toast.LENGTH_LONG).show();
+				//Toast.makeText(appContext, "Skickar intentmeddelande", Toast.LENGTH_LONG).show();
 			}
 				/*
 				//Making and starting the intent. 
@@ -179,6 +179,10 @@ public class GlosarFileHandler {
 		for (int i = 2; i <= counter-1; i = i+2){
 			EditText word = (EditText) activity.findViewById(i);
 			EditText translation = (EditText) activity.findViewById(i + 1);
+			if(translation.getText().toString().contains(",") || word.getText().toString().contains(",")){
+				Toast.makeText(context, context.getString(R.string.Sorry_Your_word_and_translations_may_not_contain), Toast.LENGTH_LONG).show();
+				return false;
+			}
 			if (!(word.getText().toString().equals("") && translation.getText().toString().equals(""))){
 				if ((word.getText().toString().equals("")) || (translation.getText().toString().equals(""))){
 					Toast.makeText(appContext, context.getResources().getString(R.string.there_is_an_empty_word_or_translation_please_fix_it), Toast.LENGTH_LONG).show();

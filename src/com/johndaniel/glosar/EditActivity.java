@@ -1,14 +1,9 @@
 package com.johndaniel.glosar;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
@@ -17,8 +12,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 public class EditActivity extends SherlockActivity {
 	EditText nameField;
@@ -69,8 +66,19 @@ public class EditActivity extends SherlockActivity {
 		//Add the previous words
 		for (int i = 0; i < wordsAndTranslations.length; i++){
 			String[] group = wordsAndTranslations[i].split("=");
-			String word = group[0];
-			String translation = group[1];
+			String word;
+			String translation;
+			if(group[0] != null){
+				word = group[0];
+			} else {
+				word = "";
+			}
+			
+			if(group[1] != null){
+				translation = group[1];
+			} else {
+				translation = "";
+			}
 			addWord(i, word, translation, true);
 		}
 		
@@ -195,16 +203,25 @@ public class EditActivity extends SherlockActivity {
 		// TODO Auto-generated method stub
 		switch(item.getItemId()){
 		case R.id.addFileSaveButton: 
-			doReplacement();
-			Intent intent = new Intent(this, StartPoint.class);
-			startActivity(intent);
-			finish();
+			boolean allClear = doCheck();
+			if(allClear){
+				doReplacement();
+				Intent intent = new Intent(this, StartPoint.class);
+				startActivity(intent);
+				finish();	
+			}
 			return true;	
 		default: 
 			return super.onOptionsItemSelected(item); 
 		}
 	}
 	
+	private boolean doCheck() {
+		// TODO Auto-generated method stub
+		GlosarFileHandler glosFH = new GlosarFileHandler(getApplicationContext(), this, this);
+		boolean allClear = glosFH.wordCheck(nameField.getText().toString(), counter);
+		return allClear;
+	}
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
@@ -215,11 +232,11 @@ public class EditActivity extends SherlockActivity {
 	private void doReplacement() {
 		// TODO Auto-generated method stub
 		GlosarFileHandler glosFH = new GlosarFileHandler(getApplicationContext(), this, this);
-		boolean allClear = glosFH.wordCheck(nameField.getText().toString(), counter);
-		if (allClear){
+		//boolean allClear = glosFH.wordCheck(nameField.getText().toString(), counter);
+		//if (allClear){
 			glosFH.deleteOperation(trainingId, PREF_FILES);
 			glosFH.saveOperation(PREF_FILES, PREF_MISC, trainingName, counter);
-		}
+		//}
 	}
 	
 

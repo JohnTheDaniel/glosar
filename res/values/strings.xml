@@ -17,13 +17,18 @@
     <string name="new_glosa">NEW GLOSS</string>
     <string name="there_is_an_empty_word_or_translation_please_fix_it">There is an empty word or translation, please fix it.</string>
     <string name="two_words_are_equal_to_each_other">Two words are equal to each other. Please fix it before saving.</string>
+    <string name="Sorry_Your_word_and_translations_may_not_contain">Sorry. Your word and translations may not contain ","</string>
 
     <!-- SettingsActivity.java -->
     <string name="enable_ads">Enable ads</string>
     <string name="help_the_developer_by_enabling_ads">Help the developer by enabling ads</string>
     <string name="keep_count">Keep count</string>
     <string name="show_the_amount_of_trainings_youve_ever_done">Show the amount of trainings you\'ve ever done</string>
-
+    
+    <!-- About Activity -->
+	<string name="John_Daniel">John Daniel</string>
+	<string name="about_developer_text">Glosar is developed by John Daniel, 18 years old from Stockholm. A John Daniel is a special kind of organism. It uses neither cellular respiration or fotosynthesis to extract energi, it consumes coffee and creates code as a biproduct. Therefore is it very important that John Daniel gets his coffee in order to continue the development of Glosar.</string>
+	
     <!-- TranslateActivity.java -->
     <string name="title_activity_translate">Practise translations</string>
 
@@ -32,7 +37,7 @@
 
     <!-- StartPoint.java Activity -->
     <string name="title_activity_start_point">StartPoint</string>
-    <string name="start_point_no_files_message">\nInga filer lagrade.\n\nTryck på plusknappen för att lägga till en träning.</string>
+    <string name="start_point_no_files_message">\nNo exercises has been created.\n\nPress the plus button to add a new exercise.</string>
     <string name="old_exercises">Old exercises</string>
 
     <!-- OverviewFragment -->
@@ -43,7 +48,12 @@
     <string name="delete">delete</string>
     <string name="edit">edit</string>
     <string name="title_activity_edit">Edit exercise</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_spell">SpellActivity</string>
+    <string name="start_spell_training">Start spell trainings</string>
+    
+    <!--  SpellFragment -->
+    <string name="word_big_first">Word"</string>
+    <string name="of">of</string>
+    <string name="title_activity_spell">Spell exercise</string>
+    <string name="help">help</string>
 
 </resources>

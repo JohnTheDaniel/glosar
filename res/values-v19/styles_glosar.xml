@@ -41,6 +41,9 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
+    <style name="Theme.Glosar.NoActionShadow.TransparentStat" parant="@style/Theme.Glosar.NoActionShadow">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
     
     <style name="ActionBar.Solid.Glosar" parent="@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@drawable/ab_solid_glosar</item>

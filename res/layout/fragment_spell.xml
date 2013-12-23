@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical" 
     android:paddingLeft="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_vertical_margin">
+    android:paddingRight="@dimen/activity_vertical_margin"
+    android:id="@+id/fragment_spell_container">
     
     <LinearLayout
-        android:paddingTop="48dp"
         android:orientation="vertical"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_centerVertical="true">
 	<TextView 
 	    style="?android:textAppearanceLarge"
@@ -19,15 +19,19 @@
 	    android:text="Hello World!"
 	    android:id="@+id/fragment_spell_word"
 	    android:textSize="@dimen/training_text_size" 
-	    android:textColor="#000"
+	    android:textColor="#fff"
 	    android:gravity="center"/>
 	<EditText 
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:hint="translation"
+	    android:hint="@string/translation"
 	    android:id="@+id/fragment_spell_translation"
 	    android:paddingTop="8dp"
 	    android:gravity="center"
+	    android:textColor="#fff"
+	    android:inputType="textNoSuggestions"
+	    android:textColorHint="#80ffffff"
+	    android:imeOptions="flagNoExtractUi"
 	    android:textSize="@dimen/training_edittext_size"/>
 	</LinearLayout>
 </RelativeLayout>

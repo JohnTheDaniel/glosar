@@ -17,7 +17,7 @@
         android:scaleType="centerCrop"
         android:src="@drawable/john_d" />
         <TextView 
-            android:text="John Daniel"
+            android:text="@string/John_Daniel"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textSize="40sp"
@@ -28,8 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="Glosar är utvecklad av John Daniel - 17 år från Stockholm. En John Daniel är en väldigt speciell organism. Den utnyttjar varken cellandningen eller fotosyntesen för att skapa energi, utan konsumerar kaffe och skapar en biprodukt i form av kod. Därför är det väldigt viktigt att John Daniel får kaffe om utvecklingen av denna app ska fortsätta." >
-            
-        </TextView>	
+            android:text="@string/about_developer_text" >
+        </TextView>
     </LinearLayout>
 </ScrollView>
+<!-- android:text="Glosar är utvecklad av John Daniel - 17 år från Stockholm. En John Daniel är en väldigt speciell organism. Den utnyttjar varken cellandningen eller fotosyntesen för att skapa energi, utan konsumerar kaffe och skapar en biprodukt i form av kod. Därför är det väldigt viktigt att John Daniel får kaffe om utvecklingen av denna app ska fortsätta." -->

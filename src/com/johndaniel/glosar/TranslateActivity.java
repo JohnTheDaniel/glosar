@@ -1,21 +1,19 @@
 package com.johndaniel.glosar;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.Window;
-
-import android.os.Bundle;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.Window;
 
 public class TranslateActivity extends SherlockFragmentActivity {
 	/*
@@ -57,7 +55,7 @@ public class TranslateActivity extends SherlockFragmentActivity {
 		//Edit ActionBar
 		final ActionBar ab = getSupportActionBar();
 		ab.setBackgroundDrawable(getResources().getDrawable(R.drawable.translate_activity_ab_bg));
-		ab.setTitle("Word 1 of " + NUM_PAGES);
+		ab.setTitle(getString(R.string.word_big_first) + " 1 " + getString(R.string.of) + " " + NUM_PAGES);
 		ab.setHomeButtonEnabled(true);
 		ab.setDisplayHomeAsUpEnabled(true);
 		
@@ -86,7 +84,7 @@ public class TranslateActivity extends SherlockFragmentActivity {
 			public void onPageSelected(int arg0) {
 				// TODO Auto-generated method stub
 				int thisPage = arg0 + 1;
-				ab.setTitle("Word " + thisPage + " of " + NUM_PAGES);
+				ab.setTitle(getString(R.string.word_big_first) + " " + thisPage + " " + getString(R.string.of) + " " + NUM_PAGES);
 				
 			}
 			

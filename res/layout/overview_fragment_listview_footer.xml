@@ -23,7 +23,7 @@
 	    	        android:layout_weight="1"
 	    	        android:layout_height="match_parent"
 	    	        android:layout_width="0dp"
-	    	        android:text="Start spell training"/>
+	    	        android:text="@string/start_spell_training"/>
 	    	</LinearLayout>
 	    	
     	    <TextView

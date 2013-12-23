@@ -1,14 +1,11 @@
 package com.johndaniel.glosar;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
-
-import android.os.Bundle;
-import android.preference.PreferenceActivity;
-import android.app.Activity;
-import android.content.Intent;
-import android.view.Menu;
 
 public class SettingsActivity extends SherlockPreferenceActivity {
 

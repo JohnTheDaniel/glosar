@@ -1,24 +1,11 @@
 package com.johndaniel.glosar;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuInflater;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.graphics.Color;
 
 
 public class TranslateHolder extends Fragment {

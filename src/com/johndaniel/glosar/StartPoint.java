@@ -1,18 +1,13 @@
 package com.johndaniel.glosar;
 
-import java.io.File;
-
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuInflater;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.FrameLayout;
-import android.content.Intent;
-import android.content.SharedPreferences;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 
 public class StartPoint extends SherlockFragmentActivity implements ListOfFilesFragment.OnTrainingSelectedListener {

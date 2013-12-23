@@ -1,12 +1,11 @@
 package com.johndaniel.glosar;
 
+import android.os.Bundle;
+
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.Window;
-
-import android.os.Bundle;
-import android.app.Activity;
 
 
 public class AboutActivity extends SherlockActivity {

@@ -1,12 +1,5 @@
 package com.johndaniel.glosar;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuInflater;
-
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,17 +8,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 public class addFile extends SherlockActivity {
 	int counter; 
@@ -53,7 +48,7 @@ public class addFile extends SherlockActivity {
 		CharSequence toastText = filesNumber + " filer";
 		int duration = Toast.LENGTH_SHORT;
 		Toast toast = Toast.makeText(context, toastText, duration);
-		toast.show();
+		//toast.show();
 
 		//Pairing constant views id's to variables.
 		final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.RelativeLayout);
@@ -266,8 +261,6 @@ public class addFile extends SherlockActivity {
 			
 			//Here goes the stuff from the edittexts.'
 			if(counter > 1){ //To avoid null
-				Toast saveErr = Toast.makeText(getApplicationContext(), "For-loop kšrs", Toast.LENGTH_LONG);
-				saveErr.show();
 				for(int i = 2; i < counter; i = i + 2){
 						EditText word1 = (EditText) activity.findViewById(i);
 						EditText word2 = (EditText) activity.findViewById(i + 1);
@@ -293,7 +286,7 @@ public class addFile extends SherlockActivity {
 				
 				
 				//For development. Deleted on release.
-				Toast.makeText(getApplicationContext(), "Skickar intentmeddelande", Toast.LENGTH_LONG).show();
+				//Toast.makeText(getApplicationContext(), "Skickar intentmeddelande", Toast.LENGTH_LONG).show();
 				
 				//Making and starting the intent. 
 				Intent intent = new Intent(this, StartPoint.class);
@@ -388,6 +381,10 @@ public class addFile extends SherlockActivity {
 		for (int i = 2; i <= counter-1; i = i+2){
 			EditText word = (EditText) findViewById(i);
 			EditText translation = (EditText) findViewById(i + 1);
+			if(translation.getText().toString().contains(",") || word.getText().toString().contains(",")){
+				Toast.makeText(getApplicationContext(), getString(R.string.Sorry_Your_word_and_translations_may_not_contain), Toast.LENGTH_LONG).show();
+				return false;
+			}
 			if (!(word.getText().toString().equals("") && translation.getText().toString().equals(""))){
 				if ((word.getText().toString().equals("")) || (translation.getText().toString().equals(""))){
 					Toast.makeText(getApplicationContext(), getResources().getString(R.string.there_is_an_empty_word_or_translation_please_fix_it), Toast.LENGTH_LONG).show();

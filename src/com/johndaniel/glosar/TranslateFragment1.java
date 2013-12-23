@@ -1,7 +1,6 @@
 package com.johndaniel.glosar;
 
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -60,7 +59,5 @@ public class TranslateFragment1 extends Fragment {
 				return res.getColor(R.color.blue);
 			
 		}
-	}
-	
-	
+	}	
 }

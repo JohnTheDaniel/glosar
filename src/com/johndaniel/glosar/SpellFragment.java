@@ -3,7 +3,6 @@ package com.johndaniel.glosar;
 import android.app.Activity;
 import android.app.Service;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -11,10 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class SpellFragment extends Fragment{
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
+public class SpellFragment extends SherlockFragment{
 	SpelledRightListener mSpellListener;
+	View thisView;
+	String translation;
+	String word;
+	EditText translationView;
 	public interface SpelledRightListener {
 		public void spelledRight();
 	}
@@ -22,17 +31,23 @@ public class SpellFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View thisView = inflater.inflate(R.layout.fragment_spell, container, false);
+		thisView = inflater.inflate(R.layout.fragment_spell, container, false);
 		
 		//[0] = word
 		//[1] = translation
+		setHasOptionsMenu(true);
 		final String wordAndTrans = getArguments().getString(SpellActivity.TRANSLATION_AND_WORD_KEY);
 		final int editTextId = getArguments().getInt(SpellActivity.EDITTEXT_ID_KEY);
+		final int colorChooser = getArguments().getInt(SpellActivity.COLOR_CHOOSER_KEY);
+		final boolean reverseTraining = getArguments().getBoolean(OverviewFragment.REVERSE_TRANSLATION);
+		
+		RelativeLayout layoutContainer = (RelativeLayout) thisView.findViewById(R.id.fragment_spell_container);
+		layoutContainer.setBackgroundColor(ColorChooser.colorChooser(colorChooser, getActivity()));
 		
 		TextView wordView = (TextView) thisView.findViewById(R.id.fragment_spell_word);
-		final EditText translationView = (EditText) thisView.findViewById(R.id.fragment_spell_translation);
+		translationView = (EditText) thisView.findViewById(R.id.fragment_spell_translation);
 		translationView.setId(editTextId);
-		
+
 
 		final InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Service.INPUT_METHOD_SERVICE);
 		translationView.requestFocus();
@@ -41,10 +56,27 @@ public class SpellFragment extends Fragment{
 		
 		String[] textDataArray = wordAndTrans.split("="); 
 		//0 is word, 1 is translation
-		String word = textDataArray[0];
-		final String translation = textDataArray[1];
+		if(textDataArray[0] != null){
+			if(!reverseTraining){
+				word = textDataArray[0];
+			} else {
+				translation = textDataArray[0];
+			}
+		} else {
+			word = "";
+		}
 		
-		wordView.setText(word + "(" + translation + ")");
+		if(textDataArray[1] != null){
+			if(!reverseTraining) {
+				translation = textDataArray[1];
+			} else {
+				word = textDataArray[1];	
+			}
+		} else {
+			translation = "";
+		}
+		
+		wordView.setText(word/* + "(" + translation + ")"*/);
 		
 		translationView.addTextChangedListener(new TextWatcher(){
 
@@ -66,14 +98,24 @@ public class SpellFragment extends Fragment{
 					int arg3) {
 				// TODO Auto-generated method stub
 				String currentText = translationView.getText().toString();
-				if(currentText.equals(translation)){
+				if(currentText.toLowerCase().replace(" ", "").equals(translation.toLowerCase().replace(" ", ""))){
 					translationView.clearFocus();
 					mSpellListener.spelledRight();
+					
+					backgroundResponse(true, thisView);
 				}
 			}
 		});
 		
 		return thisView;
+	}
+	private void backgroundResponse(boolean spelledRight, View layout){
+		RelativeLayout container = (RelativeLayout) layout.findViewById(R.id.fragment_spell_container);
+		if(spelledRight){
+			container.setBackgroundColor(getResources().getColor(R.color.green));
+		} else {
+			container.setBackgroundColor(getResources().getColor(R.color.red_dark));
+		}
 	}
 	
 	@Override
@@ -82,8 +124,27 @@ public class SpellFragment extends Fragment{
         try {
             mSpellListener = (SpelledRightListener) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
+            throw new ClassCastException(activity.toString() + " must implement SpelledRightListener");
         }
     }
-
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Auto-generated method stub
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.spell, menu);
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch(item.getItemId()){
+		case R.id.spell_fragment_hint:
+			translationView.setText("");
+			translationView.setHint(translation);
+			translationView.setHintTextColor(0x9FFFFFFF);
+			return true;
+		
+		default: return super.onOptionsItemSelected(item);
+		}
+	}
+	
 }
