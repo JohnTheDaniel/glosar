@@ -14,8 +14,7 @@
 	android:divider="@android:color/transparent"
 	android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_horizontal_margin"
+    android:paddingTop="16dp"
    	android:id="@+id/overview_fragment_listview" >
     </ListView>
 </LinearLayout>
